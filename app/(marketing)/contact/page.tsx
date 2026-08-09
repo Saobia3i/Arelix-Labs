@@ -12,24 +12,43 @@ import { contact } from '@/content/site-copy';
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
+
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setStatus('error');
+      setErrorMessage('Please fill in all required fields.');
+      return;
+    }
+
     setStatus('submitting');
     try {
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, source: 'contact-form' }),
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+          source: 'contact-form',
+        }),
       });
+
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+
       if (res.ok) {
         setStatus('success');
         setForm({ name: '', email: '', message: '' });
       } else {
         setStatus('error');
+        setErrorMessage(data.error || 'Something went wrong. Please try again.');
       }
     } catch {
       setStatus('error');
+      setErrorMessage('Network error. Please check your connection and try again.');
     }
   };
 
@@ -54,7 +73,7 @@ export default function ContactPage() {
             severity="success"
             sx={{ mb: 3, borderRadius: 1.5 }}
           >
-            Message sent! We'll get back to you within one business day.
+            Message sent! We&apos;ll get back to you within one business day.
           </Alert>
         )}
         {status === 'error' && (
@@ -62,14 +81,13 @@ export default function ContactPage() {
             severity="error"
             sx={{ mb: 3, borderRadius: 1.5 }}
           >
-            Something went wrong. Please try again or email us directly.
+            {errorMessage || 'Something went wrong. Please try again or email us directly at arelixlabs@gmail.com.'}
           </Alert>
         )}
 
         <Box
           component="form"
           onSubmit={handleSubmit}
-          noValidate
           sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}
         >
           <TextField
