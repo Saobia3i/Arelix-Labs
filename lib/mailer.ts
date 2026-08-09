@@ -25,15 +25,26 @@ export async function sendLeadNotificationEmail(data: LeadEmailData) {
 
   const fromAddress = process.env.SMTP_FROM || `"Arelix Labs Web" <${smtpUser}>`;
 
-  const transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: smtpPort,
-    secure: smtpSecure,
-    auth: {
-      user: smtpUser,
-      pass: smtpPass,
-    },
-  });
+  const isGmail = smtpHost.includes('gmail');
+  const transporter = nodemailer.createTransport(
+    isGmail
+      ? {
+          service: 'gmail',
+          auth: {
+            user: smtpUser,
+            pass: smtpPass,
+          },
+        }
+      : {
+          host: smtpHost,
+          port: smtpPort,
+          secure: smtpSecure,
+          auth: {
+            user: smtpUser,
+            pass: smtpPass,
+          },
+        }
+  );
 
   const submissionDate = new Date().toLocaleString('en-US', {
     dateStyle: 'full',
