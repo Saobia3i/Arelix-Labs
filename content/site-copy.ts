@@ -167,6 +167,39 @@ export const process: {
   },
 ];
 
+export const selectedWork = [
+  {
+    name: 'Tensor Security Academy',
+    tag: 'EdTech · Cybersecurity · Next.js',
+    description:
+      'A cybersecurity education platform built with Next.js and PostgreSQL, combining structured learning, student workflows and operational administration.',
+  },
+  {
+    name: 'Linear AI',
+    tag: 'AI Automation · Commerce · ASP.NET Core',
+    description:
+      'An AI-enabled automation and commerce platform with a React interface and ASP.NET Core services designed around scalable business workflows.',
+  },
+  {
+    name: 'AUST Rover Challenge Portal',
+    tag: 'Event Platform · Real Time · Automation',
+    description:
+      'A competition portal featuring event operations, real-time leaderboards and automated certificate generation for participants.',
+  },
+  {
+    name: 'WattWatch',
+    tag: 'IoT · ESP32 · Digital Twin',
+    description:
+      'A connected energy-monitoring system that links ESP32 device telemetry with a web-based digital twin for live visibility and control.',
+  },
+  {
+    name: 'AI Sales Research System',
+    tag: 'Multi-Agent AI · Research · Outreach',
+    description:
+      'A multi-agent workflow that supports sales research, lead qualification and personalized outreach while keeping human review in the loop.',
+  },
+];
+
 export const about = {
   headline: '07 — ABOUT ARELIX LABS',
   tagline: 'Technology Built With Purpose.',
@@ -206,25 +239,40 @@ export const founders = {
   footerNote: 'Different responsibilities. Shared ownership of the vision.',
   items: [
     {
-      name: '[Founder Name]',
+      name: 'Khorshed Alam',
       role: 'Co-Founder & CEO',
       image: '/images/founders/founder-1.jpg',
       bio:
         'Leads Arelix\'s vision, business strategy and growth, with a focus on partnerships and building the company\'s international direction.',
+      education: 'BSc in EEE, Ahsanullah University of Science & Technology',
+      email: 'khorshedalamkhairul@gmail.com',
+      phone: '0198496164',
+      linkedin: 'https://www.linkedin.com/in/khorshedalamon',
+      portfolio: '',
     },
     {
-      name: '[Founder Name]',
+      name: 'Khadiza Khanom',
       role: 'Co-Founder & Managing Director',
       image: '/images/founders/founder-2.jpg',
       bio:
         'Oversees operations, administration and client coordination, helping turn the company\'s vision into organized execution and long-term relationships.',
+      education: '',
+      email: 'kkl.khadiza@gmail.com',
+      phone: '01795753116',
+      linkedin: 'https://www.linkedin.com/in/khadiza-khanom-liza-a95a26263/',
+      portfolio: '',
     },
     {
-      name: '[Founder Name]',
+      name: 'Saobia Islam Tinni',
       role: 'Co-Founder & CTO',
       image: '/images/founders/founder-3.jpg',
       bio:
         'Leads software development and technical execution, overseeing architecture, engineering practices and the development of Arelix\'s digital products.',
+      education: 'BSc in CSE, Ahsanullah University of Science & Technology',
+      email: 'islamsaobia@gmail.com',
+      phone: '',
+      linkedin: 'https://www.linkedin.com/in/saobia-islam',
+      portfolio: 'https://islamsaobia.vercel.app',
     },
   ],
 };
@@ -237,7 +285,7 @@ export const cta = {
 
 export const contact = {
   headline: 'Let\'s talk about your project.',
-  body: 'Fill out the form and we\'ll get back to you within one business day. Prefer email? Reach us at contact@arelixlabs.com.',
+  body: 'Fill out the form and we\'ll get back to you within one business day. Prefer email? Reach us at arelixlabs@gmail.com.',
   formLabels: {
     name: 'Your name',
     email: 'Your email',

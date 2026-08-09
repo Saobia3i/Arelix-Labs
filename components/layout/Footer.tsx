@@ -79,6 +79,21 @@ export default function Footer() {
             <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 280 }}>
               Engineering at the intersection of software, hardware, AI, and IoT.
             </Typography>
+            <Typography
+              component="a"
+              href="mailto:arelixlabs@gmail.com"
+              variant="body2"
+              sx={{
+                display: 'inline-block',
+                mt: 1,
+                color: 'text.primary',
+                textDecoration: 'none',
+                fontWeight: 500,
+                '&:hover': { color: 'primary.main' },
+              }}
+            >
+              arelixlabs@gmail.com
+            </Typography>
           </Box>
 
           {/* Nav links */}

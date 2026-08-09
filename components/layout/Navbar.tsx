@@ -70,7 +70,7 @@ export default function Navbar() {
 
   return (
     <>
-      <AppBar position="sticky" component="header">
+      <AppBar position="sticky" component="header" sx={{ bgcolor: 'background.default' }}>
         <Container>
           <Toolbar
             disableGutters

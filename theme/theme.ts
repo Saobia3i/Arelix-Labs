@@ -101,7 +101,7 @@ export function getTheme(mode: PaletteMode) {
               boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
             },
           },
-          containedPrimary: {
+          contained: {
             '&:hover': {
               backgroundColor: mode === 'light' ? colors.light.primaryDark : colors.dark.primaryDark,
             },

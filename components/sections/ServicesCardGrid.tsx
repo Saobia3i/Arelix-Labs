@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import type { Theme } from '@mui/material/styles';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Section from '@/components/ui/Section';
@@ -55,17 +56,17 @@ function ServiceCard({ category, description, items, index }: ServiceCardProps) 
         flexDirection: 'column',
         justifyContent: 'space-between',
         borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
-        border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
-        bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
-        boxShadow: (theme) =>
+        border: (theme: Theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
+        bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
+        boxShadow: (theme: Theme) =>
           theme.palette.mode === 'light'
             ? '0 4px 20px rgba(0,0,0,0.08)'
             : '0 4px 20px rgba(0,0,0,0.7)',
         p: { xs: 3, sm: 3.5 },
         transition: 'all 150ms ease',
         '&:hover': {
-          borderColor: (theme) => (theme.palette.mode === 'light' ? '#B84A47' : '#C25752'),
-          boxShadow: (theme) =>
+          borderColor: (theme: Theme) => (theme.palette.mode === 'light' ? '#B84A47' : '#C25752'),
+          boxShadow: (theme: Theme) =>
             theme.palette.mode === 'light'
               ? '0 12px 32px rgba(0,0,0,0.18)'
               : '0 12px 36px rgba(194,87,82,0.16)',

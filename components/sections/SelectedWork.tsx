@@ -10,6 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import MuiLink from '@mui/material/Link';
+import type { Theme } from '@mui/material/styles';
 import {
   ChevronLeft,
   ChevronRight,
@@ -190,7 +191,7 @@ export default function SelectedWork() {
               justifyContent: 'space-between',
               position: 'relative',
               overflow: 'hidden',
-              background: (theme) =>
+              background: (theme: Theme) =>
                 theme.palette.mode === 'light'
                   ? '#FFFFFF'
                   : 'linear-gradient(135deg, #000000 0%, #000000 100%)',

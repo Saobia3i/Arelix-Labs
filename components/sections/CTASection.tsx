@@ -3,6 +3,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import type { Theme } from '@mui/material/styles';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
@@ -21,7 +22,7 @@ export default function CTASection() {
           position: 'relative',
           borderTop: '4px solid',
           borderColor: 'primary.main',
-          background: (theme) =>
+          background: (theme: Theme) =>
             theme.palette.mode === 'light'
               ? '#FFFFFF'
               : 'linear-gradient(180deg, #000000 0%, #000000 100%)',

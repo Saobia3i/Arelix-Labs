@@ -8,7 +8,7 @@ import type { Theme } from '@mui/material/styles';
 import { keyframes } from '@emotion/react';
 import Section from '@/components/ui/Section';
 import { founders } from '@/content/site-copy';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, GraduationCap, Mail, Phone } from 'lucide-react';
 
 const profileShimmerSweep = keyframes`
   0%, 14% { transform: translateX(-260%) rotate(25deg); }
@@ -149,6 +149,11 @@ export default function FoundersGrid() {
                   </Box>
 
                   <Box
+                    component="a"
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${founder.name}'s LinkedIn profile`}
                     className="founder-action"
                     sx={{
                       width: 38,
@@ -170,6 +175,46 @@ export default function FoundersGrid() {
                 <Typography sx={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.86rem', lineHeight: 1.65 }}>
                   {founder.bio}
                 </Typography>
+
+                <Box sx={{ display: 'grid', gap: 0.8, mt: 1.7 }}>
+                  {founder.education && (
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                      <GraduationCap size={14} style={{ flex: '0 0 auto', marginTop: 3 }} />
+                      <Typography sx={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.74rem', lineHeight: 1.45 }}>
+                        {founder.education}
+                      </Typography>
+                    </Box>
+                  )}
+                  <Box
+                    component="a"
+                    href={`mailto:${founder.email}`}
+                    sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'rgba(255,255,255,0.82)', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}
+                  >
+                    <Mail size={14} />
+                    <Typography sx={{ fontSize: '0.74rem', overflowWrap: 'anywhere' }}>{founder.email}</Typography>
+                  </Box>
+                  {founder.phone && (
+                    <Box
+                      component="a"
+                      href={`tel:+88${founder.phone}`}
+                      sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'rgba(255,255,255,0.82)', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}
+                    >
+                      <Phone size={14} />
+                      <Typography sx={{ fontSize: '0.74rem' }}>{founder.phone}</Typography>
+                    </Box>
+                  )}
+                  {founder.portfolio && (
+                    <Box
+                      component="a"
+                      href={founder.portfolio}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.74rem', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}
+                    >
+                      Portfolio ↗
+                    </Box>
+                  )}
+                </Box>
               </Box>
             </Box>
           </Grid>

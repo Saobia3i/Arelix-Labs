@@ -330,7 +330,7 @@ export default function ChatBot() {
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary', p: 1 }}>
                     <RefreshCw size={14} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
                     <Typography variant="caption" sx={{ fontSize: '0.75rem' }}>
-                      Analyzing query via OpenRouter API...
+                      Searching Arelix knowledge...
                     </Typography>
                   </Box>
                 )}
