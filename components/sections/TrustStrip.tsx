@@ -23,8 +23,11 @@ export default function TrustStrip() {
 
   const goToSlide = useCallback((index: number) => {
     const nextIndex = Math.max(0, Math.min(bannerDomains.length - 1, index));
-    const item = carouselRef.current?.querySelector<HTMLElement>(`[data-carousel-index="${nextIndex}"]`);
-    item?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    const container = carouselRef.current;
+    const item = container?.querySelector<HTMLElement>(`[data-carousel-index="${nextIndex}"]`);
+    if (container && item) {
+      container.scrollTo({ left: item.offsetLeft, behavior: 'smooth' });
+    }
     setActiveIndex(nextIndex);
   }, []);
 

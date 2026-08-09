@@ -66,10 +66,14 @@ function HexagonNodeCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.35, delay: index * 0.06 }}
+      initial={{ opacity: 0, y: 28, scale: 0.88 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.22 }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.18,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       whileHover={{ scale: 1.05 }}
       style={{ width: '100%', height: '100%' }}
     >
@@ -351,8 +355,75 @@ export default function ServicesGrid() {
       </Box>
 
       {/* Mobile & Tablet Mode (< lg): Responsive Hexagon Grid */}
-      <Box sx={{ display: { xs: 'block', lg: 'none' } }}>
-        <Box sx={{ textAlign: 'center', mb: 4 }}>
+      <Box sx={{ display: { xs: 'block', lg: 'none' }, position: 'relative' }}>
+        {/* Animated mobile connection backbone */}
+        <Box
+          component="svg"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            position: 'absolute',
+            top: 34,
+            bottom: 80,
+            left: '50%',
+            width: 24,
+            height: 'calc(100% - 114px)',
+            transform: 'translateX(-50%)',
+            color: 'primary.main',
+            pointerEvents: 'none',
+            zIndex: 0,
+            overflow: 'visible',
+          }}
+        >
+          <motion.line
+            x1="50"
+            y1="0"
+            x2="50"
+            y2="100"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeDasharray="3 4"
+            opacity="0.62"
+            animate={{ strokeDashoffset: [0, -28] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'linear' }}
+          />
+        </Box>
+
+        {/* Animated two-column tablet connection network */}
+        <Box
+          component="svg"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          sx={{
+            display: { xs: 'none', sm: 'block', lg: 'none' },
+            position: 'absolute',
+            top: 34,
+            bottom: 70,
+            left: 0,
+            width: '100%',
+            height: 'calc(100% - 104px)',
+            color: 'primary.main',
+            pointerEvents: 'none',
+            zIndex: 0,
+            overflow: 'visible',
+          }}
+        >
+          <motion.path
+            d="M 50 0 V 88 M 50 18 H 25 M 50 18 H 75 M 50 50 H 25 M 50 50 H 75 M 50 82 H 25 M 50 82 H 75"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.45"
+            strokeDasharray="2 2"
+            opacity="0.62"
+            animate={{ strokeDashoffset: [0, -18] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'linear' }}
+          />
+        </Box>
+
+        <Box sx={{ textAlign: 'center', mb: 4, position: 'relative', zIndex: 2 }}>
           <Box
             sx={{
               width: 66,
@@ -376,7 +447,7 @@ export default function ServicesGrid() {
           </Box>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={3} sx={{ position: 'relative', zIndex: 1 }}>
           {services.map((service, index) => (
             <Grid key={service.category} size={{ xs: 12, sm: 6 }}>
               <HexagonNodeCard
