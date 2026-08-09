@@ -208,18 +208,21 @@ export const founders = {
     {
       name: '[Founder Name]',
       role: 'Co-Founder & CEO',
+      image: '/images/founders/founder-1.jpg',
       bio:
         'Leads Arelix\'s vision, business strategy and growth, with a focus on partnerships and building the company\'s international direction.',
     },
     {
       name: '[Founder Name]',
       role: 'Co-Founder & Managing Director',
+      image: '/images/founders/founder-2.jpg',
       bio:
         'Oversees operations, administration and client coordination, helping turn the company\'s vision into organized execution and long-term relationships.',
     },
     {
       name: '[Founder Name]',
       role: 'Co-Founder & CTO',
+      image: '/images/founders/founder-3.jpg',
       bio:
         'Leads software development and technical execution, overseeing architecture, engineering practices and the development of Arelix\'s digital products.',
     },

@@ -189,13 +189,6 @@ export default function WhyArelix() {
 
           {/* Section Header */}
           <Box sx={{ maxWidth: 760, mb: { xs: 4, md: 2 }, position: 'relative', zIndex: 1 }}>
-            <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, mb: { xs: 1.5, md: 1 } }}>
-              <Badge label="04 // WHY CHOOSE ARELIX" color="primary" />
-              <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600, letterSpacing: '0.05em' }}>
-                PINNED STICKY SCROLL
-              </Typography>
-            </Box>
-
             <Typography
               variant="h2"
               sx={{
@@ -218,7 +211,15 @@ export default function WhyArelix() {
           <Grid container spacing={{ xs: 4, md: 2 }} sx={{ alignItems: 'center', position: 'relative', zIndex: 1 }}>
             {/* Left Panel: Step Navigation List (01 to 06) */}
             <Grid size={{ xs: 12, md: 5 }}>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 1.5, md: 0.5 } }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: { xs: 1.5, md: 0.5 },
+                  width: '100%',
+                  maxWidth: { md: 440 },
+                }}
+              >
                 {whyChooseCards.map((card, idx) => {
                   const isActive = idx === activeIndex;
                   return (
@@ -301,6 +302,7 @@ export default function WhyArelix() {
                   transition={{ duration: 0.3, ease: 'easeOut' }}
                 >
                   <Card
+                    noPadding
                     sx={{
                       minHeight: { xs: 440, md: 400 },
                       p: { xs: 3.5, sm: 4.5, md: 3 },

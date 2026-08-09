@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import type { Theme } from '@mui/material/styles';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -22,9 +23,6 @@ export default function AboutPage() {
       {/* About Header */}
       <Section spacing="lg" id="about-header">
         <Box sx={{ maxWidth: 820 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-            <Badge label={about.headline} color="primary" />
-          </Box>
           <Typography
             variant="h1"
             sx={{ fontSize: { xs: '2.4rem', md: '3.4rem' }, fontWeight: 700, mb: 2 }}
@@ -72,11 +70,15 @@ export default function AboutPage() {
               sx={{
                 height: '100%',
                 p: { xs: 3.5, md: 4 },
-                borderTop: '4px solid',
-                borderColor: 'primary.main',
+                border: (theme: Theme) =>
+                  theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                '&:hover': {
+                  borderColor: (theme: Theme) =>
+                    theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
+                },
               }}
             >
               <Box>
@@ -122,11 +124,15 @@ export default function AboutPage() {
               sx={{
                 height: '100%',
                 p: { xs: 3.5, md: 4 },
-                borderTop: '4px solid',
-                borderColor: 'primary.main',
+                border: (theme: Theme) =>
+                  theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                '&:hover': {
+                  borderColor: (theme: Theme) =>
+                    theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
+                },
               }}
             >
               <Box>

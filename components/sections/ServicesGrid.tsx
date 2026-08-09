@@ -12,7 +12,6 @@ import IconButton from '@mui/material/IconButton';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Section from '@/components/ui/Section';
-import Badge from '@/components/ui/Badge';
 import { services } from '@/content/site-copy';
 import {
   Check,
@@ -131,7 +130,7 @@ function HexagonNodeCard({
               fontFamily: 'var(--font-oswald)',
               color: 'primary.main',
               fontWeight: 700,
-              fontSize: '0.75rem',
+              fontSize: '1rem',
               letterSpacing: '0.1em',
               display: 'block',
               mb: 0.5,
@@ -163,7 +162,7 @@ function HexagonNodeCard({
           <Typography
             variant="h4"
             sx={{
-              fontSize: '1rem',
+              fontSize: '1.35rem',
               fontWeight: 700,
               color: 'text.primary',
               mb: 0.5,
@@ -180,7 +179,7 @@ function HexagonNodeCard({
               display: 'inline-flex',
               alignItems: 'center',
               gap: 0.5,
-              fontSize: '0.72rem',
+              fontSize: '0.95rem',
               fontWeight: 600,
               color: 'primary.main',
             }}
@@ -197,29 +196,28 @@ export default function ServicesGrid() {
   const [selectedModal, setSelectedModal] = useState<number | null>(null);
 
   return (
-    <Section spacing="lg" background="default" id="services">
-      {/* Header (Original Copy: WHAT WE BUILD / Our Services) */}
+    <Section
+      spacing="lg"
+      background="default"
+      id="services"
+      sx={{ py: { xs: 6, md: 2 } }}
+    >
+      {/* Services heading */}
       <Box
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'flex-start', md: 'flex-end' },
           justifyContent: 'space-between',
-          mb: 4,
+          mb: { xs: 4, lg: 1.5 },
           gap: 2,
         }}
       >
         <Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-            <Badge label="WHAT WE BUILD" color="primary" />
-            <Typography variant="caption" sx={{ fontWeight: 600, color: 'text.secondary', letterSpacing: '0.05em' }}>
-              NETWORK TOPOLOGY MAP
-            </Typography>
-          </Box>
           <Typography
             variant="h2"
             sx={{
-              fontSize: { xs: '2.2rem', md: '2.8rem' },
+              fontSize: { xs: '2.2rem', md: '2.35rem' },
               fontWeight: 700,
               letterSpacing: '-0.02em',
             }}
@@ -238,11 +236,29 @@ export default function ServicesGrid() {
         sx={{
           display: { xs: 'none', lg: 'block' },
           position: 'relative',
-          width: 1100,
-          height: 920,
+          width: 638,
+          height: 563,
           mx: 'auto',
+          '@media (min-height: 850px)': {
+            width: 770,
+            height: 679,
+          },
         }}
       >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: 1100,
+            height: 920,
+            transform: 'scale(0.58) translateY(25px)',
+            transformOrigin: 'top left',
+            '@media (min-height: 850px)': {
+              transform: 'scale(0.7) translateY(25px)',
+            },
+          }}
+        >
         {/* SVG Wires Layer (Underneath Cards, Clean Endpoints) */}
         <svg
           width="1100"
@@ -326,7 +342,7 @@ export default function ServicesGrid() {
               fontWeight: 700,
               letterSpacing: '0.14em',
               color: 'primary.main',
-              fontSize: '0.95rem',
+              fontSize: '1.2rem',
               display: 'block',
               bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
               px: 2,
@@ -367,6 +383,7 @@ export default function ServicesGrid() {
             </Box>
           );
         })}
+        </Box>
       </Box>
 
       {/* Mobile & Tablet Mode (< lg): Responsive Hexagon Grid */}
@@ -418,7 +435,8 @@ export default function ServicesGrid() {
             sx: {
               borderRadius: 3,
               p: 1,
-              bgcolor: '#FFFFFF',
+              bgcolor: 'background.paper',
+              color: 'text.primary',
             },
           },
         }}
@@ -445,17 +463,17 @@ export default function ServicesGrid() {
                   <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 700, lineHeight: 1 }}>
                     TOPOLOGY NODE 0{selectedModal + 1} SPECIFICATION
                   </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, fontSize: '1.2rem', mt: 0.25 }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, fontSize: '1.2rem', mt: 0.25, color: 'text.primary' }}>
                     {services[selectedModal].category}
                   </Typography>
                 </Box>
               </Box>
-              <IconButton onClick={() => setSelectedModal(null)} size="small">
+              <IconButton onClick={() => setSelectedModal(null)} size="small" sx={{ color: 'text.primary' }}>
                 <X size={18} />
               </IconButton>
             </DialogTitle>
-            <DialogContent dividers sx={{ borderColor: '#E2E8F0' }}>
-              <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7 }}>
+            <DialogContent dividers sx={{ borderColor: 'divider' }}>
+              <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'text.secondary' }}>
                 {services[selectedModal].description}
               </Typography>
 
@@ -481,7 +499,7 @@ export default function ServicesGrid() {
                     >
                       <Check size={12} strokeWidth={2.5} />
                     </Box>
-                    <Typography variant="body2" sx={{ fontSize: '0.875rem' }}>
+                    <Typography variant="body2" sx={{ fontSize: '0.875rem', color: 'text.primary' }}>
                       {item}
                     </Typography>
                   </Box>

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { motion, AnimatePresence } from 'framer-motion';
+import type { Theme } from '@mui/material/styles';
 import Button from '@/components/ui/Button';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
@@ -26,36 +26,24 @@ const consoleTabs = [
     id: 'software',
     label: 'Software Engine',
     icon: Code2,
-    stack: ['Next.js', 'React', 'ASP.NET Core', 'Node.js', 'PostgreSQL'],
-    uptime: '99.99%',
-    latency: '< 4ms',
     status: 'OPTIMIZED',
   },
   {
     id: 'hardware',
     label: 'Hardware & PCB',
     icon: Cpu,
-    stack: ['Multi-layer PCB', 'STM32 / ESP32', 'C/C++ RTOS', 'Gerber CAD'],
-    uptime: '100% Signal',
-    latency: '< 1ms',
     status: 'PRODUCTION READY',
   },
   {
     id: 'ai',
     label: 'AI & Automation',
     icon: Zap,
-    stack: ['LangGraph', 'Edge ONNX', 'Computer Vision', 'RAG Pipelines'],
-    uptime: 'Real-time',
-    latency: '< 12ms',
     status: 'ACTIVE MODEL',
   },
   {
     id: 'iot',
     label: 'IoT & Telemetry',
     icon: Layers,
-    stack: ['LoRaWAN / BLE', 'MQTT Broker', 'Digital Twin', 'OTA Firmware'],
-    uptime: '99.99%',
-    latency: '< 8ms',
     status: 'STREAMING',
   },
 ];
@@ -68,9 +56,9 @@ function LiveEngineConsole() {
       sx={{
         p: { xs: 3, sm: 3.5 },
         borderRadius: '24px 0px 24px 24px', // Cat's Eye sharp top-right corner
-        bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
-        border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
-        boxShadow: (theme) =>
+        bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+        border: (theme: Theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
+        boxShadow: (theme: Theme) =>
           theme.palette.mode === 'light'
             ? '0 12px 36px rgba(0,0,0,0.12)'
             : '0 12px 36px rgba(0,0,0,0.85)',
@@ -147,91 +135,6 @@ function LiveEngineConsole() {
         })}
       </Box>
 
-      {/* Selected Domain Spec Panel */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab.id}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Box
-            sx={{
-              p: 2,
-              borderRadius: '16px 0px 16px 16px',
-              bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#141414'),
-              border: '1px solid',
-              borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#262626'),
-              mb: 2.5,
-            }}
-          >
-            {/* Tech Chips */}
-            <Typography variant="caption" sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: '0.05em', display: 'block', mb: 1.25 }}>
-              ENGINEERED TECH STACK &amp; SPECIFICATION:
-            </Typography>
-
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, mb: 2 }}>
-              {activeTab.stack.map((item, idx) => (
-                <Box
-                  key={idx}
-                  sx={{
-                    px: 1.25,
-                    py: 0.4,
-                    borderRadius: 6,
-                    bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0A0A0A'),
-                    border: '1px solid',
-                    borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#333333'),
-                    fontSize: '0.72rem',
-                    fontWeight: 600,
-                    color: 'text.primary',
-                  }}
-                >
-                  {item}
-                </Box>
-              ))}
-            </Box>
-
-            {/* Metrics Bar */}
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr',
-                gap: 1,
-                pt: 1.5,
-                borderTop: '1px solid',
-                borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#262626'),
-              }}
-            >
-              <Box>
-                <Typography variant="caption" color="text.secondary" display="block">
-                  Reliability
-                </Typography>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'primary.main', fontSize: '0.825rem' }}>
-                  {activeTab.uptime}
-                </Typography>
-              </Box>
-              <Box>
-                <Typography variant="caption" color="text.secondary" display="block">
-                  Latency
-                </Typography>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.825rem' }}>
-                  {activeTab.latency}
-                </Typography>
-              </Box>
-              <Box>
-                <Typography variant="caption" color="text.secondary" display="block">
-                  Ownership
-                </Typography>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.825rem' }}>
-                  100% Client IP
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-        </motion.div>
-      </AnimatePresence>
-
       {/* Widget Sales Action Bar */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
@@ -300,9 +203,8 @@ export default function Hero() {
       >
         {/* Left: Verbatim High-Impact Sales Copy */}
         <Box sx={{ maxWidth: { lg: 620 } }}>
-          {/* Eyebrow badge */}
+          {/* Capability eyebrow */}
           <Box sx={{ mb: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 1 }}>
-            <Badge label={hero.eyebrow} color="primary" />
             <Typography
               variant="caption"
               sx={{ color: 'text.secondary', fontWeight: 600, letterSpacing: '0.05em', fontSize: '0.78rem' }}

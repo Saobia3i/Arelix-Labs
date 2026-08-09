@@ -5,6 +5,7 @@ import { ColorModeProvider } from '@/theme/ColorModeProvider';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import AssistantWidget from '@/components/assistant/AssistantWidget';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 
 const oswald = Oswald({
   subsets: ['latin'],
@@ -48,6 +49,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <ScrollToTop />
           <ChatBot />
         </ColorModeProvider>
       </body>

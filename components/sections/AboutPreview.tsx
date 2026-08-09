@@ -4,6 +4,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import type { Theme } from '@mui/material/styles';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -16,12 +17,6 @@ export default function AboutPreview() {
     <Section spacing="lg" id="about-preview">
       {/* Header */}
       <Box sx={{ maxWidth: 780, mb: 5 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-          <Badge label={about.headline} color="primary" />
-          <Typography variant="caption" sx={{ fontWeight: 600, color: 'text.secondary', letterSpacing: '0.05em' }}>
-            WHO WE ARE
-          </Typography>
-        </Box>
         <Typography
           variant="h2"
           sx={{
@@ -51,17 +46,24 @@ export default function AboutPreview() {
               height: '100%',
               p: { xs: 3.5, md: 4 },
               borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
-              border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
-              borderTop: '4px solid',
-              borderColor: 'primary.main',
+              border: (theme: Theme) =>
+                theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
-              boxShadow: (theme) =>
+              bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+              boxShadow: (theme: Theme) =>
                 theme.palette.mode === 'light'
                   ? '0 6px 24px rgba(0,0,0,0.08)'
                   : '0 6px 24px rgba(0,0,0,0.7)',
+              '&:hover': {
+                borderColor: (theme: Theme) =>
+                  theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
+                boxShadow: (theme: Theme) =>
+                  theme.palette.mode === 'light'
+                    ? '0 12px 32px rgba(0,0,0,0.14)'
+                    : '0 12px 32px rgba(0,0,0,0.72)',
+              },
             }}
           >
             <Box>
@@ -108,17 +110,24 @@ export default function AboutPreview() {
               height: '100%',
               p: { xs: 3.5, md: 4 },
               borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
-              border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
-              borderTop: '4px solid',
-              borderColor: 'primary.main',
+              border: (theme: Theme) =>
+                theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
-              boxShadow: (theme) =>
+              bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+              boxShadow: (theme: Theme) =>
                 theme.palette.mode === 'light'
                   ? '0 6px 24px rgba(0,0,0,0.08)'
                   : '0 6px 24px rgba(0,0,0,0.7)',
+              '&:hover': {
+                borderColor: (theme: Theme) =>
+                  theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
+                boxShadow: (theme: Theme) =>
+                  theme.palette.mode === 'light'
+                    ? '0 12px 32px rgba(0,0,0,0.14)'
+                    : '0 12px 32px rgba(0,0,0,0.72)',
+              },
             }}
           >
             <Box>
