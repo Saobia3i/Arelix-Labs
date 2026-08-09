@@ -2,6 +2,7 @@
 
 import React, { type ReactNode } from 'react';
 import Box from '@mui/material/Box';
+import type { SxProps, Theme } from '@mui/material/styles';
 import Container from './Container';
 
 type Spacing = 'sm' | 'md' | 'lg';
@@ -13,6 +14,7 @@ interface SectionProps {
   background?: Background;
   id?: string;
   noContainer?: boolean;
+  sx?: SxProps<Theme>;
 }
 
 const paddingMap: Record<Spacing, { xs: number; md: number }> = {
@@ -27,6 +29,7 @@ export default function Section({
   background = 'default',
   id,
   noContainer = false,
+  sx,
 }: SectionProps) {
   const py = paddingMap[spacing];
 
@@ -34,11 +37,14 @@ export default function Section({
     <Box
       component="section"
       id={id}
-      sx={{
-        py,
-        bgcolor: background === 'paper' ? 'background.paper' : 'background.default',
-        width: '100%',
-      }}
+      sx={[
+        {
+          py,
+          bgcolor: background === 'paper' ? 'background.paper' : 'background.default',
+          width: '100%',
+        },
+        ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+      ]}
     >
       {noContainer ? children : <Container>{children}</Container>}
     </Box>

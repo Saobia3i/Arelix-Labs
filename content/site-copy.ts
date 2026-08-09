@@ -5,12 +5,12 @@
 // ============================================================
 
 export const hero = {
-  eyebrow: 'Engineering Systems That Work in the Real World',
-  title: 'We Build What Others\nCan\'t Ship.',
-  tagline: 'Arelix Labs designs and delivers advanced software, hardware, AI, and IoT systems — end-to-end, production-grade, no handoffs.',
-  body: 'From embedded firmware to full-stack platforms to intelligent automation, we\'re the engineering partner for teams that need technical depth, not a slideware vendor.',
+  eyebrow: '01 — HERO',
+  title: 'Build Digital. Build Physical.\nBuild What\'s Next.',
+  tagline: 'Software. Hardware. Engineered Together.',
+  body: 'We build digital products, connected systems and engineering solutions for businesses ready to build what\'s next. From applications and platforms to PCB, embedded systems, and IoT, Arelix Labs engineers solutions designed for real-world use.',
   cta: 'Talk to Arelix',
-  ctaSecondary: 'See Our Work',
+  ctaSecondary: 'Start a Conversation',
 };
 
 export const trustStrip: {
@@ -19,24 +19,24 @@ export const trustStrip: {
   subtitle: string;
 }[] = [
   {
+    icon: 'Code2',
+    title: 'Software Engineering',
+    subtitle: 'Web • Mobile • AI-Integrated Products',
+  },
+  {
     icon: 'Cpu',
-    title: 'Hardware + Software',
-    subtitle: 'Full-stack from silicon to UI',
+    title: 'Hardware Engineering',
+    subtitle: 'PCB • Embedded • Electronics',
   },
   {
     icon: 'Brain',
-    title: 'AI & Machine Learning',
-    subtitle: 'Applied intelligence, not buzzwords',
-  },
-  {
-    icon: 'Wifi',
-    title: 'IoT Systems',
-    subtitle: 'Connected devices that actually ship',
+    title: 'AI & Intelligent Systems',
+    subtitle: 'AI Agents • Computer Vision • IoT',
   },
   {
     icon: 'Shield',
-    title: 'Production-Grade',
-    subtitle: 'Engineered to run, not just demo',
+    title: 'Long-Term Partnership',
+    subtitle: 'Development • Support • Maintenance',
   },
 ];
 
@@ -46,109 +46,92 @@ export const services: {
   items: string[];
 }[] = [
   {
-    category: 'Software Engineering',
-    description:
-      'Full-stack web and mobile applications, APIs, and backend systems built for scale and maintainability.',
+    category: 'Software Development',
+    description: 'Full-stack digital products, built for scale and security.',
     items: [
-      'Web application development (React, Next.js, Node.js)',
-      'Mobile applications (React Native, cross-platform)',
-      'RESTful & GraphQL API design and implementation',
-      'Cloud infrastructure and DevOps (AWS, GCP, CI/CD)',
-      'Database architecture (SQL, NoSQL, time-series)',
-      'Legacy system modernisation and migration',
+      'Web Applications — Next.js, React, MERN, ASP.NET Core, Laravel',
+      'Custom Admin Panels & Dashboards',
+      'E-commerce & Marketplace Platforms',
+      'EdTech, Booking & Service Platforms',
+      'Real-Time Systems — live leaderboards, event portals, SSE-based dashboards',
+      'API Development & Backend Architecture',
     ],
   },
   {
-    category: 'Hardware & Embedded Systems',
-    description:
-      'Custom PCB design, firmware development, and embedded systems engineering from prototype to production.',
+    category: 'AI Solutions',
+    description: 'Intelligence layered on top of your existing systems.',
     items: [
-      'Custom PCB design and hardware prototyping',
-      'Firmware development (C/C++, RTOS, bare-metal)',
-      'Microcontroller and SoC integration (ARM, ESP32, STM32)',
-      'Signal processing and sensor fusion',
-      'Hardware-software co-design',
-      'Production readiness and DFM review',
+      'AI-Integrated Web Products',
+      'AI Lead Qualification & Sales Agents',
+      'Multi-Agent AI Systems',
+      'Computer Vision Applications',
     ],
   },
   {
-    category: 'Artificial Intelligence & ML',
-    description:
-      'Applied machine learning, computer vision, NLP, and intelligent automation systems — deployed to production.',
+    category: 'Hardware & Electronics',
+    description: 'From circuit concepts to working hardware.',
     items: [
-      'Custom ML model design, training, and evaluation',
-      'Computer vision pipelines (detection, classification, segmentation)',
-      'Natural language processing and LLM integration',
-      'Edge AI and on-device inference (TensorRT, ONNX)',
-      'AI-powered automation and decision systems',
-      'Model monitoring, retraining, and MLOps pipelines',
+      'PCB Design',
+      'Circuit Design',
+      'Embedded Systems',
+      'Prototyping',
     ],
   },
   {
     category: 'IoT & Connected Systems',
-    description:
-      'End-to-end IoT architecture — from device hardware through connectivity layers to cloud dashboards.',
+    description: 'Connecting intelligence, data and devices.',
     items: [
-      'IoT device design and firmware (MQTT, CoAP, BLE, LoRaWAN)',
-      'Edge computing and gateway architecture',
-      'Cloud IoT platforms (AWS IoT, Azure IoT Hub)',
-      'Real-time data pipelines and telemetry systems',
-      'Fleet management and remote device monitoring',
-      'Industrial IoT and SCADA integration',
+      'IoT Dashboards & Digital Twins — real-time device monitoring and control panels',
+      'Device Integration Software — bridging hardware telemetry to web interfaces',
+      'Connected Device Firmware & Sensor Networks',
     ],
   },
   {
-    category: 'Systems Integration',
-    description:
-      'Connecting disparate systems, APIs, and hardware into coherent, reliable, automated workflows.',
+    category: 'UI/UX & Product Design',
+    description: 'Interfaces designed for people, not just screens.',
     items: [
-      'Third-party API and platform integration',
-      'ERP, CRM, and enterprise system connectors',
-      'Hardware-to-cloud data bridges',
-      'Automated testing and validation pipelines',
-      'Observability, logging, and alerting infrastructure',
-      'Compliance and security hardening',
+      'Product UI Design',
+      'Design Systems',
+      'Web & Mobile Experiences',
+      'Admin & Operational Interface Design',
     ],
   },
   {
-    category: 'Technical Consulting & Architecture',
-    description:
-      'Strategic technical guidance for founders, CTOs, and product teams navigating complex engineering decisions.',
+    category: 'Technology Support',
+    description: "Technology doesn't stop at delivery. Neither do we.",
     items: [
-      'Architecture review and design for complex systems',
-      'Technology selection and vendor evaluation',
-      'Technical due diligence for investors and acquirers',
-      'Engineering team mentorship and process improvement',
-      'Build-vs-buy and make-vs-integrate analysis',
-      'Proof-of-concept and feasibility studies',
+      'Maintenance & Uptime Monitoring',
+      'Continuous Feature Development',
+      'Security & Performance Reviews',
+      'System Updates & Scaling Support',
     ],
   },
 ];
 
 export const whyArelix: { title: string; body: string }[] = [
   {
-    title: 'We own the full stack.',
-    body: 'Software, hardware, AI, IoT — handled under one roof. No finger-pointing between vendors when something doesn\'t integrate.',
+    title: 'Software Meets Engineering',
+    body: 'We bring software and physical engineering under one roof — giving businesses a single team for digital and connected technology.',
   },
   {
-    title: 'We ship to production.',
-    body: 'We\'re not a prototype shop. Everything we build is engineered to run reliably at scale, not just to impress in a demo.',
+    title: 'Built Around the Problem',
+    body: "We don't start with a technology and look for somewhere to use it. We first understand the problem, then engineer the right solution.",
   },
   {
-    title: 'We speak engineering, not buzzwords.',
-    body: 'Our team is engineers first. We scope projects accurately, surface real constraints early, and don\'t overpromise.',
+    title: 'Built to Keep Working',
+    body: "Our goal isn't simply to deliver and disappear. We build with maintainability, scalability and long-term use in mind.",
   },
   {
-    title: 'We move fast without cutting corners.',
-    body: 'Aggressive timelines don\'t have to mean technical debt. We have the depth to move quickly and the discipline to do it right.',
+    title: 'Clear From Day One',
+    body: 'Clear communication, defined deliverables and a structured development process keep projects moving without unnecessary complexity.',
   },
   {
-    title: 'We treat your budget like our own.',
-    body: 'We build the right solution for the problem, not the most impressive one. Our incentive is your system working, not billable hours.',
+    title: 'A Partner, Not Just a Vendor',
+    body: 'We aim to build lasting relationships with businesses, supporting their technology as their needs evolve.',
   },
   {
-    title: 'We stay until it\'s done.',
-    body: 'Integration hell, hardware quirks, deployment surprises — we don\'t disappear when things get hard. We solve it.',
+    title: 'Lean by Design',
+    body: 'As a growing engineering company, we stay agile, focused and close to the work — without layers of unnecessary overhead.',
   },
 ];
 
@@ -159,109 +142,99 @@ export const process: {
 }[] = [
   {
     step: '01',
-    title: 'Discovery',
-    body: 'We map your technical requirements, constraints, and success criteria. No assumptions, no generic playbooks.',
+    title: 'Understand',
+    body: 'We listen before we build. We understand your business, requirements, users and constraints.',
   },
   {
     step: '02',
-    title: 'Architecture',
-    body: 'We design the system architecture — hardware, software, data, and integration layers — before writing a line of code.',
+    title: 'Plan',
+    body: 'We turn requirements into a clear roadmap. Scope, architecture, technology and deliverables are defined before development begins.',
   },
   {
     step: '03',
     title: 'Build',
-    body: 'Iterative development with regular check-ins. You see real progress, not status updates.',
+    body: 'We engineer the solution. Our team develops, designs, integrates and iterates around the agreed goals.',
   },
   {
     step: '04',
-    title: 'Integration & Test',
-    body: 'Every component gets integrated and tested against real-world conditions — not just unit tests in isolation.',
+    title: 'Validate',
+    body: 'We test what we\'ve built. Functionality, usability, reliability and performance are reviewed before delivery.',
   },
   {
     step: '05',
-    title: 'Deploy & Support',
-    body: 'We handle deployment, documentation, and knowledge transfer. Post-launch support is part of the engagement.',
-  },
-];
-
-export const selectedWork: {
-  name: string;
-  tag: string;
-  description: string;
-}[] = [
-  {
-    name: 'Industrial Sensor Network',
-    tag: 'IoT · Hardware · Cloud',
-    description:
-      'Designed and deployed a 200-node wireless sensor network for a manufacturing facility, including custom PCBs, LoRaWAN firmware, and a real-time cloud dashboard. Reduced unplanned downtime by 34%.',
-  },
-  {
-    name: 'AI Quality Inspection System',
-    tag: 'Computer Vision · AI · Embedded',
-    description:
-      'Built an edge AI visual inspection system using custom-trained models deployed on NVIDIA Jetson hardware. Achieved 99.2% defect detection accuracy in production, replacing a manual inspection team of 12.',
-  },
-  {
-    name: 'Fleet Telematics Platform',
-    tag: 'Web Platform · IoT · Software',
-    description:
-      'Developed a full-stack telematics platform for a logistics company — device firmware, real-time data pipelines, and a React dashboard tracking 800+ vehicles. Handles 2M+ data points per day.',
-  },
-  {
-    name: 'Medical Device Firmware',
-    tag: 'Embedded · Hardware · Compliance',
-    description:
-      'Engineered safety-critical firmware for a Class II medical device — RTOS, sensor fusion algorithms, and IEC 62304-compliant documentation. Shipped to FDA 510(k) clearance.',
+    title: 'Support',
+    body: 'We stay beyond launch. Maintenance, improvements and continued development keep your technology moving forward.',
   },
 ];
 
 export const about = {
+  headline: '07 — ABOUT ARELIX LABS',
+  tagline: 'Technology Built With Purpose.',
   short:
-    'Arelix Labs is an engineering company founded on a simple principle: the best technical work comes from people who understand the full stack — from electrons to end users.',
+    'Arelix Labs is a technology and engineering company building practical solutions for modern businesses. We bring software, electronics and connected technologies together to turn ideas and business requirements into reliable products and systems. As we grow, our goal is simple: become a trusted technology partner for businesses across borders.',
   full: [
-    'We started Arelix Labs because we kept seeing the same problem: clients would hire a software agency, then a hardware firm, then an AI consultancy, and spend half their budget managing the seams between them. Nobody owned the whole system.',
-    'We built Arelix Labs to be that one team. Not a generalist shop that does everything mediocrely, but a team of specialists who have worked across domains long enough to design systems that integrate cleanly from day one.',
-    'Our work spans embedded firmware running on custom silicon, cloud platforms processing millions of events per day, AI models trained on proprietary datasets and deployed at the edge, and everything in between. We\'ve shipped to regulated industries (medical, industrial, automotive) and early-stage startups alike.',
-    'We\'re selective about the work we take on. If your project is technically interesting and the stakes are real, we\'d like to talk.',
+    'Arelix Labs was built around a simple idea: technology works better when the people building it understand the problem behind it.',
+    'We are a growing technology and engineering company focused on helping businesses turn ideas, requirements and challenges into working solutions.',
+    'Our capabilities span software development, mobile applications, UI/UX, AI-integrated products and automation, PCB and electronics engineering, embedded systems, and IoT. This combination allows us to work across both the digital and physical sides of technology.',
+    'We are building Arelix with a long-term vision — not simply to complete projects, but to become a technology partner businesses can rely on as they grow.',
+    'Our journey starts small. Our ambition doesn\'t.',
   ],
 };
 
 export const vision = {
-  title: 'Our Vision',
-  body: 'A world where advanced engineering is accessible to any team with a hard problem to solve — not just the ones who can afford a 50-person consultancy.',
+  title: '08 — VISION',
+  headline: 'Our Vision',
+  statement:
+    'To become a trusted global engineering partner that turns meaningful ideas into technology that works.',
+  body:
+    'We envision a future where software, hardware and intelligent systems come together seamlessly to solve real problems for businesses around the world.',
 };
 
 export const mission = {
-  title: 'Our Mission',
-  body: 'To design and deliver production-grade software, hardware, AI, and IoT systems for clients who need technical depth, not a vendor relationship.',
+  title: '09 — MISSION',
+  headline: 'Our Mission',
+  statement:
+    'To understand real business needs and engineer reliable, scalable technology around them.',
+  body:
+    'We combine thoughtful design, software development and engineering to build solutions that are practical today, maintainable tomorrow and ready to grow with our clients.',
 };
 
-export const founders: {
-  name: string;
-  role: string;
-  bio: string;
-}[] = [
-  {
-    name: 'Founder Name',
-    role: 'Co-Founder & CEO',
-    bio: 'Bio coming soon. Background in systems engineering, embedded hardware, and scaling technical teams across multiple ventures.',
-  },
-  {
-    name: 'Founder Name',
-    role: 'Co-Founder & CTO',
-    bio: 'Bio coming soon. Deep expertise in AI/ML, distributed systems, and production infrastructure for high-throughput applications.',
-  },
-];
+export const founders = {
+  title: '10 — FOUNDERS',
+  headline: 'The People Behind Arelix',
+  tagline: 'Three founders. One direction. A long way to go.',
+  footerNote: 'Different responsibilities. Shared ownership of the vision.',
+  items: [
+    {
+      name: '[Founder Name]',
+      role: 'Co-Founder & CEO',
+      bio:
+        'Leads Arelix\'s vision, business strategy and growth, with a focus on partnerships and building the company\'s international direction.',
+    },
+    {
+      name: '[Founder Name]',
+      role: 'Co-Founder & Managing Director',
+      bio:
+        'Oversees operations, administration and client coordination, helping turn the company\'s vision into organized execution and long-term relationships.',
+    },
+    {
+      name: '[Founder Name]',
+      role: 'Co-Founder & CTO',
+      bio:
+        'Leads software development and technical execution, overseeing architecture, engineering practices and the development of Arelix\'s digital products.',
+    },
+  ],
+};
 
 export const cta = {
-  headline: 'Ready to build something that works?',
-  body: 'Tell us about your project. We\'ll tell you honestly whether we\'re the right team for it — and if we are, we\'ll show you exactly how we\'d approach it.',
+  headline: 'Have a technology challenge?',
+  body: 'Tell us what you\'re trying to build. We\'ll explore what it takes to make it work.',
   buttonLabel: 'Talk to Arelix',
 };
 
 export const contact = {
   headline: 'Let\'s talk about your project.',
-  body: 'Fill out the form and we\'ll get back to you within one business day. Prefer email? Reach us at hello@arelixlabs.com.',
+  body: 'Fill out the form and we\'ll get back to you within one business day. Prefer email? Reach us at contact@arelixlabs.com.',
   formLabels: {
     name: 'Your name',
     email: 'Your email',
@@ -269,9 +242,3 @@ export const contact = {
     submit: 'Send Message',
   },
 };
-
-// ──────────────────────────────────────────────────
-// Recommended Homepage Section Order
-// Hero → TrustStrip → ServicesGrid → WhyArelix →
-// ProcessTimeline → SelectedWork → CTASection
-// ──────────────────────────────────────────────────

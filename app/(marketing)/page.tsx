@@ -4,13 +4,14 @@ import TrustStrip from '@/components/sections/TrustStrip';
 import ServicesGrid from '@/components/sections/ServicesGrid';
 import WhyArelix from '@/components/sections/WhyArelix';
 import ProcessTimeline from '@/components/sections/ProcessTimeline';
-import SelectedWork from '@/components/sections/SelectedWork';
+import AboutPreview from '@/components/sections/AboutPreview';
+import FoundersGrid from '@/components/sections/FoundersGrid';
 import CTASection from '@/components/sections/CTASection';
 
 export const metadata: Metadata = {
-  title: 'Arelix Labs — We Build What Others Can\'t Ship',
+  title: 'Arelix Labs — Build Digital. Build Physical. Build What\'s Next.',
   description:
-    'Arelix Labs designs and delivers advanced software, hardware, AI, and IoT systems — end-to-end, production-grade, no handoffs.',
+    'Arelix Labs builds digital products, connected systems and engineering solutions for businesses ready to build what\'s next.',
 };
 
 export default function HomePage() {
@@ -21,7 +22,8 @@ export default function HomePage() {
       <ServicesGrid />
       <WhyArelix />
       <ProcessTimeline />
-      <SelectedWork />
+      <AboutPreview />
+      <FoundersGrid />
       <CTASection />
     </>
   );

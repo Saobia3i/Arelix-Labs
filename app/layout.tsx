@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   },
 };
 
+import ChatBot from '@/components/ui/ChatBot';
+
 export default function RootLayout({
   children,
 }: {
@@ -46,7 +48,7 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
-          <AssistantWidget />
+          <ChatBot />
         </ColorModeProvider>
       </body>
     </html>

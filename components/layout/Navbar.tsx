@@ -19,6 +19,7 @@ import ThemeToggle from '@/components/ui/ThemeToggle';
 import Container from '@/components/ui/Container';
 
 const navLinks = [
+  { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'Work', href: '/work' },
   { label: 'About', href: '/about' },

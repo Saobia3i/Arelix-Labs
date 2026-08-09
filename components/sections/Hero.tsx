@@ -1,155 +1,421 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Section from '@/components/ui/Section';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
 import { hero } from '@/content/site-copy';
+import {
+  ArrowRight,
+  Cpu,
+  Zap,
+  CheckCircle2,
+  Code2,
+  Layers,
+  Lock,
+} from 'lucide-react';
+import Link from 'next/link';
 
-// Geometric SVG brand graphic — angular forms echoing the triangular mark
-function HeroGraphic() {
+// Live Architecture Console Domains for Right-Side Widget
+const consoleTabs = [
+  {
+    id: 'software',
+    label: 'Software Engine',
+    icon: Code2,
+    stack: ['Next.js', 'React', 'ASP.NET Core', 'Node.js', 'PostgreSQL'],
+    uptime: '99.99%',
+    latency: '< 4ms',
+    status: 'OPTIMIZED',
+  },
+  {
+    id: 'hardware',
+    label: 'Hardware & PCB',
+    icon: Cpu,
+    stack: ['Multi-layer PCB', 'STM32 / ESP32', 'C/C++ RTOS', 'Gerber CAD'],
+    uptime: '100% Signal',
+    latency: '< 1ms',
+    status: 'PRODUCTION READY',
+  },
+  {
+    id: 'ai',
+    label: 'AI & Automation',
+    icon: Zap,
+    stack: ['LangGraph', 'Edge ONNX', 'Computer Vision', 'RAG Pipelines'],
+    uptime: 'Real-time',
+    latency: '< 12ms',
+    status: 'ACTIVE MODEL',
+  },
+  {
+    id: 'iot',
+    label: 'IoT & Telemetry',
+    icon: Layers,
+    stack: ['LoRaWAN / BLE', 'MQTT Broker', 'Digital Twin', 'OTA Firmware'],
+    uptime: '99.99%',
+    latency: '< 8ms',
+    status: 'STREAMING',
+  },
+];
+
+function LiveEngineConsole() {
+  const [activeTab, setActiveTab] = useState(consoleTabs[0]);
+
   return (
-    <Box
-      aria-hidden="true"
+    <Card
       sx={{
-        width: '100%',
-        height: { xs: 280, md: 420 },
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        p: { xs: 3, sm: 3.5 },
+        borderRadius: '24px 0px 24px 24px', // Cat's Eye sharp top-right corner
+        bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+        border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
+        boxShadow: (theme) =>
+          theme.palette.mode === 'light'
+            ? '0 12px 36px rgba(0,0,0,0.12)'
+            : '0 12px 36px rgba(0,0,0,0.85)',
       }}
     >
-      <svg
-        viewBox="0 0 500 420"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        style={{ width: '100%', height: '100%', maxWidth: 500 }}
-      >
-        {/* Large background triangle */}
-        <polygon
-          points="250,20 480,400 20,400"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          style={{ color: 'var(--divider-color, #2A2A2A)', opacity: 0.5 }}
-        />
-        {/* Primary red fill triangle */}
-        <polygon points="250,60 430,380 70,380" fill="#C00000" opacity="0.12" />
-        {/* Accent triangles */}
-        <polygon points="250,100 370,360 130,360" fill="#C00000" opacity="0.18" />
-        <polygon points="250,160 320,320 180,320" fill="#C00000" opacity="0.30" />
-        {/* Core diamond mark */}
-        <polygon points="250,200 290,280 250,310 210,280" fill="#C00000" />
-        {/* Corner accent marks */}
-        <rect x="30" y="30" width="24" height="1" fill="#C00000" opacity="0.6" />
-        <rect x="30" y="30" width="1" height="24" fill="#C00000" opacity="0.6" />
-        <rect x="446" y="30" width="24" height="1" fill="#C00000" opacity="0.6" />
-        <rect x="469" y="30" width="1" height="24" fill="#C00000" opacity="0.6" />
-        {/* Grid dots */}
-        {[100, 150, 200, 250, 300, 350, 400].map((x) =>
-          [80, 140, 200, 260].map((y) => (
-            <circle
-              key={`${x}-${y}`}
-              cx={x}
-              cy={y}
-              r="1.5"
-              fill="#C00000"
-              opacity="0.2"
-            />
-          ))
-        )}
-      </svg>
-    </Box>
+      {/* Console Top Bar */}
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2.5 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box
+            sx={{
+              width: 10,
+              height: 10,
+              borderRadius: '50%',
+              bgcolor: '#22C55E',
+              boxShadow: '0 0 10px #22C55E',
+            }}
+          />
+          <Typography
+            variant="caption"
+            sx={{ fontFamily: 'var(--font-oswald)', fontWeight: 700, letterSpacing: '0.1em', color: 'primary.main', fontSize: '0.78rem' }}
+          >
+            ARELIX CORE ENGINE v2.4
+          </Typography>
+        </Box>
+        <Badge label={activeTab.status} color="primary" />
+      </Box>
+
+      <Typography variant="h5" sx={{ fontWeight: 700, mb: 1, fontSize: '1.25rem', lineHeight: 1.3 }}>
+        Integrated Systems Architecture
+      </Typography>
+
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 2.5, fontSize: '0.85rem' }}>
+        Software, electronics, and AI connected under a single unified engineering handoff:
+      </Typography>
+
+      {/* Console Domain Tabs */}
+      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1.25, mb: 2.5 }}>
+        {consoleTabs.map((tab) => {
+          const isSelected = tab.id === activeTab.id;
+          const TabIcon = tab.icon;
+          return (
+            <Box
+              key={tab.id}
+              onClick={() => setActiveTab(tab)}
+              sx={{
+                p: 1.25,
+                borderRadius: '12px 0px 12px 12px',
+                cursor: 'pointer',
+                transition: 'all 150ms ease',
+                bgcolor: (theme) =>
+                  isSelected
+                    ? 'rgba(192, 0, 0, 0.08)'
+                    : theme.palette.mode === 'light'
+                    ? '#F4F5F7'
+                    : '#1A1A1A',
+                border: '1.5px solid',
+                borderColor: (theme) =>
+                  isSelected
+                    ? '#C00000'
+                    : theme.palette.mode === 'light'
+                    ? '#E2E8F0'
+                    : '#262626',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1,
+              }}
+            >
+              <TabIcon size={18} style={{ color: isSelected ? '#C00000' : 'inherit' }} />
+              <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.78rem' }}>
+                {tab.label}
+              </Typography>
+            </Box>
+          );
+        })}
+      </Box>
+
+      {/* Selected Domain Spec Panel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2 }}
+        >
+          <Box
+            sx={{
+              p: 2,
+              borderRadius: '16px 0px 16px 16px',
+              bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#141414'),
+              border: '1px solid',
+              borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#262626'),
+              mb: 2.5,
+            }}
+          >
+            {/* Tech Chips */}
+            <Typography variant="caption" sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: '0.05em', display: 'block', mb: 1.25 }}>
+              ENGINEERED TECH STACK &amp; SPECIFICATION:
+            </Typography>
+
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.75, mb: 2 }}>
+              {activeTab.stack.map((item, idx) => (
+                <Box
+                  key={idx}
+                  sx={{
+                    px: 1.25,
+                    py: 0.4,
+                    borderRadius: 6,
+                    bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0A0A0A'),
+                    border: '1px solid',
+                    borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#333333'),
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    color: 'text.primary',
+                  }}
+                >
+                  {item}
+                </Box>
+              ))}
+            </Box>
+
+            {/* Metrics Bar */}
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr 1fr',
+                gap: 1,
+                pt: 1.5,
+                borderTop: '1px solid',
+                borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#262626'),
+              }}
+            >
+              <Box>
+                <Typography variant="caption" color="text.secondary" display="block">
+                  Reliability
+                </Typography>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700, color: 'primary.main', fontSize: '0.825rem' }}>
+                  {activeTab.uptime}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant="caption" color="text.secondary" display="block">
+                  Latency
+                </Typography>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.825rem' }}>
+                  {activeTab.latency}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography variant="caption" color="text.secondary" display="block">
+                  Ownership
+                </Typography>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.825rem' }}>
+                  100% Client IP
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Widget Sales Action Bar */}
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+          <Lock size={14} style={{ color: '#C00000' }} />
+          <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.75rem' }}>
+            Zero Vendor Lock-in
+          </Typography>
+        </Box>
+
+        <Button
+          component={Link}
+          href="/contact"
+          variant="primary"
+          size="small"
+          sx={{ fontSize: '0.78rem', py: 0.4, px: 1.5 }}
+        >
+          Talk to Arelix <ArrowRight size={13} style={{ marginLeft: 4 }} />
+        </Button>
+      </Box>
+    </Card>
   );
 }
 
 export default function Hero() {
   return (
-    <Section spacing="lg" id="hero">
+    <Section
+      spacing="lg"
+      id="hero"
+      sx={{
+        py: { xs: 6, md: 6, lg: 3 },
+        minHeight: { lg: 'calc(100svh - 68px)' },
+        display: { lg: 'flex' },
+        alignItems: { lg: 'center' },
+      }}
+    >
+      {/* Semantic Schema.org Organization Metadata for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Arelix Labs',
+            url: 'https://arelixlabs.com',
+            logo: 'https://arelixlabs.com/logo.png',
+            description:
+              'Arelix Labs builds digital products, connected systems and engineering solutions for businesses ready to build what\'s next.',
+            knowsAbout: [
+              'Software Engineering',
+              'PCB Design',
+              'Embedded RTOS Firmware',
+              'Artificial Intelligence',
+              'IoT Telemetry Systems',
+            ],
+          }),
+        }}
+      />
+
       <Box
         sx={{
           display: 'grid',
           gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
-          gap: { xs: 6, lg: 10 },
+          gap: { xs: 6, lg: 8 },
           alignItems: 'center',
         }}
       >
-        {/* Left: Text content */}
-        <Box sx={{ maxWidth: { lg: 580 } }}>
-          {/* Eyebrow */}
-          <Typography
-            variant="overline"
-            sx={{
-              color: 'primary.main',
-              display: 'block',
-              mb: 2.5,
-              fontSize: '0.8rem',
-            }}
-          >
-            {hero.eyebrow}
-          </Typography>
+        {/* Left: Verbatim High-Impact Sales Copy */}
+        <Box sx={{ maxWidth: { lg: 620 } }}>
+          {/* Eyebrow badge */}
+          <Box sx={{ mb: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 1 }}>
+            <Badge label={hero.eyebrow} color="primary" />
+            <Typography
+              variant="caption"
+              sx={{ color: 'text.secondary', fontWeight: 600, letterSpacing: '0.05em', fontSize: '0.78rem' }}
+            >
+              • SOFTWARE + HARDWARE + AI + IOT
+            </Typography>
+          </Box>
 
-          {/* H1 */}
+          {/* H1 Title (Verbatim Copy: Build Digital. Build Physical. Build What's Next.) */}
           <Typography
             variant="h1"
             sx={{
-              fontSize: { xs: '2.6rem', sm: '3.2rem', md: '3.8rem', lg: '4rem' },
-              mb: 2.5,
+              fontSize: { xs: '2.5rem', sm: '3.2rem', md: '3.7rem', lg: '4rem' },
+              mb: 2,
+              fontWeight: 700,
+              letterSpacing: '-0.025em',
+              lineHeight: 1.1,
               whiteSpace: 'pre-line',
             }}
           >
             {hero.title}
           </Typography>
 
-          {/* Tagline */}
+          {/* Sub-headline Tagline (Verbatim Copy: Software. Hardware. Engineered Together.) */}
           <Typography
             variant="body1"
             sx={{
-              fontSize: { xs: '1.05rem', md: '1.15rem' },
-              color: 'text.secondary',
-              mb: 1.5,
-              maxWidth: 520,
+              fontSize: { xs: '1.1rem', md: '1.2rem' },
+              color: 'primary.main',
+              fontWeight: 700,
+              mb: 2,
+              maxWidth: 560,
+              lineHeight: 1.5,
             }}
           >
             {hero.tagline}
           </Typography>
 
-          {/* Body */}
+          {/* Body Copy (Verbatim Copy) */}
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ mb: 4, maxWidth: 500 }}
+            sx={{ mb: 3.5, maxWidth: 540, lineHeight: 1.7, fontSize: '0.95rem' }}
           >
             {hero.body}
           </Typography>
 
-          {/* CTA */}
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          {/* High-Converting CTA Buttons */}
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 3.5 }}>
             <Button
               variant="primary"
               href="/contact"
               id="hero-primary-cta"
               size="large"
+              sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1,
+                px: 3.5,
+                py: 1.25,
+                fontSize: '0.98rem',
+                boxShadow: '0 8px 24px rgba(192, 0, 0, 0.35)',
+              }}
             >
-              {hero.cta}
+              {hero.cta} <ArrowRight size={18} />
             </Button>
+
             <Button
               variant="secondary"
-              href="/work"
+              href="/contact"
               id="hero-secondary-cta"
               size="large"
+              sx={{ px: 3, py: 1.25, fontSize: '0.95rem' }}
             >
               {hero.ctaSecondary}
             </Button>
           </Box>
+
+          {/* Conversion Proof Points */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: { xs: 2, sm: 3 },
+              pt: 2.5,
+              borderTop: '1px solid',
+              borderColor: (theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.12)'),
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+              <CheckCircle2 size={16} style={{ color: '#C00000' }} />
+              <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.78rem', color: 'text.primary' }}>
+                Full-Stack &amp; Embedded Engineering
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+              <CheckCircle2 size={16} style={{ color: '#C00000' }} />
+              <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.78rem', color: 'text.primary' }}>
+                100% Guaranteed IP Transfer
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+              <CheckCircle2 size={16} style={{ color: '#C00000' }} />
+              <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.78rem', color: 'text.primary' }}>
+                Cross-Border Technology Partner
+              </Typography>
+            </Box>
+          </Box>
         </Box>
 
-        {/* Right: Geometric graphic */}
+        {/* Right: Live Engineering Console Widget */}
         <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
-          <HeroGraphic />
+          <LiveEngineConsole />
         </Box>
       </Box>
     </Section>

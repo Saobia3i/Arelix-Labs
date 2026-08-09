@@ -3,94 +3,167 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Section from '@/components/ui/Section';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
 import FoundersGrid from '@/components/sections/FoundersGrid';
 import CTASection from '@/components/sections/CTASection';
 import { about, vision, mission } from '@/content/site-copy';
+import { Compass, Target, Eye } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About — Arelix Labs',
   description:
-    'Arelix Labs is an engineering company founded on a simple principle: the best technical work comes from people who understand the full stack.',
+    'Arelix Labs is a technology and engineering company building practical solutions for modern businesses.',
 };
 
 export default function AboutPage() {
   return (
     <>
-      {/* About header */}
+      {/* About Header */}
       <Section spacing="lg" id="about-header">
-        <Box sx={{ maxWidth: 720 }}>
-          <Typography
-            variant="overline"
-            sx={{ color: 'primary.main', display: 'block', mb: 1 }}
-          >
-            About Arelix Labs
-          </Typography>
+        <Box sx={{ maxWidth: 820 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+            <Badge label={about.headline} color="primary" />
+          </Box>
           <Typography
             variant="h1"
-            sx={{ fontSize: { xs: '2.4rem', md: '3rem' }, mb: 3 }}
+            sx={{ fontSize: { xs: '2.4rem', md: '3.4rem' }, fontWeight: 700, mb: 2 }}
           >
-            Built by engineers, for hard problems.
+            {about.tagline}
           </Typography>
           <Typography
             variant="body1"
             color="text.secondary"
-            sx={{ mb: 2, lineHeight: 1.75, fontSize: '1.1rem' }}
+            sx={{ mb: 2, lineHeight: 1.8, fontSize: { xs: '1.05rem', md: '1.15rem' } }}
           >
             {about.short}
           </Typography>
         </Box>
       </Section>
 
-      {/* Full about copy */}
+      {/* Full About Copy */}
       <Section spacing="md" background="paper" id="about-full">
-        <Box sx={{ maxWidth: 720 }}>
+        <Card sx={{ maxWidth: 840, p: { xs: 3, md: 5 } }}>
           {about.full.map((paragraph, index) => (
             <Typography
               key={index}
               variant="body1"
-              color="text.secondary"
-              sx={{ mb: index < about.full.length - 1 ? 2.5 : 0, lineHeight: 1.8 }}
+              color="text.primary"
+              sx={{
+                mb: index < about.full.length - 1 ? 2.5 : 0,
+                lineHeight: 1.8,
+                fontSize: index === about.full.length - 1 ? '1.1rem' : '1rem',
+                fontWeight: index === about.full.length - 1 ? 700 : 400,
+                color: index === about.full.length - 1 ? 'primary.main' : 'text.primary',
+              }}
             >
               {paragraph}
             </Typography>
           ))}
-        </Box>
+        </Card>
       </Section>
 
-      {/* Vision & Mission */}
+      {/* Vision & Mission with MUI Cards */}
       <Section spacing="lg" id="vision-mission">
-        <Grid container spacing={6}>
+        <Grid container spacing={4}>
+          {/* Vision */}
           <Grid size={{ xs: 12, md: 6 }}>
-            <Box
+            <Card
               sx={{
-                borderLeft: '2px solid',
+                height: '100%',
+                p: { xs: 3.5, md: 4 },
+                borderTop: '4px solid',
                 borderColor: 'primary.main',
-                pl: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
               }}
             >
-              <Typography variant="h3" sx={{ mb: 2, fontSize: '1.5rem' }}>
-                {vision.title}
-              </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.75 }}>
-                {vision.body}
-              </Typography>
-            </Box>
+              <Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                  <Box
+                    sx={{
+                      width: 42,
+                      height: 42,
+                      borderRadius: 1.5,
+                      bgcolor: 'rgba(192,0,0,0.08)',
+                      color: 'primary.main',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Eye size={22} />
+                  </Box>
+                  <Badge label={vision.title} color="primary" />
+                </Box>
+
+                <Typography variant="h3" sx={{ mb: 1.5, fontSize: '1.5rem', fontWeight: 700 }}>
+                  {vision.headline}
+                </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: 600, mb: 2, color: 'primary.main', lineHeight: 1.6 }}
+                >
+                  "{vision.statement}"
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
+                  {vision.body}
+                </Typography>
+              </Box>
+            </Card>
           </Grid>
+
+          {/* Mission */}
           <Grid size={{ xs: 12, md: 6 }}>
-            <Box
+            <Card
               sx={{
-                borderLeft: '2px solid',
+                height: '100%',
+                p: { xs: 3.5, md: 4 },
+                borderTop: '4px solid',
                 borderColor: 'primary.main',
-                pl: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
               }}
             >
-              <Typography variant="h3" sx={{ mb: 2, fontSize: '1.5rem' }}>
-                {mission.title}
-              </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.75 }}>
-                {mission.body}
-              </Typography>
-            </Box>
+              <Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                  <Box
+                    sx={{
+                      width: 42,
+                      height: 42,
+                      borderRadius: 1.5,
+                      bgcolor: 'rgba(192,0,0,0.08)',
+                      color: 'primary.main',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Target size={22} />
+                  </Box>
+                  <Badge label={mission.title} color="primary" />
+                </Box>
+
+                <Typography variant="h3" sx={{ mb: 1.5, fontSize: '1.5rem', fontWeight: 700 }}>
+                  {mission.headline}
+                </Typography>
+
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: 600, mb: 2, color: 'primary.main', lineHeight: 1.6 }}
+                >
+                  "{mission.statement}"
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
+                  {mission.body}
+                </Typography>
+              </Box>
+            </Card>
           </Grid>
         </Grid>
       </Section>

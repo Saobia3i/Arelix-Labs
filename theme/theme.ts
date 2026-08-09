@@ -113,15 +113,21 @@ export function getTheme(mode: PaletteMode) {
       MuiCard: {
         styleOverrides: {
           root: {
-            borderRadius: borderRadius.card,
-            border: `1px solid ${t.divider}`,
-            boxShadow: 'none',
-            transition: 'box-shadow 80ms ease, border-color 80ms ease',
+            borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
+            backgroundColor: mode === 'light' ? '#FFFFFF' : '#0D0D0D',
+            border: mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
+            boxShadow: mode === 'light'
+              ? '0 4px 20px rgba(0,0,0,0.08)'
+              : '0 4px 20px rgba(0,0,0,0.7)',
+            transition: 'transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease',
+            position: 'relative',
+            overflow: 'hidden',
             '&:hover': {
+              transform: 'translateY(-3px)',
               boxShadow: mode === 'light'
-                ? '0 4px 20px rgba(0,0,0,0.10)'
-                : '0 4px 20px rgba(0,0,0,0.40)',
-              borderColor: t.primaryMain,
+                ? '0 12px 32px rgba(0,0,0,0.18)'
+                : '0 12px 36px rgba(229,35,27,0.35)',
+              borderColor: mode === 'light' ? '#C00000' : '#E5231B',
             },
           },
         },

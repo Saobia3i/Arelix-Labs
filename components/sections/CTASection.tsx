@@ -4,17 +4,27 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Section from '@/components/ui/Section';
+import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { cta } from '@/content/site-copy';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 export default function CTASection() {
   return (
     <Section spacing="lg" background="paper" id="cta">
-      <Box
+      <Card
         sx={{
-          textAlign: 'center',
-          maxWidth: 620,
+          maxWidth: 860,
           mx: 'auto',
+          p: { xs: 4, md: 6 },
+          textAlign: 'center',
+          position: 'relative',
+          borderTop: '4px solid',
+          borderColor: 'primary.main',
+          background: (theme) =>
+            theme.palette.mode === 'light'
+              ? '#FFFFFF'
+              : 'linear-gradient(180deg, #141414 0%, #1A1A1A 100%)',
         }}
       >
         {/* Geometric accent above headline */}
@@ -22,16 +32,31 @@ export default function CTASection() {
           aria-hidden="true"
           sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}
         >
-          <svg width="40" height="34" viewBox="0 0 40 34" fill="none">
-            <polygon points="20,0 40,34 0,34" fill="#C00000" opacity="0.9" />
-          </svg>
+          <Box
+            sx={{
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              bgcolor: (theme) =>
+                theme.palette.mode === 'light' ? 'rgba(192,0,0,0.08)' : 'rgba(229,35,27,0.15)',
+              color: 'primary.main',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Sparkles size={22} />
+          </Box>
         </Box>
 
         <Typography
           variant="h2"
           sx={{
-            fontSize: { xs: '1.8rem', md: '2.4rem' },
+            fontSize: { xs: '1.8rem', md: '2.5rem' },
+            fontWeight: 700,
             mb: 2,
+            maxWidth: 640,
+            mx: 'auto',
           }}
         >
           {cta.headline}
@@ -39,7 +64,7 @@ export default function CTASection() {
         <Typography
           variant="body1"
           color="text.secondary"
-          sx={{ mb: 4, maxWidth: 480, mx: 'auto', lineHeight: 1.7 }}
+          sx={{ mb: 4, maxWidth: 540, mx: 'auto', lineHeight: 1.75 }}
         >
           {cta.body}
         </Typography>
@@ -48,10 +73,11 @@ export default function CTASection() {
           href="/contact"
           id="cta-primary-btn"
           size="large"
+          sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, px: 4, py: 1.25 }}
         >
-          {cta.buttonLabel}
+          {cta.buttonLabel} <ArrowRight size={18} />
         </Button>
-      </Box>
+      </Card>
     </Section>
   );
 }
