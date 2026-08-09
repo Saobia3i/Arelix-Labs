@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/db';
+import { sendLeadNotificationEmail } from '@/lib/mailer';
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,6 +23,16 @@ export async function POST(req: NextRequest) {
         message: body.message,
         source: body.source ?? null,
       },
+    });
+
+    // Send email notification to Arelix email asynchronously
+    void sendLeadNotificationEmail({
+      name: body.name,
+      email: body.email,
+      message: body.message,
+      source: body.source,
+    }).catch((err) => {
+      console.error('[POST /api/leads] Error triggering mailer:', err);
     });
 
     return NextResponse.json({ id: lead.id }, { status: 201 });
