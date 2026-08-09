@@ -22,8 +22,8 @@ import {
 import Link from 'next/link';
 
 const talkButtonShimmer = keyframes`
-  0% { transform: translateX(-220%) skewX(-22deg); }
-  55%, 100% { transform: translateX(420%) skewX(-22deg); }
+  0% { transform: translateX(-240%) skewX(-22deg); }
+  100% { transform: translateX(620%) skewX(-22deg); }
 `;
 
 // Live Architecture Console Domains for Right-Side Widget
@@ -285,7 +285,8 @@ export default function Hero() {
                   background:
                     'linear-gradient(90deg, transparent, rgba(255,255,255,0.18), rgba(255,255,255,0.72), rgba(255,255,255,0.18), transparent)',
                   filter: 'blur(0.5px)',
-                  animation: `${talkButtonShimmer} 1.8s ease-in-out infinite`,
+                  willChange: 'transform',
+                  animation: `${talkButtonShimmer} 1.55s linear infinite`,
                 },
                 '@media (prefers-reduced-motion: reduce)': {
                   '&::after': { display: 'none' },
