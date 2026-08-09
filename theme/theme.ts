@@ -106,7 +106,7 @@ export function getTheme(mode: PaletteMode) {
               backgroundColor: mode === 'light' ? colors.light.primaryDark : colors.dark.primaryDark,
             },
           },
-          outlinedSecondary: {
+          outlined: {
             borderColor: t.divider,
             color: t.textPrimary,
             '&:hover': {
