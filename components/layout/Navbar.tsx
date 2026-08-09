@@ -135,7 +135,7 @@ export default function Navbar() {
                   py: 0.875,
                 }}
               >
-                Talk to Arelix
+                Contact Us
               </MuiButton>
               {/* Mobile hamburger */}
               <IconButton
@@ -209,7 +209,7 @@ export default function Navbar() {
             fullWidth
             onClick={() => setMobileOpen(false)}
           >
-            Talk to Arelix
+            Contact Us
           </MuiButton>
         </Box>
       </Drawer>

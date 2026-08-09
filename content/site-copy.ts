@@ -9,7 +9,7 @@ export const hero = {
   title: 'Build Digital. Build Physical.\nBuild What\'s Next.',
   tagline: 'Software. Hardware. Engineered Together.',
   body: 'We build digital products, connected systems and engineering solutions for businesses ready to build what\'s next. From applications and platforms to PCB, embedded systems, and IoT, Arelix Labs engineers solutions designed for real-world use.',
-  cta: 'Talk to Arelix',
+  cta: 'Contact Us',
   ctaSecondary: 'Start a Conversation',
 };
 
@@ -280,7 +280,7 @@ export const founders = {
 export const cta = {
   headline: 'Have a technology challenge?',
   body: 'Tell us what you\'re trying to build. We\'ll explore what it takes to make it work.',
-  buttonLabel: 'Talk to Arelix',
+  buttonLabel: 'Contact Us',
 };
 
 export const contact = {
