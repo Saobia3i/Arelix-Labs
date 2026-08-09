@@ -157,7 +157,7 @@ function LiveEngineConsole() {
           size="small"
           sx={{ fontSize: '0.78rem', py: 0.4, px: 1.5 }}
         >
-          Talk to Arelix <ArrowRight size={13} style={{ marginLeft: 4 }} />
+          Contact us <ArrowRight size={13} style={{ marginLeft: 4 }} />
         </Button>
       </Box>
     </Card>
