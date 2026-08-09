@@ -22,7 +22,6 @@ import {
   Layers,
   Compass,
   ArrowRight,
-  GitMerge,
   X,
 } from 'lucide-react';
 
@@ -77,18 +76,18 @@ function HexagonNodeCard({
       <Box
         sx={{
           position: 'relative',
-          width: 250,
-          height: 250,
+          width: 220,
+          height: 220,
           mx: 'auto',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          p: 2.5,
+          p: 2,
           // Precision 6-Sided Hexagon Clip Path
           clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-          bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+          bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
           boxShadow: (theme) =>
             theme.palette.mode === 'light'
               ? '0 10px 30px rgba(0, 0, 0, 0.12)'
@@ -122,24 +121,7 @@ function HexagonNodeCard({
           />
         </svg>
 
-        <Box sx={{ position: 'relative', zIndex: 2, maxWidth: 190, mx: 'auto' }}>
-          {/* Node Number Badge */}
-          <Typography
-            variant="overline"
-            sx={{
-              fontFamily: 'var(--font-oswald)',
-              color: 'primary.main',
-              fontWeight: 700,
-              fontSize: '1rem',
-              letterSpacing: '0.1em',
-              display: 'block',
-              mb: 0.5,
-              lineHeight: 1,
-            }}
-          >
-            NODE 0{index + 1}
-          </Typography>
-
+        <Box sx={{ position: 'relative', zIndex: 2, maxWidth: 170, mx: 'auto' }}>
           {/* Icon */}
           <Box
             sx={{
@@ -184,7 +166,7 @@ function HexagonNodeCard({
               color: 'primary.main',
             }}
           >
-            Explore Node <ArrowRight size={12} />
+            Explore <ArrowRight size={12} />
           </Box>
         </Box>
       </Box>
@@ -279,7 +261,7 @@ export default function ServicesGrid() {
                 y1="460"
                 x2={node.x}
                 y2={node.y}
-                stroke="#C00000"
+                stroke="#B84A47"
                 strokeWidth="1.5"
                 opacity="0.6"
               />
@@ -287,7 +269,7 @@ export default function ServicesGrid() {
                 cx="550"
                 cy="460"
                 r="3.5"
-                fill="#FF3B30"
+                fill="#C25752"
                 animate={{ cx: [550, node.x], cy: [460, node.y] }}
                 transition={{
                   duration: 2 + idx * 0.2,
@@ -300,7 +282,7 @@ export default function ServicesGrid() {
           ))}
         </svg>
 
-        {/* CENTER MAIN NODE: CORE TOPOLOGY HUB (Exact Center: 550, 460) */}
+        {/* Center logo at the exact topology origin (550, 460). */}
         <Box
           sx={{
             position: 'absolute',
@@ -318,45 +300,27 @@ export default function ServicesGrid() {
           >
             <Box
               sx={{
-                width: 76,
-                height: 76,
+                width: 86,
+                height: 86,
                 borderRadius: '50%',
-                bgcolor: 'primary.main',
-                color: '#FFFFFF',
+                bgcolor: 'background.default',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 0 40px rgba(192, 0, 0, 0.55)',
+                overflow: 'hidden',
+                boxShadow: '0 0 40px rgba(217, 92, 87, 0.42)',
                 mx: 'auto',
-                mb: 1.25,
               }}
             >
-              <GitMerge size={36} />
+              <Box
+                component="img"
+                src="/images/arelix-logo-transparent.png"
+                alt="Arelix Labs"
+                sx={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.08)' }}
+              />
             </Box>
           </motion.div>
 
-          <Typography
-            variant="caption"
-            sx={{
-              fontFamily: 'var(--font-oswald)',
-              fontWeight: 700,
-              letterSpacing: '0.14em',
-              color: 'primary.main',
-              fontSize: '1.2rem',
-              display: 'block',
-              bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
-              px: 2,
-              py: 0.5,
-              borderRadius: 10,
-              boxShadow: (theme) =>
-                theme.palette.mode === 'light'
-                  ? '0 4px 14px rgba(0,0,0,0.12)'
-                  : '0 4px 14px rgba(0,0,0,0.7)',
-              border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
-            }}
-          >
-            CORE TOPOLOGY HUB
-          </Typography>
         </Box>
 
         {/* 6 Hexagon Node Cards Positioned Radially Around the Center Hub (No Overlaps) */}
@@ -369,8 +333,8 @@ export default function ServicesGrid() {
                 position: 'absolute',
                 top: node.y,
                 left: node.x,
-                width: 250,
-                height: 250,
+                width: 220,
+                height: 220,
                 transform: 'translate(-50%, -50%)',
                 zIndex: 5,
               }}
@@ -391,24 +355,25 @@ export default function ServicesGrid() {
         <Box sx={{ textAlign: 'center', mb: 4 }}>
           <Box
             sx={{
-              width: 56,
-              height: 56,
+              width: 66,
+              height: 66,
               borderRadius: '50%',
-              bgcolor: 'primary.main',
-              color: '#FFFFFF',
+              bgcolor: 'background.default',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              overflow: 'hidden',
               mx: 'auto',
-              mb: 1,
-              boxShadow: '0 0 24px rgba(192,0,0,0.4)',
+              boxShadow: '0 0 24px rgba(217,92,87,0.34)',
             }}
           >
-            <GitMerge size={28} />
+            <Box
+              component="img"
+              src="/images/arelix-logo-transparent.png"
+              alt="Arelix Labs"
+              sx={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.08)' }}
+            />
           </Box>
-          <Typography variant="caption" sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: '0.1em' }}>
-            CORE TOPOLOGY HUB
-          </Typography>
         </Box>
 
         <Grid container spacing={3}>
@@ -460,10 +425,7 @@ export default function ServicesGrid() {
                   {iconMap[services[selectedModal].category]}
                 </Box>
                 <Box>
-                  <Typography variant="overline" sx={{ color: 'primary.main', fontWeight: 700, lineHeight: 1 }}>
-                    TOPOLOGY NODE 0{selectedModal + 1} SPECIFICATION
-                  </Typography>
-                  <Typography variant="h5" sx={{ fontWeight: 700, fontSize: '1.2rem', mt: 0.25, color: 'text.primary' }}>
+                  <Typography variant="h5" sx={{ fontWeight: 700, fontSize: '1.2rem', color: 'text.primary' }}>
                     {services[selectedModal].category}
                   </Typography>
                 </Box>
@@ -508,7 +470,7 @@ export default function ServicesGrid() {
             </DialogContent>
             <DialogActions sx={{ px: 3, py: 2 }}>
               <Button variant="primary" href="/contact" onClick={() => setSelectedModal(null)}>
-                Inquire About Node Integration
+                Inquire About Integration
               </Button>
             </DialogActions>
           </>

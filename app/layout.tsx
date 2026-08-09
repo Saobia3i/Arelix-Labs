@@ -22,16 +22,38 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://arelixlabs.com'),
   title: 'Arelix Labs — Engineering at the Intersection of Software, Hardware, AI & IoT',
   description:
     'Arelix Labs builds advanced software, hardware, AI, and IoT systems for clients who need engineering that works in the real world.',
   keywords: 'software engineering, hardware, AI, IoT, embedded systems, custom solutions, Arelix Labs',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/images/arelix-logo-transparent.png', type: 'image/png' },
+    ],
+    apple: [{ url: '/images/arelix-logo-transparent.png', type: 'image/png' }],
+  },
   openGraph: {
     title: 'Arelix Labs',
     description:
       'Engineering at the intersection of software, hardware, AI, and IoT.',
     type: 'website',
     locale: 'en_US',
+    images: [
+      {
+        url: '/images/arelix-logo-transparent.png',
+        width: 500,
+        height: 500,
+        alt: 'Arelix Labs logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Arelix Labs',
+    description: 'Engineering at the intersection of software, hardware, AI, and IoT.',
+    images: ['/images/arelix-logo-transparent.png'],
   },
 };
 

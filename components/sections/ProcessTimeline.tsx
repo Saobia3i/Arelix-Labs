@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import type { Theme } from '@mui/material/styles';
@@ -10,6 +10,17 @@ import { process } from '@/content/site-copy';
 
 export default function ProcessTimeline() {
   const reduceMotion = useReducedMotion();
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const timer = window.setInterval(() => {
+      setActiveStep((current) => (current + 1) % process.length);
+    }, 2200);
+
+    return () => window.clearInterval(timer);
+  }, [reduceMotion]);
 
   return (
     <Section spacing="lg" id="process" sx={{ py: { xs: 6, md: 7 } }}>
@@ -38,13 +49,12 @@ export default function ProcessTimeline() {
         >
           <motion.div
             initial={reduceMotion ? false : { scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            animate={{ scaleX: (activeStep + 1) / process.length }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             style={{
               width: '100%',
               height: '100%',
-              background: 'linear-gradient(90deg, #C00000, #E97A75)',
+              background: 'linear-gradient(90deg, #B84A47, #C96A66)',
               transformOrigin: 'left center',
             }}
           />
@@ -58,12 +68,19 @@ export default function ProcessTimeline() {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
             whileHover={reduceMotion ? undefined : { y: -8 }}
+            onHoverStart={() => setActiveStep(index)}
             style={{ minWidth: 0, position: 'relative', zIndex: 1 }}
           >
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
               <motion.div
-                animate={reduceMotion ? undefined : { scale: [1, 1.08, 1] }}
-                transition={{ duration: 2.8, repeat: Infinity, delay: index * 0.35, ease: 'easeInOut' }}
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : activeStep === index
+                      ? { scale: [1, 1.16, 1], y: [0, -3, 0] }
+                      : { scale: 1, y: 0 }
+                }
+                transition={{ duration: 1.2, repeat: activeStep === index ? Infinity : 0, ease: 'easeInOut' }}
               >
                 <Box
                   sx={{
@@ -72,8 +89,8 @@ export default function ProcessTimeline() {
                     borderRadius: '50%',
                     border: '1.5px solid',
                     borderColor: (theme: Theme) =>
-                      theme.palette.mode === 'light' ? '#C00000' : '#D95C57',
-                    bgcolor: 'background.default',
+                      theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
+                    bgcolor: activeStep === index ? '#C25752' : 'background.default',
                     display: 'grid',
                     placeItems: 'center',
                     boxShadow: (theme: Theme) =>
@@ -87,8 +104,7 @@ export default function ProcessTimeline() {
                       fontFamily: 'var(--font-oswald)',
                       fontWeight: 700,
                       fontSize: '0.82rem',
-                      color: (theme: Theme) =>
-                        theme.palette.mode === 'light' ? '#C00000' : '#E97A75',
+                      color: activeStep === index ? '#FFFFFF' : '#C25752',
                     }}
                   >
                     {step.step}
@@ -106,12 +122,21 @@ export default function ProcessTimeline() {
                   bgcolor: 'background.paper',
                   border: '1px solid',
                   borderColor: (theme: Theme) =>
-                    theme.palette.mode === 'light' ? '#E2E8F0' : '#2A2A2A',
+                    activeStep === index
+                      ? theme.palette.mode === 'light' ? '#B84A47' : '#C25752'
+                      : theme.palette.mode === 'light' ? '#E2E8F0' : '#FFFFFF',
+                  backgroundImage: activeStep === index
+                    ? 'linear-gradient(145deg, rgba(217,92,87,0.10), transparent 58%)'
+                    : 'none',
                   textAlign: 'center',
-                  transition: 'border-color 200ms ease, box-shadow 200ms ease',
+                  boxShadow: activeStep === index
+                    ? '0 16px 38px rgba(217,92,87,0.14)'
+                    : 'none',
+                  transform: activeStep === index ? 'translateY(-5px)' : 'translateY(0)',
+                  transition: 'transform 350ms ease, border-color 350ms ease, box-shadow 350ms ease, background-image 350ms ease',
                   '&:hover': {
                     borderColor: (theme: Theme) =>
-                      theme.palette.mode === 'light' ? '#C00000' : '#D95C57',
+                      theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
                     boxShadow: (theme: Theme) =>
                       theme.palette.mode === 'light'
                         ? '0 16px 34px rgba(15,23,42,0.12)'
@@ -155,7 +180,7 @@ export default function ProcessTimeline() {
                   bgcolor: 'background.default',
                   border: '1.5px solid',
                   borderColor: (theme: Theme) =>
-                    theme.palette.mode === 'light' ? '#C00000' : '#D95C57',
+                    theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
                   display: 'grid',
                   placeItems: 'center',
                   zIndex: 1,
@@ -172,7 +197,12 @@ export default function ProcessTimeline() {
                   borderRadius: '16px 0 16px 16px',
                   bgcolor: 'background.paper',
                   border: '1px solid',
-                  borderColor: 'divider',
+                  borderColor: (theme: Theme) =>
+                    theme.palette.mode === 'light' ? '#E2E8F0' : '#FFFFFF',
+                  '&:hover': {
+                    borderColor: (theme: Theme) =>
+                      theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
+                  },
                 }}
               >
                 <Typography variant="h6" sx={{ mb: 0.75, fontSize: '1rem', fontWeight: 700 }}>

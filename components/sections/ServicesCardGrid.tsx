@@ -56,7 +56,7 @@ function ServiceCard({ category, description, items, index }: ServiceCardProps) 
         justifyContent: 'space-between',
         borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
         border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
-        bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+        bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
         boxShadow: (theme) =>
           theme.palette.mode === 'light'
             ? '0 4px 20px rgba(0,0,0,0.08)'
@@ -64,11 +64,11 @@ function ServiceCard({ category, description, items, index }: ServiceCardProps) 
         p: { xs: 3, sm: 3.5 },
         transition: 'all 150ms ease',
         '&:hover': {
-          borderColor: (theme) => (theme.palette.mode === 'light' ? '#C00000' : '#E5231B'),
+          borderColor: (theme) => (theme.palette.mode === 'light' ? '#B84A47' : '#C25752'),
           boxShadow: (theme) =>
             theme.palette.mode === 'light'
               ? '0 12px 32px rgba(0,0,0,0.18)'
-              : '0 12px 36px rgba(229,35,27,0.35)',
+              : '0 12px 36px rgba(194,87,82,0.16)',
         },
       }}
     >

@@ -24,7 +24,7 @@ export default function CTASection() {
           background: (theme) =>
             theme.palette.mode === 'light'
               ? '#FFFFFF'
-              : 'linear-gradient(180deg, #141414 0%, #1A1A1A 100%)',
+              : 'linear-gradient(180deg, #000000 0%, #000000 100%)',
         }}
       >
         {/* Geometric accent above headline */}

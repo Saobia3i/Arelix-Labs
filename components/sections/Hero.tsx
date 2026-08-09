@@ -56,7 +56,7 @@ function LiveEngineConsole() {
       sx={{
         p: { xs: 3, sm: 3.5 },
         borderRadius: '24px 0px 24px 24px', // Cat's Eye sharp top-right corner
-        bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+        bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
         border: (theme: Theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
         boxShadow: (theme: Theme) =>
           theme.palette.mode === 'light'
@@ -113,11 +113,11 @@ function LiveEngineConsole() {
                     ? 'rgba(192, 0, 0, 0.08)'
                     : theme.palette.mode === 'light'
                     ? '#F4F5F7'
-                    : '#1A1A1A',
+                    : '#000000',
                 border: '1.5px solid',
                 borderColor: (theme) =>
                   isSelected
-                    ? '#C00000'
+                    ? '#B84A47'
                     : theme.palette.mode === 'light'
                     ? '#E2E8F0'
                     : '#262626',
@@ -126,7 +126,7 @@ function LiveEngineConsole() {
                 gap: 1,
               }}
             >
-              <TabIcon size={18} style={{ color: isSelected ? '#C00000' : 'inherit' }} />
+              <TabIcon size={18} style={{ color: isSelected ? '#B84A47' : 'inherit' }} />
               <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.78rem' }}>
                 {tab.label}
               </Typography>
@@ -138,7 +138,7 @@ function LiveEngineConsole() {
       {/* Widget Sales Action Bar */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-          <Lock size={14} style={{ color: '#C00000' }} />
+          <Lock size={14} style={{ color: '#B84A47' }} />
           <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.75rem' }}>
             Zero Vendor Lock-in
           </Typography>
@@ -179,7 +179,7 @@ export default function Hero() {
             '@type': 'Organization',
             name: 'Arelix Labs',
             url: 'https://arelixlabs.com',
-            logo: 'https://arelixlabs.com/logo.png',
+            logo: 'https://arelixlabs.com/images/arelix-logo-transparent.png',
             description:
               'Arelix Labs builds digital products, connected systems and engineering solutions for businesses ready to build what\'s next.',
             knowsAbout: [
@@ -266,7 +266,7 @@ export default function Hero() {
                 px: 3.5,
                 py: 1.25,
                 fontSize: '0.98rem',
-                boxShadow: '0 8px 24px rgba(192, 0, 0, 0.35)',
+                boxShadow: '0 8px 24px rgba(184, 74, 71, 0.22)',
               }}
             >
               {hero.cta} <ArrowRight size={18} />
@@ -295,19 +295,19 @@ export default function Hero() {
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-              <CheckCircle2 size={16} style={{ color: '#C00000' }} />
+              <CheckCircle2 size={16} style={{ color: '#B84A47' }} />
               <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.78rem', color: 'text.primary' }}>
                 Full-Stack &amp; Embedded Engineering
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-              <CheckCircle2 size={16} style={{ color: '#C00000' }} />
+              <CheckCircle2 size={16} style={{ color: '#B84A47' }} />
               <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.78rem', color: 'text.primary' }}>
                 100% Guaranteed IP Transfer
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-              <CheckCircle2 size={16} style={{ color: '#C00000' }} />
+              <CheckCircle2 size={16} style={{ color: '#B84A47' }} />
               <Typography variant="caption" sx={{ fontWeight: 700, fontSize: '0.78rem', color: 'text.primary' }}>
                 Cross-Border Technology Partner
               </Typography>

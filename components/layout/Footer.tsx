@@ -46,10 +46,23 @@ export default function Footer() {
           {/* Brand */}
           <Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-                <polygon points="0,28 14,0 28,28" fill="#C00000" />
-                <polygon points="8,28 14,16 20,28" fill="currentColor" />
-              </svg>
+              <Box
+                sx={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  bgcolor: 'transparent',
+                  flexShrink: 0,
+                }}
+              >
+                <Box
+                  component="img"
+                  src="/images/arelix-logo-transparent.png"
+                  alt="Arelix Labs logo"
+                  sx={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.08)' }}
+                />
+              </Box>
               <Typography
                 sx={{
                   fontFamily: 'var(--font-oswald), Oswald, sans-serif',

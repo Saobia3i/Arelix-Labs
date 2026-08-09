@@ -30,10 +30,23 @@ function ArelixLogo() {
   return (
     <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
       {/* Geometric brand mark — sharp angular accent echoing the banner's triangular motif */}
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <polygon points="0,28 14,0 28,28" fill="#C00000" />
-        <polygon points="8,28 14,16 20,28" fill="#0A0A0A" />
-      </svg>
+      <Box
+        sx={{
+          width: 36,
+          height: 36,
+          borderRadius: '50%',
+          overflow: 'hidden',
+          bgcolor: 'transparent',
+          flexShrink: 0,
+        }}
+      >
+        <Box
+          component="img"
+          src="/images/arelix-logo-transparent.png"
+          alt="Arelix Labs logo"
+          sx={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.08)' }}
+        />
+      </Box>
       <Typography
         component="span"
         sx={{
@@ -182,7 +195,7 @@ export default function Navbar() {
               >
                 <ListItemText
                   primary={link.label}
-                  slotProps={{ primary: { fontWeight: 500 } }}
+                  slotProps={{ primary: { sx: { fontWeight: 500 } } }}
                 />
               </ListItemButton>
             </ListItem>

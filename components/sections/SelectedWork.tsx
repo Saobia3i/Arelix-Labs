@@ -85,7 +85,7 @@ export default function SelectedWork() {
             sx={{
               display: 'flex',
               alignItems: 'center',
-              bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#1A1A1A'),
+              bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
               border: '1px solid',
               borderColor: 'divider',
               borderRadius: 2,
@@ -193,7 +193,7 @@ export default function SelectedWork() {
               background: (theme) =>
                 theme.palette.mode === 'light'
                   ? '#FFFFFF'
-                  : 'linear-gradient(135deg, #141414 0%, #1A1A1A 100%)',
+                  : 'linear-gradient(135deg, #000000 0%, #000000 100%)',
               boxShadow: '0 8px 30px rgba(0,0,0,0.06)',
             }}
           >
@@ -418,19 +418,19 @@ export default function SelectedWork() {
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                 <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
-                  <CheckCircle2 size={18} style={{ color: '#C00000', marginTop: 2, flexShrink: 0 }} />
+                  <CheckCircle2 size={18} style={{ color: '#B84A47', marginTop: 2, flexShrink: 0 }} />
                   <Typography variant="body2">
                     Production-grade system designed and tested under harsh operational environments.
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
-                  <CheckCircle2 size={18} style={{ color: '#C00000', marginTop: 2, flexShrink: 0 }} />
+                  <CheckCircle2 size={18} style={{ color: '#B84A47', marginTop: 2, flexShrink: 0 }} />
                   <Typography variant="body2">
                     Seamless integration between low-level hardware/firmware layers and cloud telemetry dashboards.
                   </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
-                  <CheckCircle2 size={18} style={{ color: '#C00000', marginTop: 2, flexShrink: 0 }} />
+                  <CheckCircle2 size={18} style={{ color: '#B84A47', marginTop: 2, flexShrink: 0 }} />
                   <Typography variant="body2">
                     Zero third-party vendor lock-in with fully documented API specs and hardware schemas.
                   </Typography>

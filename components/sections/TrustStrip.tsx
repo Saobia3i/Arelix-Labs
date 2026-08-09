@@ -38,20 +38,20 @@ export default function TrustStrip() {
                   justifyContent: 'center',
                   gap: 1,
                   borderRadius: '14px 0px 14px 14px',
-                  bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+                  bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
                   border: '1px solid',
-                  borderColor: (theme: Theme) => (theme.palette.mode === 'light' ? '#D8DEE8' : '#2A2A2A'),
+                  borderColor: (theme: Theme) => (theme.palette.mode === 'light' ? '#D8DEE8' : '#FFFFFF'),
                   boxShadow: (theme: Theme) =>
                     theme.palette.mode === 'light'
                       ? '0 4px 16px rgba(0,0,0,0.08)'
                       : '0 4px 16px rgba(0,0,0,0.6)',
                   transition: 'all 150ms ease',
                   '&:hover': {
-                    borderColor: (theme: Theme) => (theme.palette.mode === 'light' ? '#C00000' : '#D95C57'),
+                    borderColor: (theme: Theme) => (theme.palette.mode === 'light' ? '#B84A47' : '#C25752'),
                     boxShadow: (theme: Theme) =>
                       theme.palette.mode === 'light'
                         ? '0 8px 24px rgba(0,0,0,0.18)'
-                        : '0 8px 24px rgba(229,35,27,0.3)',
+                        : '0 8px 24px rgba(214,107,102,0.16)',
                   },
                 }}
               >
@@ -60,7 +60,7 @@ export default function TrustStrip() {
                     width: 40,
                     height: 40,
                     borderRadius: '10px 0px 10px 10px',
-                    bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#1A1A1A'),
+                    bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#000000'),
                     border: '1px solid',
                     borderColor: (theme: Theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#333333'),
                     color: 'primary.main',

@@ -139,11 +139,11 @@ export default function ChatBot() {
             borderRadius: '50%',
             bgcolor: 'primary.main',
             color: '#FFFFFF',
-            boxShadow: '0 8px 30px rgba(192, 0, 0, 0.45)',
+            boxShadow: '0 8px 30px rgba(184, 74, 71, 0.24)',
             border: '2px solid #FFFFFF',
             '&:hover': {
               bgcolor: 'primary.dark',
-              boxShadow: '0 12px 36px rgba(192, 0, 0, 0.6)',
+              boxShadow: '0 12px 36px rgba(184, 74, 71, 0.32)',
             },
           }}
         >
@@ -178,7 +178,7 @@ export default function ChatBot() {
                 display: 'flex',
                 flexDirection: 'column',
                 borderRadius: '24px 0px 24px 24px', // Cat's Eye sharp top-right corner
-                bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+                bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
                 border: (theme) => (theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF'),
                 boxShadow: (theme) =>
                   theme.palette.mode === 'light'
@@ -192,7 +192,7 @@ export default function ChatBot() {
                 sx={{
                   px: 2.5,
                   py: 2,
-                  bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#141414'),
+                  bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#000000'),
                   borderBottom: '1px solid',
                   borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#262626'),
                   display: 'flex',
@@ -237,7 +237,7 @@ export default function ChatBot() {
                 sx={{
                   px: 2,
                   py: 1,
-                  bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0A0A0A'),
+                  bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
                   borderBottom: '1px solid',
                   borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#1F1F1F'),
                   display: 'flex',
@@ -300,7 +300,7 @@ export default function ChatBot() {
                             ? 'primary.main'
                             : theme.palette.mode === 'light'
                             ? '#F4F5F7'
-                            : '#1A1A1A',
+                            : '#000000',
                         color: (theme) =>
                           msg.sender === 'user'
                             ? '#FFFFFF'
@@ -354,7 +354,7 @@ export default function ChatBot() {
                           px: 1.25,
                           py: 0.5,
                           borderRadius: 6,
-                          bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#1A1A1A'),
+                          bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#000000'),
                           border: '1px solid',
                           borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#333333'),
                           color: 'text.primary',
@@ -381,7 +381,7 @@ export default function ChatBot() {
                 }}
                 sx={{
                   p: 1.5,
-                  bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+                  bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
                   borderTop: '1px solid',
                   borderColor: (theme) => (theme.palette.mode === 'light' ? '#E2E8F0' : '#1F1F1F'),
                   display: 'flex',
@@ -404,7 +404,7 @@ export default function ChatBot() {
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       borderRadius: 2,
-                      bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#141414'),
+                      bgcolor: (theme) => (theme.palette.mode === 'light' ? '#F4F5F7' : '#000000'),
                     },
                   }}
                 />

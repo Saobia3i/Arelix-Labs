@@ -46,19 +46,15 @@ export default function AboutPreview() {
               height: '100%',
               p: { xs: 3.5, md: 4 },
               borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
-              border: (theme: Theme) =>
-                theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+              bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
               boxShadow: (theme: Theme) =>
                 theme.palette.mode === 'light'
                   ? '0 6px 24px rgba(0,0,0,0.08)'
                   : '0 6px 24px rgba(0,0,0,0.7)',
               '&:hover': {
-                borderColor: (theme: Theme) =>
-                  theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
                 boxShadow: (theme: Theme) =>
                   theme.palette.mode === 'light'
                     ? '0 12px 32px rgba(0,0,0,0.14)'
@@ -74,7 +70,7 @@ export default function AboutPreview() {
                     height: 42,
                     borderRadius: '12px 0px 12px 12px',
                     bgcolor: (theme) => (theme.palette.mode === 'light' ? 'rgba(192, 0, 0, 0.08)' : 'rgba(229, 35, 27, 0.15)'),
-                    color: 'primary.main',
+                    color: '#B85B57',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -91,7 +87,7 @@ export default function AboutPreview() {
 
               <Typography
                 variant="subtitle1"
-                sx={{ fontWeight: 600, mb: 1.5, color: 'primary.main', lineHeight: 1.6, fontSize: '0.95rem' }}
+                sx={{ fontWeight: 600, mb: 1.5, color: '#B85B57', lineHeight: 1.6, fontSize: '0.95rem' }}
               >
                 "{vision.statement}"
               </Typography>
@@ -110,19 +106,15 @@ export default function AboutPreview() {
               height: '100%',
               p: { xs: 3.5, md: 4 },
               borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
-              border: (theme: Theme) =>
-                theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+              bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
               boxShadow: (theme: Theme) =>
                 theme.palette.mode === 'light'
                   ? '0 6px 24px rgba(0,0,0,0.08)'
                   : '0 6px 24px rgba(0,0,0,0.7)',
               '&:hover': {
-                borderColor: (theme: Theme) =>
-                  theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
                 boxShadow: (theme: Theme) =>
                   theme.palette.mode === 'light'
                     ? '0 12px 32px rgba(0,0,0,0.14)'
@@ -138,7 +130,7 @@ export default function AboutPreview() {
                     height: 42,
                     borderRadius: '12px 0px 12px 12px',
                     bgcolor: (theme) => (theme.palette.mode === 'light' ? 'rgba(192, 0, 0, 0.08)' : 'rgba(229, 35, 27, 0.15)'),
-                    color: 'primary.main',
+                    color: '#B85B57',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -155,7 +147,7 @@ export default function AboutPreview() {
 
               <Typography
                 variant="subtitle1"
-                sx={{ fontWeight: 600, mb: 1.5, color: 'primary.main', lineHeight: 1.6, fontSize: '0.95rem' }}
+                sx={{ fontWeight: 600, mb: 1.5, color: '#B85B57', lineHeight: 1.6, fontSize: '0.95rem' }}
               >
                 "{mission.statement}"
               </Typography>

@@ -1,5 +1,11 @@
 import { createTheme, type PaletteMode } from '@mui/material/styles';
+import { keyframes } from '@emotion/react';
 import { colors, borderRadius, typography } from './tokens';
+
+const cardShimmerSweep = keyframes`
+  0%, 14% { transform: translateX(-260%) rotate(25deg); }
+  68%, 100% { transform: translateX(720%) rotate(25deg); }
+`;
 
 export function getTheme(mode: PaletteMode) {
   const t = mode === 'light' ? colors.light : colors.dark;
@@ -114,20 +120,39 @@ export function getTheme(mode: PaletteMode) {
         styleOverrides: {
           root: {
             borderRadius: '20px 0px 20px 20px', // Cat's Eye sharp top-right corner
-            backgroundColor: mode === 'light' ? '#FFFFFF' : '#0D0D0D',
-            border: mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
+            backgroundColor: mode === 'light' ? '#FFFFFF' : '#000000',
+            border: mode === 'light' ? '1px solid #D8DEE8' : '1px solid #FFFFFF',
             boxShadow: mode === 'light'
               ? '0 4px 20px rgba(0,0,0,0.08)'
               : '0 4px 20px rgba(0,0,0,0.7)',
             transition: 'transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease',
             position: 'relative',
             overflow: 'hidden',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: '-60%',
+              left: '-35%',
+              width: '28%',
+              height: '220%',
+              pointerEvents: 'none',
+              zIndex: 2,
+              opacity: mode === 'light' ? 0.28 : 0.38,
+              background: mode === 'light'
+                ? 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 48%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0.5) 52%, transparent 100%)'
+                : 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.14) 48%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.14) 52%, transparent 100%)',
+              animation: `${cardShimmerSweep} 3.2s ease-in-out infinite`,
+              '@media (prefers-reduced-motion: reduce)': {
+                animation: 'none',
+                opacity: 0,
+              },
+            },
             '&:hover': {
               transform: 'translateY(-3px)',
               boxShadow: mode === 'light'
                 ? '0 12px 32px rgba(0,0,0,0.18)'
-                : '0 12px 36px rgba(229,35,27,0.35)',
-              borderColor: mode === 'light' ? '#C00000' : '#E5231B',
+                : '0 12px 36px rgba(214,107,102,0.16)',
+              borderColor: mode === 'light' ? '#B84A47' : '#C25752',
             },
           },
         },

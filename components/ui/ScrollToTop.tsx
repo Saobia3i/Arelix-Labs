@@ -12,7 +12,7 @@ export default function ScrollToTop() {
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const updateVisibility = () => setVisible(window.scrollY > 420);
+    const updateVisibility = () => setVisible(window.scrollY > 160);
 
     updateVisibility();
     window.addEventListener('scroll', updateVisibility, { passive: true });
@@ -31,7 +31,7 @@ export default function ScrollToTop() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={reduceMotion ? undefined : { opacity: 0, y: 12, scale: 0.88 }}
           transition={{ duration: 0.22, ease: 'easeOut' }}
-          style={{ position: 'fixed', right: 30, bottom: 100, zIndex: 1190 }}
+          style={{ position: 'fixed', right: 98, bottom: 31, zIndex: 1210 }}
         >
           <Tooltip title="Back to top" placement="left">
             <IconButton
@@ -42,12 +42,12 @@ export default function ScrollToTop() {
                 height: 46,
                 color: '#FFFFFF',
                 bgcolor: (theme: Theme) =>
-                  theme.palette.mode === 'light' ? '#C00000' : '#D95C57',
+                  theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
                 border: '1.5px solid #FFFFFF',
                 boxShadow: '0 10px 28px rgba(0,0,0,0.28)',
                 '&:hover': {
                   bgcolor: (theme: Theme) =>
-                    theme.palette.mode === 'light' ? '#940000' : '#C94D49',
+                    theme.palette.mode === 'light' ? '#9F3F3C' : '#C75B57',
                   transform: 'translateY(-3px)',
                 },
                 transition: 'transform 180ms ease, background-color 180ms ease',

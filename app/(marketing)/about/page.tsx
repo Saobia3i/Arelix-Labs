@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import type { Theme } from '@mui/material/styles';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -70,15 +69,9 @@ export default function AboutPage() {
               sx={{
                 height: '100%',
                 p: { xs: 3.5, md: 4 },
-                border: (theme: Theme) =>
-                  theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                '&:hover': {
-                  borderColor: (theme: Theme) =>
-                    theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
-                },
               }}
             >
               <Box>
@@ -89,7 +82,7 @@ export default function AboutPage() {
                       height: 42,
                       borderRadius: 1.5,
                       bgcolor: 'rgba(192,0,0,0.08)',
-                      color: 'primary.main',
+                      color: '#B85B57',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -106,7 +99,7 @@ export default function AboutPage() {
 
                 <Typography
                   variant="subtitle1"
-                  sx={{ fontWeight: 600, mb: 2, color: 'primary.main', lineHeight: 1.6 }}
+                  sx={{ fontWeight: 600, mb: 2, color: '#B85B57', lineHeight: 1.6 }}
                 >
                   "{vision.statement}"
                 </Typography>
@@ -124,15 +117,9 @@ export default function AboutPage() {
               sx={{
                 height: '100%',
                 p: { xs: 3.5, md: 4 },
-                border: (theme: Theme) =>
-                  theme.palette.mode === 'light' ? '1.5px solid #1F2937' : '1.5px solid #FFFFFF',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                '&:hover': {
-                  borderColor: (theme: Theme) =>
-                    theme.palette.mode === 'light' ? '#1F2937' : '#FFFFFF',
-                },
               }}
             >
               <Box>
@@ -143,7 +130,7 @@ export default function AboutPage() {
                       height: 42,
                       borderRadius: 1.5,
                       bgcolor: 'rgba(192,0,0,0.08)',
-                      color: 'primary.main',
+                      color: '#B85B57',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -160,7 +147,7 @@ export default function AboutPage() {
 
                 <Typography
                   variant="subtitle1"
-                  sx={{ fontWeight: 600, mb: 2, color: 'primary.main', lineHeight: 1.6 }}
+                  sx={{ fontWeight: 600, mb: 2, color: '#B85B57', lineHeight: 1.6 }}
                 >
                   "{mission.statement}"
                 </Typography>

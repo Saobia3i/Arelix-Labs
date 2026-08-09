@@ -179,7 +179,7 @@ export default function WhyArelix() {
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <pattern id="why-dot-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-                  <circle cx="2" cy="2" r="1.5" fill="#C00000" opacity="0.4" />
+                  <circle cx="2" cy="2" r="1.5" fill="#B84A47" opacity="0.24" />
                   <circle cx="18" cy="18" r="1.2" fill="#888888" opacity="0.25" />
                 </pattern>
               </defs>
@@ -237,7 +237,7 @@ export default function WhyArelix() {
                           isActive
                             ? theme.palette.mode === 'light'
                               ? '#FFFFFF'
-                              : '#0D0D0D'
+                              : '#000000'
                             : 'transparent',
                         border: (theme) =>
                           isActive
@@ -282,7 +282,7 @@ export default function WhyArelix() {
 
                       {isActive && (
                         <motion.div layoutId="active-arrow">
-                          <ChevronRight size={18} style={{ color: '#C00000' }} />
+                          <ChevronRight size={18} style={{ color: '#B84A47' }} />
                         </motion.div>
                       )}
                     </Box>
@@ -310,7 +310,7 @@ export default function WhyArelix() {
                       flexDirection: 'column',
                       justifyContent: 'space-between',
                       borderRadius: '24px 0px 24px 24px', // Cat's Eye sharp top-right corner
-                      bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0D0D0D'),
+                      bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
                       border: (theme: Theme) =>
                         theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
                       boxShadow: (theme: Theme) =>
@@ -344,7 +344,7 @@ export default function WhyArelix() {
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'center',
-                              boxShadow: '0 4px 16px rgba(192,0,0,0.35)',
+                              boxShadow: '0 4px 16px rgba(184,74,71,0.2)',
                             }}
                           >
                             <Icon size={24} />
@@ -432,7 +432,7 @@ export default function WhyArelix() {
                       }}
                     >
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Sparkles size={16} style={{ color: '#C00000' }} />
+                        <Sparkles size={16} style={{ color: '#B84A47' }} />
                         <Typography variant="body2" sx={{ fontWeight: 700, fontSize: '0.875rem' }}>
                           {activeCard.metric}
                         </Typography>

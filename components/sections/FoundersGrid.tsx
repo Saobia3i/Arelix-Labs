@@ -5,9 +5,15 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import type { Theme } from '@mui/material/styles';
+import { keyframes } from '@emotion/react';
 import Section from '@/components/ui/Section';
 import { founders } from '@/content/site-copy';
 import { ArrowUpRight } from 'lucide-react';
+
+const profileShimmerSweep = keyframes`
+  0%, 14% { transform: translateX(-260%) rotate(25deg); }
+  68%, 100% { transform: translateX(720%) rotate(25deg); }
+`;
 
 export default function FoundersGrid() {
   return (
@@ -38,7 +44,7 @@ export default function FoundersGrid() {
                 minHeight: { xs: 460, md: 520 },
                 overflow: 'hidden',
                 borderRadius: '26px 26px 26px 4px',
-                bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#E8EAED' : '#151515'),
+                bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#E8EAED' : '#000000'),
                 backgroundImage: (theme: Theme) =>
                   `linear-gradient(180deg, transparent 42%, ${
                     theme.palette.mode === 'light' ? 'rgba(8,12,22,0.28)' : 'rgba(0,0,0,0.5)'
@@ -47,16 +53,34 @@ export default function FoundersGrid() {
                 backgroundPosition: 'center top',
                 border: '1px solid',
                 borderColor: (theme: Theme) =>
-                  theme.palette.mode === 'light' ? '#D8DEE8' : '#2A2A2A',
+                  theme.palette.mode === 'light' ? '#D8DEE8' : '#FFFFFF',
                 boxShadow: (theme: Theme) =>
                   theme.palette.mode === 'light'
                     ? '0 18px 45px rgba(15,23,42,0.12)'
                     : '0 18px 45px rgba(0,0,0,0.45)',
                 transition: 'transform 240ms ease, box-shadow 240ms ease',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: '-60%',
+                  left: '-35%',
+                  width: '28%',
+                  height: '220%',
+                  zIndex: 2,
+                  pointerEvents: 'none',
+                  opacity: 0.38,
+                  background:
+                    'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.14) 48%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.14) 52%, transparent 100%)',
+                  animation: `${profileShimmerSweep} 3.2s ease-in-out infinite`,
+                  '@media (prefers-reduced-motion: reduce)': {
+                    animation: 'none',
+                    opacity: 0,
+                  },
+                },
                 '&:hover': {
                   transform: 'translateY(-8px)',
                   borderColor: (theme: Theme) =>
-                    theme.palette.mode === 'light' ? '#C00000' : '#D95C57',
+                    theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
                   boxShadow: (theme: Theme) =>
                     theme.palette.mode === 'light'
                       ? '0 26px 60px rgba(15,23,42,0.18)'
@@ -65,7 +89,7 @@ export default function FoundersGrid() {
                 '&:hover .founder-action': {
                   transform: 'rotate(45deg)',
                   bgcolor: (theme: Theme) =>
-                    theme.palette.mode === 'light' ? '#C00000' : '#D95C57',
+                    theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
                   color: '#FFFFFF',
                 },
               }}
@@ -114,7 +138,7 @@ export default function FoundersGrid() {
                     <Typography
                       sx={{
                         color: (theme: Theme) =>
-                          theme.palette.mode === 'light' ? '#C00000' : '#E97A75',
+                          theme.palette.mode === 'light' ? '#B84A47' : '#C96A66',
                         fontSize: '0.82rem',
                         fontWeight: 700,
                         mb: 1.5,

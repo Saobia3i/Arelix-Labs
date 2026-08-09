@@ -3,11 +3,11 @@
 
 export const colors = {
   brand: {
-    red: '#C00000',
-    redDark: '#8F0000',
-    redBright: '#E5231B',
-    redBrightHover: '#FF3B30',
-    black: '#0A0A0A',
+    red: '#B84A47',
+    redDark: '#9F3F3C',
+    redBright: '#D66B66',
+    redBrightHover: '#C75B57',
+    black: '#000000',
     white: '#FFFFFF',
   },
   light: {
@@ -16,18 +16,18 @@ export const colors = {
     textPrimary: '#0F172A',
     textSecondary: '#475569',
     divider: '#E2E8F0',
-    primaryMain: '#C00000',
-    primaryDark: '#940000',
+    primaryMain: '#B84A47',
+    primaryDark: '#9F3F3C',
     primaryContrastText: '#FFFFFF',
   },
   dark: {
     backgroundDefault: '#000000',
-    backgroundPaper: '#0A0A0A',
+    backgroundPaper: '#000000',
     textPrimary: '#FFFFFF',
     textSecondary: '#A3A3A3',
     divider: '#1F1F1F',
-    primaryMain: '#E5231B',
-    primaryDark: '#FF3B30',
+    primaryMain: '#C25752',
+    primaryDark: '#A94743',
     primaryContrastText: '#FFFFFF',
   },
 } as const;
