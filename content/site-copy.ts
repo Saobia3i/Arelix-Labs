@@ -256,7 +256,7 @@ export const founders = {
       image: '/images/founders/founder-2.jpg',
       bio:
         'Oversees operations, administration and client coordination, helping turn the company\'s vision into organized execution and long-term relationships.',
-      education: '',
+      education: 'BSc in CSE, Ahsanullah University of Science & Technology',
       email: 'kkl.khadiza@gmail.com',
       phone: '01795753116',
       linkedin: 'https://www.linkedin.com/in/khadiza-khanom-liza-a95a26263/',

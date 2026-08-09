@@ -160,12 +160,13 @@ export default function ChatBot() {
             exit={{ opacity: 0, y: 30, scale: 0.95 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             style={{
-              position: 'absolute',
-              bottom: 76,
-              right: 0,
-              width: '92vw',
+              position: 'fixed',
+              bottom: 96,
+              right: 12,
+              width: 'calc(100vw - 24px)',
               maxWidth: 400,
-              height: 560,
+              height: 'min(560px, calc(100dvh - 112px))',
+              maxHeight: 'calc(100dvh - 112px)',
               display: 'flex',
               flexDirection: 'column',
               zIndex: 1201,
@@ -273,6 +274,7 @@ export default function ChatBot() {
               <Box
                 sx={{
                   flexGrow: 1,
+                  minHeight: 0,
                   p: 2,
                   overflowY: 'auto',
                   display: 'flex',
@@ -396,9 +398,14 @@ export default function ChatBot() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={isLoading}
+                  helperText={`${input.length}/700 · Max 700 chars`}
                   slotProps={{
                     htmlInput: {
+                      maxLength: 700,
                       style: { fontSize: '0.825rem' },
+                    },
+                    formHelperText: {
+                      sx: { mx: 0.5, mt: 0.4, fontSize: '0.65rem', lineHeight: 1.2 },
                     },
                   }}
                   sx={{

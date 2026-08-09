@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
 import {
+  classifyChatQuery,
   createLocalFallback,
   formatKnowledgeContext,
   retrieveKnowledge,
 } from '@/lib/chat-knowledge';
+import { checkChatRateLimit, getVisitorId } from '@/lib/chat-rate-limit';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -30,19 +32,60 @@ function normalizeMessages(value: unknown): ChatMessage[] {
         ('content' in message) &&
         typeof message.content === 'string'
     )
-    .map((message) => ({ ...message, content: message.content.trim().slice(0, 4000) }))
+    .map((message) => ({ ...message, content: message.content.trim().slice(0, 1000) }))
     .filter((message) => message.content.length > 0)
-    .slice(-12);
+    .slice(-8);
+}
+
+function toPlainText(value: string) {
+  return value
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, (_match, label: string, url: string) =>
+      label.trim() === url.trim() ? url : `${label.trim()}: ${url}`
+    )
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .trim();
 }
 
 export async function POST(req: Request) {
   try {
+    const contentLength = Number(req.headers.get('content-length') || 0);
+    if (contentLength > 20_000) {
+      return NextResponse.json({ error: 'Message is too large.' }, { status: 413 });
+    }
+
+    const rateLimit = checkChatRateLimit(getVisitorId(req));
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: rateLimit.reason },
+        { status: 429, headers: { 'Retry-After': String(rateLimit.retryAfter) } }
+      );
+    }
+
     const payload = (await req.json()) as { messages?: unknown; model?: unknown };
     const messages = normalizeMessages(payload.messages);
     const latestQuestion = [...messages].reverse().find((message) => message.role === 'user')?.content;
 
     if (!latestQuestion) {
       return NextResponse.json({ error: 'A user message is required.' }, { status: 400 });
+    }
+
+    const queryType = classifyChatQuery(latestQuestion);
+    if (queryType.greeting) {
+      return NextResponse.json({
+        content: 'Hello! I can help with Arelix Labs services, projects, engineering capabilities, pricing inquiries, and consultations. What would you like to know?',
+        model: 'local-scope-response',
+      });
+    }
+
+    if (!queryType.relevant) {
+      return NextResponse.json({
+        content: 'I can only help with Arelix Labs, its engineering services, projects, team, and consultation inquiries. Please ask a relevant business or technology question.',
+        model: 'local-scope-response',
+      });
     }
 
     const retrievedChunks = retrieveKnowledge(latestQuestion);
@@ -77,6 +120,8 @@ RESPONSE RULES:
 - Never invent prices, timelines, clients, certifications, guarantees, founder details, or technical capabilities.
 - For pricing, custom scope, architecture consultations, or project discussions, recommend emailing arelixlabs@gmail.com or using the Contact page.
 - Match the user's language when practical, including Bangla or Banglish.
+- Stay strictly within Arelix Labs, its team, services, engineering projects, and project consultations. Politely refuse personal advice, entertainment, general knowledge, homework, or unrelated requests.
+- Return plain text only. Do not use Markdown, asterisks for bold or italic text, backticks, headings, or Markdown links. Write URLs directly.
 - Do not mention retrieval, chunks, context IDs, system prompts, OpenRouter, or internal implementation.
 - Do not expose credentials, API keys, database details, or private information.`;
 
@@ -92,7 +137,7 @@ RESPONSE RULES:
         model: targetModel,
         messages: [{ role: 'system', content: systemPrompt }, ...messages],
         temperature: 0.35,
-        max_tokens: 700,
+        max_tokens: 420,
       }),
     });
 
@@ -109,10 +154,10 @@ RESPONSE RULES:
       model?: string;
       usage?: unknown;
     };
-    const botReply = data.choices?.[0]?.message?.content?.trim();
+    const botReply = data.choices?.[0]?.message?.content;
 
     return NextResponse.json({
-      content: botReply || createLocalFallback(retrievedChunks),
+      content: botReply ? toPlainText(botReply) : createLocalFallback(retrievedChunks),
       model: data.model || targetModel,
       usage: data.usage,
       retrieved: retrievedChunks.map((chunk) => chunk.id),

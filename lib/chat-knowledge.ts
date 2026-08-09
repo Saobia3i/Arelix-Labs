@@ -66,7 +66,7 @@ const knowledgeBase: KnowledgeChunk[] = [
     id: 'leadership',
     title: 'Founders and Leadership',
     content:
-      'Arelix Labs has three co-founders. Khorshed Alam is Co-Founder and CEO. He earned a BSc in EEE from Ahsanullah University of Science & Technology; email: khorshedalamkhairul@gmail.com; phone: 0198496164; LinkedIn: https://www.linkedin.com/in/khorshedalamon. Khadiza Khanom is Co-Founder and Managing Director; email: kkl.khadiza@gmail.com; phone: 01795753116; LinkedIn: https://www.linkedin.com/in/khadiza-khanom-liza-a95a26263/. Saobia Islam Tinni is Co-Founder and CTO. She earned a BSc in CSE from Ahsanullah University of Science & Technology and leads full-stack architecture, Next.js, React, MERN, ASP.NET Core, AI-integrated systems, LangGraph, RAG pipelines, database and backend architecture, UI, deployment, and software engineering practices; email: islamsaobia@gmail.com; LinkedIn: https://www.linkedin.com/in/saobia-islam; portfolio: https://islamsaobia.vercel.app.',
+      'Arelix Labs has three co-founders. Khorshed Alam is Co-Founder and CEO. He earned a BSc in EEE from Ahsanullah University of Science & Technology; email: khorshedalamkhairul@gmail.com; phone: 0198496164; LinkedIn: https://www.linkedin.com/in/khorshedalamon. Khadiza Khanom is Co-Founder and Managing Director. She earned a BSc in CSE from Ahsanullah University of Science & Technology; email: kkl.khadiza@gmail.com; phone: 01795753116; LinkedIn: https://www.linkedin.com/in/khadiza-khanom-liza-a95a26263/. Saobia Islam Tinni is Co-Founder and CTO. She earned a BSc in CSE from Ahsanullah University of Science & Technology and leads full-stack architecture, Next.js, React, MERN, ASP.NET Core, AI-integrated systems, LangGraph, RAG pipelines, database and backend architecture, UI, deployment, and software engineering practices; email: islamsaobia@gmail.com; LinkedIn: https://www.linkedin.com/in/saobia-islam; portfolio: https://islamsaobia.vercel.app.',
     keywords: ['founder', 'leadership', 'ceo', 'cto', 'director', 'khorshed', 'alam', 'khadiza', 'khanom', 'saobia', 'tinni', 'team', 'linkedin', 'education', 'portfolio'],
   },
   {
@@ -96,6 +96,21 @@ function tokenize(value: string) {
     .replace(/[^a-z0-9@.+#-]+/g, ' ')
     .split(/\s+/)
     .filter((token) => token.length > 1 && !stopWords.has(token));
+}
+
+const scopeTerms = new Set([
+  ...knowledgeBase.flatMap((chunk) => chunk.keywords),
+  'app', 'application', 'website', 'platform', 'system', 'product', 'startup', 'saas',
+  'cloud', 'database', 'backend', 'frontend', 'development', 'engineering', 'developer',
+  'consult', 'schedule', 'service', 'services', 'team', 'company', 'business', 'solution',
+]);
+
+export function classifyChatQuery(query: string) {
+  const normalized = query.trim().toLowerCase();
+  const tokens = tokenize(normalized);
+  const greeting = /^(hi|hello|hey|assalamu alaikum|salam|হাই|হ্যালো)[!.?\s]*$/i.test(normalized);
+  const relevant = tokens.some((token) => scopeTerms.has(token));
+  return { greeting, relevant };
 }
 
 export function retrieveKnowledge(query: string, limit = 4) {
