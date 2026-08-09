@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import { Oswald, Roboto } from 'next/font/google';
 import './globals.css';
 import { ColorModeProvider } from '@/theme/ColorModeProvider';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import AssistantWidget from '@/components/assistant/AssistantWidget';
 import ScrollToTop from '@/components/ui/ScrollToTop';
 
 const oswald = Oswald({
@@ -59,15 +59,30 @@ export const metadata: Metadata = {
 
 import ChatBot from '@/components/ui/ChatBot';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const storedMode = (await cookies()).get('arelix-color-mode')?.value;
+  const initialMode = storedMode === 'dark' ? 'dark' : 'light';
+
   return (
-    <html lang="en" className={`${oswald.variable} ${roboto.variable}`} suppressHydrationWarning>
-      <body style={{ fontFamily: 'var(--font-roboto), Roboto, sans-serif' }} suppressHydrationWarning>
-        <ColorModeProvider>
+    <html
+      lang="en"
+      className={`${oswald.variable} ${roboto.variable}`}
+      data-arelix-theme={initialMode}
+      style={{ colorScheme: initialMode, backgroundColor: initialMode === 'dark' ? '#000000' : '#FFFFFF' }}
+      suppressHydrationWarning
+    >
+      <body
+        style={{
+          fontFamily: 'var(--font-roboto), Roboto, sans-serif',
+          backgroundColor: initialMode === 'dark' ? '#000000' : '#FFFFFF',
+        }}
+        suppressHydrationWarning
+      >
+        <ColorModeProvider initialMode={initialMode}>
           <Navbar />
           <main>{children}</main>
           <Footer />

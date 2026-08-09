@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Typography from '@mui/material/Typography';
 import ServicesCardGrid from '@/components/sections/ServicesCardGrid';
 import ProcessTimeline from '@/components/sections/ProcessTimeline';
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default function WorkPage() {
+  notFound();
+
   return (
     <>
       <Section spacing="md" id="work-header">

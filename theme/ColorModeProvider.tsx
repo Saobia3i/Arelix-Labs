@@ -3,7 +3,7 @@
 import React, {
   createContext,
   useContext,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -30,24 +30,37 @@ export function useColorMode() {
 
 const STORAGE_KEY = 'arelix-color-mode';
 
-function getInitialMode(): ColorMode {
-  if (typeof window === 'undefined') return 'light';
+function getInitialMode(fallback: ColorMode): ColorMode {
+  if (typeof window === 'undefined') return fallback;
   const stored = localStorage.getItem(STORAGE_KEY) as ColorMode | null;
   if (stored === 'light' || stored === 'dark') return stored;
-  return 'light';
+  return fallback;
 }
 
-export function ColorModeProvider({ children }: { children: ReactNode }) {
-  const [mode, setMode] = useState<ColorMode>('light');
+export function ColorModeProvider({
+  children,
+  initialMode = 'light',
+}: {
+  children: ReactNode;
+  initialMode?: ColorMode;
+}) {
+  const [mode, setMode] = useState<ColorMode>(initialMode);
 
-  useEffect(() => {
-    setMode(getInitialMode());
-  }, []);
+  useLayoutEffect(() => {
+    const storedMode = getInitialMode(initialMode);
+    if (storedMode !== mode) setMode(storedMode);
+    document.documentElement.dataset.arelixTheme = storedMode;
+    document.documentElement.style.colorScheme = storedMode;
+    document.cookie = `${STORAGE_KEY}=${storedMode}; Path=/; Max-Age=31536000; SameSite=Lax`;
+  }, [initialMode, mode]);
 
   const toggleColorMode = () => {
     setMode((prev) => {
       const next = prev === 'light' ? 'dark' : 'light';
       localStorage.setItem(STORAGE_KEY, next);
+      document.cookie = `${STORAGE_KEY}=${next}; Path=/; Max-Age=31536000; SameSite=Lax`;
+      document.documentElement.dataset.arelixTheme = next;
+      document.documentElement.style.colorScheme = next;
       return next;
     });
   };

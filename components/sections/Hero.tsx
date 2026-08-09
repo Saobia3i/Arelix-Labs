@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import type { Theme } from '@mui/material/styles';
+import { keyframes } from '@emotion/react';
 import Button from '@/components/ui/Button';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
@@ -19,6 +20,11 @@ import {
   Lock,
 } from 'lucide-react';
 import Link from 'next/link';
+
+const talkButtonShimmer = keyframes`
+  0% { transform: translateX(-220%) skewX(-22deg); }
+  55%, 100% { transform: translateX(420%) skewX(-22deg); }
+`;
 
 // Live Architecture Console Domains for Right-Side Widget
 const consoleTabs = [
@@ -267,19 +273,26 @@ export default function Hero() {
                 py: 1.25,
                 fontSize: '0.98rem',
                 boxShadow: '0 8px 24px rgba(184, 74, 71, 0.22)',
+                position: 'relative',
+                overflow: 'hidden',
+                isolation: 'isolate',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  inset: '-45% auto -45% -20%',
+                  width: '24%',
+                  pointerEvents: 'none',
+                  background:
+                    'linear-gradient(90deg, transparent, rgba(255,255,255,0.18), rgba(255,255,255,0.72), rgba(255,255,255,0.18), transparent)',
+                  filter: 'blur(0.5px)',
+                  animation: `${talkButtonShimmer} 1.8s ease-in-out infinite`,
+                },
+                '@media (prefers-reduced-motion: reduce)': {
+                  '&::after': { display: 'none' },
+                },
               }}
             >
               {hero.cta} <ArrowRight size={18} />
-            </Button>
-
-            <Button
-              variant="secondary"
-              href="/contact"
-              id="hero-secondary-cta"
-              size="large"
-              sx={{ px: 3, py: 1.25, fontSize: '0.95rem' }}
-            >
-              {hero.ctaSecondary}
             </Button>
           </Box>
 
