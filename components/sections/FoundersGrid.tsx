@@ -36,28 +36,36 @@ export default function FoundersGrid() {
       </Box>
 
       <Grid container spacing={{ xs: 3, md: 3.5 }}>
-        {founders.items.map((founder, idx) => (
+        {founders.items.map((founder) => {
+          const roleTag = founder.role.includes('CTO')
+            ? 'CTO'
+            : founder.role.includes('Managing Director')
+              ? 'MD'
+              : 'CEO';
+
+          return (
           <Grid key={founder.role} size={{ xs: 12, sm: 6, md: 4 }}>
             <Box
               sx={{
                 position: 'relative',
-                minHeight: { xs: 460, md: 520 },
+                minHeight: 0,
+                maxWidth: { xs: 340, sm: 360, md: 345 },
+                mx: 'auto',
                 overflow: 'hidden',
                 borderRadius: '26px 26px 26px 4px',
                 bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#E8EAED' : '#000000'),
                 backgroundImage: (theme: Theme) =>
-                  `linear-gradient(180deg, transparent 42%, ${
-                    theme.palette.mode === 'light' ? 'rgba(8,12,22,0.28)' : 'rgba(0,0,0,0.5)'
+                  `linear-gradient(180deg, transparent 35%, ${
+                    theme.palette.mode === 'light' ? 'rgba(8,12,22,0.35)' : 'rgba(0,0,0,0.65)'
                   } 100%), url("${founder.image}")`,
-                backgroundSize: 'cover',
+                // Keep image natural 100% width on all screen sizes to prevent zoom/stretch distortion
+                backgroundSize: '100% auto',
+                backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center top',
                 border: '1px solid',
                 borderColor: (theme: Theme) =>
                   theme.palette.mode === 'light' ? '#D8DEE8' : '#FFFFFF',
-                boxShadow: (theme: Theme) =>
-                  theme.palette.mode === 'light'
-                    ? '0 18px 45px rgba(15,23,42,0.12)'
-                    : '0 18px 45px rgba(0,0,0,0.45)',
+                boxShadow: 3,
                 transition: 'transform 240ms ease, box-shadow 240ms ease',
                 '&::before': {
                   content: '""',
@@ -81,10 +89,7 @@ export default function FoundersGrid() {
                   transform: 'translateY(-8px)',
                   borderColor: (theme: Theme) =>
                     theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
-                  boxShadow: (theme: Theme) =>
-                    theme.palette.mode === 'light'
-                      ? '0 26px 60px rgba(15,23,42,0.18)'
-                      : '0 26px 60px rgba(0,0,0,0.6)',
+                  boxShadow: 6,
                 },
                 '&:hover .founder-action': {
                   transform: 'rotate(45deg)',
@@ -98,40 +103,41 @@ export default function FoundersGrid() {
                 aria-hidden="true"
                 sx={{
                   position: 'absolute',
-                  top: 22,
-                  left: 24,
+                  top: 20,
+                  left: 22,
                   fontFamily: 'var(--font-oswald)',
-                  fontSize: '0.8rem',
+                  fontSize: '0.78rem',
                   fontWeight: 700,
                   letterSpacing: '0.12em',
                   color: '#FFFFFF',
                   textShadow: '0 2px 12px rgba(0,0,0,0.55)',
                 }}
               >
-                PROFILE {String(idx + 1).padStart(2, '0')}
+                {roleTag}
               </Typography>
 
               <Box
                 sx={{
-                  position: 'absolute',
-                  left: { xs: 14, md: 18 },
-                  right: { xs: 14, md: 18 },
-                  bottom: { xs: 14, md: 18 },
-                  p: { xs: 2.5, md: 3 },
-                  borderRadius: '20px 20px 20px 4px',
+                  // Relative flow encloses details cleanly; outer card expands dynamically on mobile & desktop
+                  position: 'relative',
+                  mt: 'calc(94% - 14px)',
+                  mx: 1.75,
+                  mb: 1.75,
+                  p: 2,
+                  borderRadius: '18px 18px 18px 6px',
                   color: '#FFFFFF',
-                  bgcolor: 'rgba(12,15,22,0.72)',
+                  bgcolor: 'rgba(12,15,22,0.78)',
                   border: '1px solid rgba(255,255,255,0.18)',
                   backdropFilter: 'blur(16px)',
                   WebkitBackdropFilter: 'blur(16px)',
-                  boxShadow: '0 16px 35px rgba(0,0,0,0.28)',
+                  boxShadow: '0 12px 30px rgba(0,0,0,0.28)',
                 }}
               >
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 2 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 1.5 }}>
                   <Box>
                     <Typography
                       variant="h4"
-                      sx={{ fontSize: '1.35rem', fontWeight: 700, lineHeight: 1.2, color: '#FFFFFF', mb: 0.5 }}
+                      sx={{ fontSize: '1.15rem', fontWeight: 700, lineHeight: 1.2, color: '#FFFFFF', mb: 0.5 }}
                     >
                       {founder.name}
                     </Typography>
@@ -139,8 +145,9 @@ export default function FoundersGrid() {
                       sx={{
                         color: (theme: Theme) =>
                           theme.palette.mode === 'light' ? '#B84A47' : '#C96A66',
-                        fontSize: '0.82rem',
+                        fontSize: '0.76rem',
                         fontWeight: 700,
+                        letterSpacing: '0.01em',
                         mb: 1.5,
                       }}
                     >
@@ -156,8 +163,8 @@ export default function FoundersGrid() {
                     aria-label={`View ${founder.name}'s LinkedIn profile`}
                     className="founder-action"
                     sx={{
-                      width: 38,
-                      height: 38,
+                      width: 34,
+                      height: 34,
                       borderRadius: '50%',
                       flexShrink: 0,
                       display: 'grid',
@@ -168,19 +175,19 @@ export default function FoundersGrid() {
                       transition: 'transform 220ms ease, background-color 220ms ease, color 220ms ease',
                     }}
                   >
-                    <ArrowUpRight size={18} />
+                    <ArrowUpRight size={16} />
                   </Box>
                 </Box>
 
-                <Typography sx={{ color: 'rgba(255,255,255,0.78)', fontSize: '0.86rem', lineHeight: 1.65 }}>
+                <Typography sx={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.76rem', lineHeight: 1.5, mb: 1.75 }}>
                   {founder.bio}
                 </Typography>
 
-                <Box sx={{ display: 'grid', gap: 0.8, mt: 1.7 }}>
+                <Box sx={{ display: 'grid', gap: 1 }}>
                   {founder.education && (
                     <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
-                      <GraduationCap size={14} style={{ flex: '0 0 auto', marginTop: 3 }} />
-                      <Typography sx={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.74rem', lineHeight: 1.45 }}>
+                      <GraduationCap size={14} style={{ flex: '0 0 auto', marginTop: 2 }} />
+                      <Typography sx={{ color: 'rgba(255,255,255,0.76)', fontSize: '0.72rem', lineHeight: 1.4 }}>
                         {founder.education}
                       </Typography>
                     </Box>
@@ -191,7 +198,7 @@ export default function FoundersGrid() {
                     sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'rgba(255,255,255,0.82)', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}
                   >
                     <Mail size={14} />
-                    <Typography sx={{ fontSize: '0.74rem', overflowWrap: 'anywhere' }}>{founder.email}</Typography>
+                    <Typography sx={{ fontSize: '0.72rem', overflowWrap: 'anywhere' }}>{founder.email}</Typography>
                   </Box>
                   {founder.phone && (
                     <Box
@@ -200,7 +207,7 @@ export default function FoundersGrid() {
                       sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'rgba(255,255,255,0.82)', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}
                     >
                       <Phone size={14} />
-                      <Typography sx={{ fontSize: '0.74rem' }}>{founder.phone}</Typography>
+                      <Typography sx={{ fontSize: '0.72rem' }}>{founder.phone}</Typography>
                     </Box>
                   )}
                   {founder.portfolio && (
@@ -209,7 +216,7 @@ export default function FoundersGrid() {
                       href={founder.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      sx={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.74rem', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}
+                      sx={{ color: 'rgba(255,255,255,0.82)', fontSize: '0.72rem', textDecoration: 'none', '&:hover': { color: '#FFFFFF' } }}
                     >
                       Portfolio ↗
                     </Box>
@@ -218,7 +225,8 @@ export default function FoundersGrid() {
               </Box>
             </Box>
           </Grid>
-        ))}
+          );
+        })}
       </Grid>
 
       <Typography

@@ -13,7 +13,7 @@ interface CardProps {
 
 export default function Card({ children, className, noPadding = false, sx }: CardProps) {
   return (
-    <MuiCard className={className} sx={sx}>
+    <MuiCard className={className} elevation={3} sx={sx}>
       {noPadding ? children : <CardContent sx={{ p: 3, '&:last-child': { pb: 3 } }}>{children}</CardContent>}
     </MuiCard>
   );

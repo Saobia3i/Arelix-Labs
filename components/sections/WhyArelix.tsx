@@ -189,7 +189,7 @@ export default function WhyArelix() {
             variant="overline"
             sx={{
               display: 'block',
-              mb: 1.5,
+              mb: 2,
               color: 'primary.main',
               fontWeight: 800,
               letterSpacing: '0.12em',
@@ -201,14 +201,14 @@ export default function WhyArelix() {
           </Typography>
 
           {/* Section Header */}
-          <Box sx={{ maxWidth: 760, mb: { xs: 1.5, md: 2 }, position: 'relative', zIndex: 1 }}>
+          <Box sx={{ maxWidth: 760, mb: 2, position: 'relative', zIndex: 1 }}>
             <Typography
               variant="h2"
               sx={{
                 fontSize: { xs: '1.45rem', md: '2.35rem' },
                 fontWeight: 700,
                 letterSpacing: '-0.02em',
-                mb: { xs: 0.5, md: 0.75 },
+                mb: 1,
                 lineHeight: { xs: 1.15, md: 1.1 },
               }}
             >
@@ -221,7 +221,7 @@ export default function WhyArelix() {
           </Box>
 
           {/* Two-Column Sticky Scroll Display */}
-          <Grid container spacing={{ xs: 2, md: 2 }} sx={{ alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          <Grid container spacing={2} sx={{ alignItems: 'center', position: 'relative', zIndex: 1 }}>
             {/* Left Panel: Step Navigation List (01 to 06) */}
             <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
               <Box

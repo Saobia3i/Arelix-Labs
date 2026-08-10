@@ -265,7 +265,7 @@ export const founders = {
     {
       name: 'Saobia Islam Tinni',
       role: 'Co-Founder & CTO',
-      image: '/images/founders/founder-3.jpg',
+      image: '/images/founders/founder-3.png?v=20260810',
       bio:
         'Leads software development and technical execution, overseeing architecture, engineering practices and the development of Arelix\'s digital products.',
       education: 'BSc in CSE, Ahsanullah University of Science & Technology',
