@@ -14,6 +14,8 @@ import {
   ChevronLeft,
   ChevronRight,
   BadgeCheck,
+  Pause,
+  Play,
 } from 'lucide-react';
 
 // The 6 Engineering Advantages for Why Choose Us
@@ -625,7 +627,7 @@ export default function WhyArelix() {
                 })}
               </Box>
 
-              {/* Mobile Carousel Arrow Controls — fixed height row so layout never shifts */}
+              {/* Mobile Carousel Controls — fixed height row so layout never shifts */}
               <Box
                 sx={{
                   display: { xs: 'flex', md: 'none' },
@@ -636,45 +638,60 @@ export default function WhyArelix() {
                   height: 44,
                 }}
               >
+                {/* Prev */}
                 <IconButton
                   data-carousel-arrow="true"
                   onClick={handlePrev}
                   aria-label="Previous step"
                   sx={{
-                    bgcolor: (theme) => isPaused
-                      ? (theme.palette.mode === 'light' ? 'rgba(192,0,0,0.08)' : 'rgba(229,35,27,0.15)')
-                      : (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)'),
-                    color: isPaused ? 'primary.main' : 'text.primary',
+                    bgcolor: (theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)'),
+                    color: 'text.primary',
                     p: 1,
                     border: '1px solid',
-                    borderColor: isPaused ? 'primary.main' : ((theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.2)')),
+                    borderColor: (theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.2)'),
                     transition: 'all 0.2s ease',
-                    '&:hover': {
-                      bgcolor: 'primary.main',
-                      color: '#FFFFFF',
-                    },
+                    '&:hover': { bgcolor: 'primary.main', color: '#FFFFFF' },
                   }}
                 >
                   <ChevronLeft size={20} />
                 </IconButton>
 
+                {/* Pause / Play */}
+                <IconButton
+                  data-carousel-arrow="true"
+                  onClick={() => setIsPaused((p) => !p)}
+                  aria-label={isPaused ? 'Resume carousel' : 'Pause carousel'}
+                  sx={{
+                    mx: 1.5,
+                    bgcolor: isPaused
+                      ? 'primary.main'
+                      : (theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)'),
+                    color: isPaused ? '#FFFFFF' : 'text.primary',
+                    p: 1.25,
+                    border: '1px solid',
+                    borderColor: isPaused
+                      ? 'primary.main'
+                      : (theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.2)'),
+                    transition: 'all 0.2s ease',
+                    '&:hover': { bgcolor: 'primary.main', color: '#FFFFFF' },
+                  }}
+                >
+                  {isPaused ? <Play size={18} /> : <Pause size={18} />}
+                </IconButton>
+
+                {/* Next */}
                 <IconButton
                   data-carousel-arrow="true"
                   onClick={handleNext}
                   aria-label="Next step"
                   sx={{
-                    bgcolor: (theme) => isPaused
-                      ? (theme.palette.mode === 'light' ? 'rgba(192,0,0,0.08)' : 'rgba(229,35,27,0.15)')
-                      : (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)'),
-                    color: isPaused ? 'primary.main' : 'text.primary',
+                    bgcolor: (theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)'),
+                    color: 'text.primary',
                     p: 1,
                     border: '1px solid',
-                    borderColor: isPaused ? 'primary.main' : ((theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.2)')),
+                    borderColor: (theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.2)'),
                     transition: 'all 0.2s ease',
-                    '&:hover': {
-                      bgcolor: 'primary.main',
-                      color: '#FFFFFF',
-                    },
+                    '&:hover': { bgcolor: 'primary.main', color: '#FFFFFF' },
                   }}
                 >
                   <ChevronRight size={20} />
