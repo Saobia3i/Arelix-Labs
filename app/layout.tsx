@@ -35,29 +35,32 @@ export const metadata: Metadata = {
     apple: [{ url: '/images/arelix-logo-transparent.png', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Arelix Labs',
+    title: 'Arelix Labs — Engineering Software, Hardware, AI & IoT',
     description:
       'Engineering at the intersection of software, hardware, AI, and IoT.',
     type: 'website',
     locale: 'en_US',
+    siteName: 'Arelix Labs',
     images: [
       {
-        url: '/images/arelix-logo-transparent.png',
-        width: 500,
-        height: 500,
-        alt: 'Arelix Labs logo',
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Arelix Labs Logo',
       },
     ],
   },
   twitter: {
-    card: 'summary',
-    title: 'Arelix Labs',
+    card: 'summary_large_image',
+    title: 'Arelix Labs — Engineering Software, Hardware, AI & IoT',
     description: 'Engineering at the intersection of software, hardware, AI, and IoT.',
-    images: ['/images/arelix-logo-transparent.png'],
+    images: ['/images/og-image.png'],
   },
 };
 
 import ChatBot from '@/components/ui/ChatBot';
+
+import NavigationScrollReset from '@/components/ui/NavigationScrollReset';
 
 export default async function RootLayout({
   children,
@@ -83,6 +86,7 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <ColorModeProvider initialMode={initialMode}>
+          <NavigationScrollReset />
           <Navbar />
           <main>{children}</main>
           <Footer />

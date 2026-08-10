@@ -14,6 +14,7 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import MuiButton from '@mui/material/Button';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 import Container from '@/components/ui/Container';
@@ -22,13 +23,13 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'About', href: '/about' },
+  { label: 'Work', href: '/work' },
   { label: 'Contact', href: '/contact' },
 ];
 
 function ArelixLogo() {
   return (
     <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-      {/* Geometric brand mark — sharp angular accent echoing the banner's triangular motif */}
       <Box
         sx={{
           width: 36,
@@ -66,6 +67,7 @@ function ArelixLogo() {
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -94,27 +96,44 @@ export default function Navbar() {
                 justifyContent: 'center',
               }}
             >
-              {navLinks.map((link) => (
-                <MuiButton
-                  key={link.href}
-                  component={Link}
-                  href={link.href}
-                  disableRipple
-                  sx={{
-                    color: 'text.secondary',
-                    fontWeight: 400,
-                    fontSize: '0.9rem',
-                    px: 1.5,
-                    '&:hover': {
-                      color: 'text.primary',
-                      backgroundColor: 'transparent',
-                    },
-                    transition: 'color 80ms ease',
-                  }}
-                >
-                  {link.label}
-                </MuiButton>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <MuiButton
+                    key={link.href}
+                    component={Link}
+                    href={link.href}
+                    disableRipple
+                    sx={{
+                      color: isActive ? 'primary.main' : 'text.secondary',
+                      fontWeight: isActive ? 700 : 500,
+                      fontSize: '0.9rem',
+                      px: 1.75,
+                      py: 0.75,
+                      position: 'relative',
+                      '&:hover': {
+                        color: 'primary.main',
+                        backgroundColor: 'transparent',
+                      },
+                      '&::after': isActive
+                        ? {
+                            content: '""',
+                            position: 'absolute',
+                            bottom: 4,
+                            left: '20%',
+                            right: '20%',
+                            height: '2px',
+                            borderRadius: '2px',
+                            bgcolor: 'primary.main',
+                          }
+                        : {},
+                      transition: 'all 120ms ease',
+                    }}
+                  >
+                    {link.label}
+                  </MuiButton>
+                );
+              })}
             </Box>
 
             {/* Right actions */}
@@ -179,26 +198,30 @@ export default function Navbar() {
         </Box>
         <Divider />
         <List>
-          {navLinks.map((link) => (
-            <ListItem key={link.href} disablePadding>
-              <ListItemButton
-                component={Link}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                sx={{
-                  px: 3,
-                  py: 1.5,
-                  '&:hover': { color: 'primary.main' },
-                  transition: 'color 80ms ease',
-                }}
-              >
-                <ListItemText
-                  primary={link.label}
-                  slotProps={{ primary: { sx: { fontWeight: 500 } } }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <ListItem key={link.href} disablePadding>
+                <ListItemButton
+                  component={Link}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  sx={{
+                    px: 3,
+                    py: 1.5,
+                    color: isActive ? 'primary.main' : 'text.primary',
+                    '&:hover': { color: 'primary.main' },
+                    transition: 'color 80ms ease',
+                  }}
+                >
+                  <ListItemText
+                    primary={link.label}
+                    slotProps={{ primary: { sx: { fontWeight: isActive ? 700 : 500 } } }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         </List>
         <Box sx={{ p: 3, mt: 'auto' }}>
           <MuiButton

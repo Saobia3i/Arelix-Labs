@@ -50,28 +50,16 @@ export default function Footer() {
             <Box sx={{ pr: { md: 2 } }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25, mb: 1.75 }}>
                 <Box
-                  sx={{
-                    width: 34,
-                    height: 34,
-                    borderRadius: '50%',
-                    overflow: 'hidden',
-                    bgcolor: '#FFFFFF',
-                    p: '2px',
-                    flexShrink: 0,
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src="/images/arelix-logo-transparent.png"
-                    alt="Arelix Labs logo"
-                    sx={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.08)' }}
-                  />
-                </Box>
+                  component="img"
+                  src="/images/arelix-logo-transparent.png"
+                  alt="Arelix Labs Logo"
+                  sx={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }}
+                />
                 <Typography
                   sx={{
                     fontFamily: 'var(--font-oswald), Oswald, sans-serif',
                     fontWeight: 700,
-                    fontSize: '1.1rem',
+                    fontSize: '1.2rem',
                     letterSpacing: '0.04em',
                     textTransform: 'uppercase',
                     color: '#FFFFFF',
@@ -232,17 +220,18 @@ export default function Footer() {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
+            flexDirection: { xs: 'column', md: 'row' },
             justifyContent: 'space-between',
-            alignItems: { xs: 'flex-start', sm: 'center' },
+            alignItems: { xs: 'center', md: 'center' },
             gap: 2,
+            pr: { md: 18 },
           }}
         >
-          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.82rem' }}>
+          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.82rem', textAlign: { xs: 'center', md: 'left' } }}>
             © {new Date().getFullYear()} Arelix Labs. All rights reserved.
           </Typography>
 
-          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap', justifyContent: 'center' }}>
             {legalLinks.map((link) => (
               <Typography
                 key={link.href}
@@ -250,9 +239,10 @@ export default function Footer() {
                 href={link.href}
                 variant="body2"
                 sx={{
-                  color: 'rgba(255, 255, 255, 0.85)',
+                  color: 'rgba(255, 255, 255, 0.9)',
                   textDecoration: 'none',
-                  fontSize: '0.82rem',
+                  fontSize: '0.84rem',
+                  fontWeight: 500,
                   '&:hover': { color: '#FFFFFF', textDecoration: 'underline' },
                   transition: 'color 80ms ease',
                 }}

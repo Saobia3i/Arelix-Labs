@@ -11,6 +11,28 @@ export const metadata: Metadata = {
   title: 'Arelix Labs — Build Digital. Build Physical. Build What\'s Next.',
   description:
     'Arelix Labs builds digital products, connected systems and engineering solutions for businesses ready to build what\'s next.',
+  openGraph: {
+    title: 'Arelix Labs — Build Digital. Build Physical. Build What\'s Next.',
+    description:
+      'Arelix Labs builds digital products, connected systems and engineering solutions for businesses ready to build what\'s next.',
+    url: 'https://arelixlabs.com',
+    siteName: 'Arelix Labs',
+    images: [
+      {
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Arelix Labs Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Arelix Labs — Build Digital. Build Physical. Build What\'s Next.',
+    description:
+      'Arelix Labs builds digital products, connected systems and engineering solutions for businesses ready to build what\'s next.',
+    images: ['/images/og-image.png'],
+  },
 };
 
 export default function HomePage() {
