@@ -246,7 +246,7 @@ export const founders = {
         'Leads Arelix\'s vision, business strategy and growth, with a focus on partnerships and building the company\'s international direction.',
       education: 'BSc in EEE, Ahsanullah University of Science & Technology',
       email: 'khorshedalamkhairul@gmail.com',
-      phone: '0198496164',
+      phone: '01984961641',
       linkedin: 'https://www.linkedin.com/in/khorshedalamon',
       portfolio: '',
     },

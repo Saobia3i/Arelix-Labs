@@ -8,7 +8,7 @@ import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { cta } from '@/content/site-copy';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, MessageSquare } from 'lucide-react';
 
 export default function CTASection() {
   return (
@@ -46,7 +46,7 @@ export default function CTASection() {
               justifyContent: 'center',
             }}
           >
-            <Sparkles size={22} />
+            <MessageSquare size={22} />
           </Box>
         </Box>
 

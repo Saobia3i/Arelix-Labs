@@ -11,7 +11,7 @@ import Card from '@/components/ui/Card';
 import {
   Check,
   ChevronRight,
-  Sparkles,
+  BadgeCheck,
 } from 'lucide-react';
 
 // The 6 Engineering Advantages for Why Choose Us
@@ -535,7 +535,7 @@ export default function WhyArelix() {
                       }}
                     >
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Sparkles size={15} style={{ color: '#B84A47' }} />
+                        <BadgeCheck size={16} style={{ color: '#B84A47' }} />
                         <Typography variant="body2" sx={{ fontWeight: 700, fontSize: { xs: '0.8rem', md: '0.875rem' } }}>
                           {activeCard.metric}
                         </Typography>
