@@ -41,7 +41,7 @@ const SUGGESTED_PROMPTS = [
   'What engineering services does Arelix Labs provide?',
   'How do you handle PCB design & hardware firmware?',
   'Can you help us integrate AI into our product?',
-  'How can I schedule a consultation with the CTO?',
+  'How can I schedule a consultation with the CEO?',
 ];
 
 export default function ChatBot() {
@@ -50,7 +50,7 @@ export default function ChatBot() {
     {
       id: 'welcome',
       sender: 'bot',
-      text: 'Hello! I am Arelix Assistant powered by OpenRouter API. How can I help you with your software, hardware, or AI project today?',
+      text: 'Hello! I am the Arelix Technical Assistant. How can I assist you today?',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
@@ -130,7 +130,7 @@ export default function ChatBot() {
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         sender: 'bot',
-        text: data.content || data.error || 'Sorry, I encountered an issue connecting to OpenRouter API.',
+        text: data.content || data.error || 'Sorry, I encountered an issue processing your inquiry. Please try again.',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
 
@@ -142,7 +142,7 @@ export default function ChatBot() {
         {
           id: (Date.now() + 1).toString(),
           sender: 'bot',
-          text: 'Network error. Please try again or check your OpenRouter API settings.',
+          text: 'Network error. Please check your connection or reach out to our team at arelixlabs@gmail.com.',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         },
       ]);

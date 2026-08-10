@@ -21,19 +21,6 @@ export default function AboutPage() {
       {/* About Header */}
       <Section spacing="lg" id="about-header">
         <Box sx={{ maxWidth: 820 }}>
-          <Typography
-            variant="caption"
-            sx={{
-              display: 'block',
-              color: 'primary.main',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              fontSize: '0.82rem',
-              mb: 1.25,
-            }}
-          >
-            {about.headline}
-          </Typography>
 
           <Typography
             variant="h1"
