@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import type { Theme } from '@mui/material/styles';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
 import FoundersGrid from '@/components/sections/FoundersGrid';
 import CTASection from '@/components/sections/CTASection';
 import { about, vision, mission } from '@/content/site-copy';
@@ -69,6 +69,8 @@ export default function AboutPage() {
               sx={{
                 height: '100%',
                 p: { xs: 3.5, md: 4 },
+                border: (theme: Theme) =>
+                  theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -90,7 +92,6 @@ export default function AboutPage() {
                   >
                     <Eye size={22} />
                   </Box>
-                  <Badge label={vision.title} color="primary" />
                 </Box>
 
                 <Typography variant="h3" sx={{ mb: 1.5, fontSize: '1.5rem', fontWeight: 700 }}>
@@ -117,6 +118,8 @@ export default function AboutPage() {
               sx={{
                 height: '100%',
                 p: { xs: 3.5, md: 4 },
+                border: (theme: Theme) =>
+                  theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -138,7 +141,6 @@ export default function AboutPage() {
                   >
                     <Target size={22} />
                   </Box>
-                  <Badge label={mission.title} color="primary" />
                 </Box>
 
                 <Typography variant="h3" sx={{ mb: 1.5, fontSize: '1.5rem', fontWeight: 700 }}>

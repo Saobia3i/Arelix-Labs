@@ -9,20 +9,17 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
-import Button from '@/components/ui/Button';
 import {
   Layers,
   Rocket,
   ShieldCheck,
   Check,
-  ArrowRight,
   Cpu,
   Lock,
   GitMerge,
   ChevronRight,
   Sparkles,
 } from 'lucide-react';
-import Link from 'next/link';
 
 // The 6 Engineering Advantages for Why Choose Us
 const whyChooseCards = [
@@ -147,20 +144,20 @@ export default function WhyArelix() {
       spacing="lg"
       background="default"
       id="why-arelix"
-      sx={{ py: { xs: 6, md: 2 } }}
+      sx={{ py: { xs: 2, md: 2 } }}
     >
-      {/* Scroll Pinning Container (300vh tall to allow mouse wheel scroll progression) */}
+      {/* Scroll pinning container: each mobile viewport advances one card. */}
       <Box
         ref={containerRef}
         sx={{
           position: 'relative',
-          height: { xs: 'auto', md: '300vh' },
+          height: '300vh',
         }}
       >
         {/* Sticky Inner Wrapper (Pins to screen on desktop as mouse scrolls) */}
         <Box
           sx={{
-            position: { xs: 'relative', md: 'sticky' },
+            position: 'sticky',
             top: { xs: 0, md: 84 },
             zIndex: 2,
           }}
@@ -187,30 +184,46 @@ export default function WhyArelix() {
             </svg>
           </Box>
 
+          {/* Mobile keeps the card experience focused, with a short section label. */}
+          <Typography
+            variant="overline"
+            sx={{
+              display: 'block',
+              mb: 1.5,
+              color: 'primary.main',
+              fontWeight: 800,
+              letterSpacing: '0.12em',
+              position: 'relative',
+              zIndex: 1,
+            }}
+          >
+            Why choose us?
+          </Typography>
+
           {/* Section Header */}
-          <Box sx={{ maxWidth: 760, mb: { xs: 4, md: 2 }, position: 'relative', zIndex: 1 }}>
+          <Box sx={{ maxWidth: 760, mb: { xs: 1.5, md: 2 }, position: 'relative', zIndex: 1 }}>
             <Typography
               variant="h2"
               sx={{
-                fontSize: { xs: '2.2rem', md: '2.35rem' },
+                fontSize: { xs: '1.45rem', md: '2.35rem' },
                 fontWeight: 700,
                 letterSpacing: '-0.02em',
-                mb: { xs: 1.5, md: 0.75 },
+                mb: { xs: 0.5, md: 0.75 },
                 lineHeight: { xs: 1.15, md: 1.1 },
               }}
             >
               Built for teams that need technical depth, not slideware.
             </Typography>
 
-            <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1rem', lineHeight: { xs: 1.6, md: 1.4 } }}>
+            <Typography variant="body1" color="text.secondary" sx={{ fontSize: { xs: '0.78rem', md: '1rem' }, lineHeight: { xs: 1.35, md: 1.4 } }}>
               Scroll down with your mouse to reveal each of our 6 core engineering principles in sequence.
             </Typography>
           </Box>
 
           {/* Two-Column Sticky Scroll Display */}
-          <Grid container spacing={{ xs: 4, md: 2 }} sx={{ alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          <Grid container spacing={{ xs: 2, md: 2 }} sx={{ alignItems: 'center', position: 'relative', zIndex: 1 }}>
             {/* Left Panel: Step Navigation List (01 to 06) */}
-            <Grid size={{ xs: 12, md: 5 }}>
+            <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
               <Box
                 sx={{
                   display: 'flex',
@@ -438,15 +451,6 @@ export default function WhyArelix() {
                         </Typography>
                       </Box>
 
-                      <Button
-                        component={Link}
-                        href="/contact"
-                        variant="primary"
-                        size="small"
-                        sx={{ fontSize: '0.825rem', py: 0.6, px: 2 }}
-                      >
-                        Inquire About Principle {activeCard.num} <ArrowRight size={14} style={{ marginLeft: 4 }} />
-                      </Button>
                     </Box>
                   </Card>
                 </motion.div>

@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import type { Theme } from '@mui/material/styles';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import { about, vision, mission } from '@/content/site-copy';
 import { ArrowRight, Eye, Target } from 'lucide-react';
@@ -50,6 +49,8 @@ export default function AboutPreview() {
               flexDirection: 'column',
               justifyContent: 'space-between',
               bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
+              border: (theme: Theme) =>
+                theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
               boxShadow: (theme: Theme) =>
                 theme.palette.mode === 'light'
                   ? '0 6px 24px rgba(0,0,0,0.08)'
@@ -78,7 +79,6 @@ export default function AboutPreview() {
                 >
                   <Eye size={22} />
                 </Box>
-                <Badge label={vision.title} color="primary" />
               </Box>
 
               <Typography variant="h4" sx={{ mb: 1.5, fontSize: '1.35rem', fontWeight: 700 }}>
@@ -110,6 +110,8 @@ export default function AboutPreview() {
               flexDirection: 'column',
               justifyContent: 'space-between',
               bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
+              border: (theme: Theme) =>
+                theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
               boxShadow: (theme: Theme) =>
                 theme.palette.mode === 'light'
                   ? '0 6px 24px rgba(0,0,0,0.08)'
@@ -138,7 +140,6 @@ export default function AboutPreview() {
                 >
                   <Target size={22} />
                 </Box>
-                <Badge label={mission.title} color="primary" />
               </Box>
 
               <Typography variant="h4" sx={{ mb: 1.5, fontSize: '1.35rem', fontWeight: 700 }}>

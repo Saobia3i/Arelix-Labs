@@ -57,6 +57,7 @@ export default function ChatBot() {
   const [input, setInput] = useState('');
   const [selectedModel, setSelectedModel] = useState('deepseek/deepseek-chat');
   const [isLoading, setIsLoading] = useState(false);
+  const [keyboardInset, setKeyboardInset] = useState(0);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -69,6 +70,30 @@ export default function ChatBot() {
       scrollToBottom();
     }
   }, [messages, isOpen]);
+
+  // Mobile browsers do not consistently shrink fixed elements when the virtual
+  // keyboard opens. Track the visual viewport so the composer stays visible.
+  useEffect(() => {
+    const visualViewport = window.visualViewport;
+    if (!visualViewport) return;
+
+    const updateKeyboardInset = () => {
+      const inset = Math.max(
+        0,
+        window.innerHeight - visualViewport.height - visualViewport.offsetTop,
+      );
+      setKeyboardInset(inset);
+    };
+
+    visualViewport.addEventListener('resize', updateKeyboardInset);
+    visualViewport.addEventListener('scroll', updateKeyboardInset);
+    updateKeyboardInset();
+
+    return () => {
+      visualViewport.removeEventListener('resize', updateKeyboardInset);
+      visualViewport.removeEventListener('scroll', updateKeyboardInset);
+    };
+  }, []);
 
   const handleSend = async (textToSend?: string) => {
     const text = textToSend || input.trim();
@@ -161,12 +186,12 @@ export default function ChatBot() {
             transition={{ duration: 0.25, ease: 'easeInOut' }}
             style={{
               position: 'fixed',
-              bottom: 96,
+              bottom: 96 + keyboardInset,
               right: 12,
               width: 'calc(100vw - 24px)',
               maxWidth: 400,
-              height: 'min(560px, calc(100dvh - 112px))',
-              maxHeight: 'calc(100dvh - 112px)',
+              height: `min(560px, calc(100dvh - ${112 + keyboardInset}px))`,
+              maxHeight: `calc(100dvh - ${112 + keyboardInset}px)`,
               display: 'flex',
               flexDirection: 'column',
               zIndex: 1201,
@@ -221,10 +246,10 @@ export default function ChatBot() {
                       <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.92rem' }}>
                         Arelix AI Assistant
                       </Typography>
-                      <Badge label="OPENROUTER" color="primary" />
+                      <Badge label="AVAILABLE 24/7" color="primary" />
                     </Box>
                     <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.72rem' }}>
-                      Powered by LLM API
+                      Ask us anything about Arelix Labs.
                     </Typography>
                   </Box>
                 </Box>
@@ -397,6 +422,7 @@ export default function ChatBot() {
                   placeholder="Ask about software, PCB, AI..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
+                  onFocus={() => requestAnimationFrame(scrollToBottom)}
                   disabled={isLoading}
                   helperText={`${input.length}/700 · Max 700 chars`}
                   slotProps={{
