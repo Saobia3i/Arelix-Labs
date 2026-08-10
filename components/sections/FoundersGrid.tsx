@@ -44,7 +44,7 @@ export default function FoundersGrid() {
               : 'CEO';
 
           return (
-          <Grid key={founder.role} size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid key={founder.role} size={{ xs: 12, sm: 6, md: 4 }}>
             <Box
               sx={{
                 position: 'relative',
