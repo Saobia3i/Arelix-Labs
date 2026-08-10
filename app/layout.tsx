@@ -62,8 +62,8 @@ export const metadata: Metadata = {
 };
 
 import ChatBot from '@/components/ui/ChatBot';
-
 import NavigationScrollReset from '@/components/ui/NavigationScrollReset';
+import GoogleSeoSchema from '@/components/seo/GoogleSeoSchema';
 
 export default async function RootLayout({
   children,
@@ -89,6 +89,7 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <ColorModeProvider initialMode={initialMode}>
+          <GoogleSeoSchema />
           <NavigationScrollReset />
           <Navbar />
           <main>{children}</main>

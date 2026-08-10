@@ -206,30 +206,19 @@ export default function ServicesGrid() {
       sx={{ py: { xs: 6, md: 2 } }}
     >
       {/* Services heading */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-          alignItems: { xs: 'flex-start', md: 'flex-end' },
-          justifyContent: 'space-between',
-          mb: { xs: 4, lg: 1.5 },
-          gap: 2,
-        }}
-      >
-        <Box>
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: { xs: '2.2rem', md: '2.35rem' },
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Our Services
-          </Typography>
-        </Box>
-
-        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 460, fontSize: '0.98rem', lineHeight: 1.6 }}>
+      <Box sx={{ mb: { xs: 4, lg: 3 }, textAlign: 'left' }}>
+        <Typography
+          variant="h2"
+          sx={{
+            fontSize: { xs: '2.1rem', md: '2.7rem' },
+            fontWeight: 700,
+            letterSpacing: '-0.02em',
+            mb: 0.75,
+          }}
+        >
+          Our Services
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ fontSize: '0.98rem', lineHeight: 1.65, maxWidth: 560 }}>
           End-to-end engineering across software, hardware, AI, and connected IoT systems.
         </Typography>
       </Box>
