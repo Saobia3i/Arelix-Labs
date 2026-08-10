@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
+import { keyframes } from '@emotion/react';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Section from '@/components/ui/Section';
@@ -24,6 +25,20 @@ import {
   ArrowRight,
   X,
 } from 'lucide-react';
+
+const hexPopIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  75% {
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
 
 const iconMap: Record<string, React.ReactNode> = {
   'Software Engineering': <Code size={22} />,
@@ -66,15 +81,14 @@ function HexagonNodeCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28, scale: 0.88 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.22 }}
+      initial={{ opacity: 0, scale: 0.65 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{
-        duration: 0.5,
-        delay: index * 0.18,
-        ease: [0.22, 1, 0.36, 1],
+        duration: 0.45,
+        delay: (index % 2) * 0.12,
+        ease: [0.175, 0.885, 0.32, 1.275],
       }}
-      whileHover={{ scale: 1.05 }}
       style={{ width: '100%', height: '100%' }}
     >
       <Box
@@ -96,8 +110,11 @@ function HexagonNodeCard({
             theme.palette.mode === 'light'
               ? '0 10px 30px rgba(0, 0, 0, 0.12)'
               : '0 10px 30px rgba(0, 0, 0, 0.7)',
-          transition: 'all 200ms ease',
+          transition: 'transform 200ms ease, box-shadow 200ms ease',
           cursor: 'pointer',
+          '&:hover': {
+            transform: 'scale(1.05)',
+          },
         }}
         onClick={() => onOpenModal(index)}
       >

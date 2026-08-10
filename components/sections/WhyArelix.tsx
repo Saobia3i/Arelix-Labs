@@ -130,6 +130,26 @@ export default function WhyArelix() {
 
   const activeCard = whyChooseCards[activeIndex];
 
+  const handleStepClick = (idx: number) => {
+    setActiveIndex(idx);
+    if (containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const containerTop = window.scrollY + containerRect.top;
+      const containerHeight = containerRef.current.offsetHeight - window.innerHeight;
+
+      const startBuffer = 0.10;
+      const endBuffer = 0.90;
+      const effectiveProgress = startBuffer + (idx / (whyChooseCards.length - 1)) * (endBuffer - startBuffer);
+
+      const targetY = containerTop + effectiveProgress * containerHeight;
+
+      window.scrollTo({
+        top: targetY,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
     <Section
       spacing="lg"
@@ -259,7 +279,7 @@ export default function WhyArelix() {
               return (
                 <Box
                   key={card.num}
-                  onClick={() => setActiveIndex(idx)}
+                  onClick={() => handleStepClick(idx)}
                   sx={{
                     position: 'relative',
                     zIndex: 1,
@@ -318,7 +338,7 @@ export default function WhyArelix() {
                   return (
                     <Box
                       key={card.num}
-                      onClick={() => setActiveIndex(idx)}
+                      onClick={() => handleStepClick(idx)}
                       sx={{
                         px: { xs: 2, md: 1.5 },
                         py: { xs: 2, md: 1 },
