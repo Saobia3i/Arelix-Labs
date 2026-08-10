@@ -1,15 +1,17 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 import type { Theme } from '@mui/material/styles';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 import {
   Check,
+  ChevronLeft,
   ChevronRight,
   BadgeCheck,
 } from 'lucide-react';
@@ -105,15 +107,54 @@ const whyChooseCards = [
 export default function WhyArelix() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Scroll Progress Hook across the 350vh container
+  // Auto carousel timer for mobile viewport — pauses when isPaused is true
+  useEffect(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 900;
+    if (!isMobile || isPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % whyChooseCards.length);
+    }, 2800);
+
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Resume carousel when user clicks anywhere outside the arrow buttons
+  useEffect(() => {
+    if (!isPaused) return;
+    const handleDocClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('[data-carousel-arrow]')) {
+        setIsPaused(false);
+      }
+    };
+    document.addEventListener('click', handleDocClick);
+    return () => document.removeEventListener('click', handleDocClick);
+  }, [isPaused]);
+
+  const handlePrev = () => {
+    setIsPaused(true);
+    setActiveIndex((prev) => (prev === 0 ? whyChooseCards.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setIsPaused(true);
+    setActiveIndex((prev) => (prev === whyChooseCards.length - 1 ? 0 : prev + 1));
+  };
+
+  // Scroll Progress Hook across the 360vh container (Desktop only)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 84px', 'end end'],
   });
 
-  // Calculate active index (0 to 5) as the user scrolls, with entry/exit buffers
+  // Calculate active index (0 to 5) as the user scrolls on desktop
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (typeof window !== 'undefined' && window.innerWidth < 900) {
+      return;
+    }
     const startBuffer = 0.06;
     const endBuffer = 0.94;
     const progress = Math.max(0, Math.min(1, (latest - startBuffer) / (endBuffer - startBuffer)));
@@ -132,7 +173,7 @@ export default function WhyArelix() {
 
   const handleStepClick = (idx: number) => {
     setActiveIndex(idx);
-    if (containerRef.current) {
+    if (typeof window !== 'undefined' && window.innerWidth >= 900 && containerRef.current) {
       const containerRect = containerRef.current.getBoundingClientRect();
       const containerTop = window.scrollY + containerRect.top;
       const containerHeight = containerRef.current.offsetHeight - window.innerHeight;
@@ -157,19 +198,19 @@ export default function WhyArelix() {
       id="why-arelix"
       sx={{ py: { xs: 2, md: 2 } }}
     >
-      {/* Scroll pinning container: 550vh on mobile for smooth single-step swiping, 360vh on desktop */}
+      {/* Scroll pinning container: auto height on mobile, 360vh on desktop sticky */}
       <Box
         ref={containerRef}
         sx={{
           position: 'relative',
-          height: { xs: '550vh', md: '360vh' },
+          height: { xs: 'auto', md: '360vh' },
         }}
       >
-        {/* Inner Sticky Wrapper */}
+        {/* Inner Wrapper: static on mobile, sticky on desktop */}
         <Box
           sx={{
-            position: 'sticky',
-            top: { xs: 72, md: 84 },
+            position: { xs: 'relative', md: 'sticky' },
+            top: { xs: 0, md: 84 },
             zIndex: 2,
           }}
         >
@@ -404,146 +445,241 @@ export default function WhyArelix() {
               </Box>
             </Grid>
 
-            {/* Right Panel: Sticky Hero Reveal Card */}
+            {/* Right Panel: Card */}
             <Grid size={{ xs: 12, md: 7 }}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, x: 25, scale: 0.96 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -25, scale: 0.96 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                >
-                  <Card
-                    noPadding
-                    sx={{
-                      minHeight: { xs: 300, sm: 340, md: 360 },
-                      p: { xs: 2.5, sm: 3, md: 3 },
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between',
-                      borderRadius: '24px 0px 24px 24px', // Cat's Eye sharp top-right corner
-                      bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
-                      border: (theme: Theme) =>
-                        theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
-                      boxShadow: (theme: Theme) =>
-                        theme.palette.mode === 'light'
-                          ? '0 12px 36px rgba(0,0,0,0.12)'
-                          : '0 12px 36px rgba(0,0,0,0.8)',
-                    }}
-                  >
-                    <Box>
-                      {/* Top Header Row - Title and Number with standard gap to prevent collapse */}
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          justifyContent: 'space-between',
-                          gap: { xs: 1.5, md: 2 },
-                          mb: { xs: 2, md: 2 },
-                          pb: { xs: 1.5, md: 1.5 },
-                          borderBottom: '1px solid',
-                          borderColor: (theme) =>
-                            theme.palette.mode === 'light' ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.1)',
-                        }}
-                      >
-                        <Typography
-                          variant="h3"
-                          sx={{
-                            flex: 1,
-                            minWidth: 0,
-                            fontSize: { xs: '1.15rem', sm: '1.3rem', md: '1.4rem' },
-                            fontWeight: 700,
-                            lineHeight: 1.25,
-                            color: 'text.primary',
-                          }}
-                        >
-                          {activeCard.title}
-                        </Typography>
-
-                        <Typography
-                          variant="h2"
-                          sx={{
-                            flexShrink: 0,
-                            fontFamily: 'var(--font-oswald)',
-                            fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.5rem' },
-                            fontWeight: 700,
-                            color: 'primary.main',
-                            lineHeight: 1,
-                          }}
-                        >
-                          {activeCard.num}
-                        </Typography>
-                      </Box>
-
-                      {/* Subtitle & Description */}
-                      <Typography
-                        variant="subtitle1"
-                        sx={{ fontWeight: 600, color: 'primary.main', mb: { xs: 1, md: 1 }, fontSize: { xs: '0.95rem', md: '1.05rem' } }}
-                      >
-                        {activeCard.subtitle}
-                      </Typography>
-
-                      <Typography
-                        variant="body1"
-                        color="text.secondary"
-                        sx={{ fontSize: { xs: '0.9rem', md: '0.975rem' }, lineHeight: { xs: 1.55, md: 1.6 }, mb: { xs: 2.5, md: 2 } }}
-                      >
-                        {activeCard.description}
-                      </Typography>
-
-                      {/* Bullet Features */}
-                      <Grid container spacing={{ xs: 1.25, md: 1 }} sx={{ mb: { xs: 2, md: 1 } }}>
-                        {activeCard.bullets.map((bullet, bIdx) => (
-                          <Grid key={bIdx} size={{ xs: 12, sm: 6 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Box
-                                sx={{
-                                  width: 17,
-                                  height: 17,
-                                  borderRadius: '50%',
-                                  bgcolor: 'rgba(192,0,0,0.1)',
-                                  color: 'primary.main',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  flexShrink: 0,
-                                }}
-                              >
-                                <Check size={11} strokeWidth={3} />
-                              </Box>
-                              <Typography variant="body2" sx={{ fontSize: { xs: '0.825rem', md: '0.875rem' }, fontWeight: 500 }}>
-                                {bullet}
-                              </Typography>
-                            </Box>
-                          </Grid>
-                        ))}
-                      </Grid>
-                    </Box>
-
-                    {/* Footer Row */}
+              {/* Fixed-height card stack — all 6 cards rendered absolutely so container height NEVER changes */}
+              <Box
+                sx={{
+                  position: 'relative',
+                  height: { xs: 420, sm: 440, md: 'auto' },
+                }}
+              >
+                {whyChooseCards.map((card, idx) => {
+                  const isVisible = idx === activeIndex;
+                  return (
                     <Box
+                      key={card.num}
                       sx={{
-                        pt: { xs: 1.5, md: 1.5 },
-                        mt: { xs: 1.5, md: 1.5 },
-                        borderTop: '1px solid',
-                        borderColor: (theme) =>
-                          theme.palette.mode === 'light' ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.1)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
+                        position: { xs: 'absolute', md: 'relative' },
+                        inset: 0,
+                        display: { xs: 'block', md: idx === activeIndex ? 'block' : 'none' },
+                        opacity: { xs: isVisible ? 1 : 0, md: 1 },
+                        pointerEvents: { xs: isVisible ? 'auto' : 'none', md: 'auto' },
+                        transition: 'opacity 0.35s ease',
+                        zIndex: isVisible ? 1 : 0,
                       }}
                     >
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <BadgeCheck size={16} style={{ color: '#B84A47' }} />
-                        <Typography variant="body2" sx={{ fontWeight: 700, fontSize: { xs: '0.8rem', md: '0.875rem' } }}>
-                          {activeCard.metric}
-                        </Typography>
-                      </Box>
+                      <Card
+                        noPadding
+                        sx={{
+                          height: { xs: '100%', md: 'auto' },
+                          minHeight: { xs: 'unset', md: 360 },
+                          p: { xs: 3, sm: 3.5, md: 3.5 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'space-between',
+                          borderRadius: '24px 0px 24px 24px',
+                          bgcolor: (theme: Theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#000000'),
+                          border: (theme: Theme) =>
+                            theme.palette.mode === 'light' ? '1.5px solid #000000' : '1.5px solid #FFFFFF',
+                          boxShadow: (theme: Theme) =>
+                            theme.palette.mode === 'light'
+                              ? '0 12px 36px rgba(0,0,0,0.12)'
+                              : '0 12px 36px rgba(0,0,0,0.8)',
+                        }}
+                      >
+                        <Box sx={{ flex: 1 }}>
+                          {/* ── Header: Title + Number ── */}
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'flex-start',
+                              justifyContent: 'space-between',
+                              gap: 2,
+                              mb: 2,
+                              pb: 1.5,
+                              borderBottom: '1px solid',
+                              borderColor: (theme) =>
+                                theme.palette.mode === 'light' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.12)',
+                            }}
+                          >
+                            <Typography
+                              variant="h3"
+                              sx={{
+                                flex: 1,
+                                minWidth: 0,
+                                fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.4rem' },
+                                fontWeight: 800,
+                                lineHeight: 1.2,
+                                letterSpacing: '-0.01em',
+                                color: 'text.primary',
+                              }}
+                            >
+                              {card.title}
+                            </Typography>
+
+                            <Typography
+                              sx={{
+                                flexShrink: 0,
+                                fontFamily: 'var(--font-oswald)',
+                                fontSize: { xs: '2rem', sm: '2.4rem', md: '2.6rem' },
+                                fontWeight: 700,
+                                color: 'primary.main',
+                                lineHeight: 1,
+                                opacity: 0.9,
+                              }}
+                            >
+                              {card.num}
+                            </Typography>
+                          </Box>
+
+                          {/* ── Subtitle (accent label) ── */}
+                          <Typography
+                            sx={{
+                              fontWeight: 700,
+                              color: 'primary.main',
+                              mb: 0.75,
+                              fontSize: { xs: '0.78rem', md: '0.875rem' },
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.06em',
+                            }}
+                          >
+                            {card.subtitle}
+                          </Typography>
+
+                          {/* ── Description ── */}
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            sx={{
+                              fontSize: { xs: '0.8rem', md: '0.925rem' },
+                              lineHeight: { xs: 1.55, md: 1.65 },
+                              mb: { xs: 1.75, md: 2 },
+                            }}
+                          >
+                            {card.description}
+                          </Typography>
+
+                          {/* ── Bullets ── */}
+                          <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 0.75, md: 0.875 } }}>
+                            {card.bullets.map((bullet, bIdx) => (
+                              <Box key={bIdx} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <Box
+                                  sx={{
+                                    width: 18,
+                                    height: 18,
+                                    borderRadius: '50%',
+                                    bgcolor: 'rgba(192,0,0,0.1)',
+                                    color: 'primary.main',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexShrink: 0,
+                                  }}
+                                >
+                                  <Check size={11} strokeWidth={3} />
+                                </Box>
+                                <Typography
+                                  sx={{
+                                    fontSize: { xs: '0.78rem', md: '0.875rem' },
+                                    fontWeight: 500,
+                                    color: 'text.primary',
+                                    lineHeight: 1.4,
+                                  }}
+                                >
+                                  {bullet}
+                                </Typography>
+                              </Box>
+                            ))}
+                          </Box>
+                        </Box>
+
+                        {/* ── Footer: Metric ── */}
+                        <Box
+                          sx={{
+                            pt: { xs: 1.5, md: 2 },
+                            mt: { xs: 1.5, md: 2 },
+                            borderTop: '1px solid',
+                            borderColor: (theme) =>
+                              theme.palette.mode === 'light' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.12)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                          }}
+                        >
+                          <BadgeCheck size={17} style={{ color: '#B84A47' }} />
+                          <Typography
+                            sx={{
+                              fontWeight: 700,
+                              fontSize: { xs: '0.78rem', md: '0.875rem' },
+                              color: 'text.primary',
+                              letterSpacing: '0.01em',
+                            }}
+                          >
+                            {card.metric}
+                          </Typography>
+                        </Box>
+                      </Card>
                     </Box>
-                  </Card>
-                </motion.div>
-              </AnimatePresence>
+                  );
+                })}
+              </Box>
+
+              {/* Mobile Carousel Arrow Controls — fixed height row so layout never shifts */}
+              <Box
+                sx={{
+                  display: { xs: 'flex', md: 'none' },
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 2,
+                  mt: 2,
+                  height: 44,
+                }}
+              >
+                <IconButton
+                  data-carousel-arrow="true"
+                  onClick={handlePrev}
+                  aria-label="Previous step"
+                  sx={{
+                    bgcolor: (theme) => isPaused
+                      ? (theme.palette.mode === 'light' ? 'rgba(192,0,0,0.08)' : 'rgba(229,35,27,0.15)')
+                      : (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)'),
+                    color: isPaused ? 'primary.main' : 'text.primary',
+                    p: 1,
+                    border: '1px solid',
+                    borderColor: isPaused ? 'primary.main' : ((theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.2)')),
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                      bgcolor: 'primary.main',
+                      color: '#FFFFFF',
+                    },
+                  }}
+                >
+                  <ChevronLeft size={20} />
+                </IconButton>
+
+                <IconButton
+                  data-carousel-arrow="true"
+                  onClick={handleNext}
+                  aria-label="Next step"
+                  sx={{
+                    bgcolor: (theme) => isPaused
+                      ? (theme.palette.mode === 'light' ? 'rgba(192,0,0,0.08)' : 'rgba(229,35,27,0.15)')
+                      : (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)'),
+                    color: isPaused ? 'primary.main' : 'text.primary',
+                    p: 1,
+                    border: '1px solid',
+                    borderColor: isPaused ? 'primary.main' : ((theme) => (theme.palette.mode === 'light' ? 'rgba(0,0,0,0.12)' : 'rgba(255,255,255,0.2)')),
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                      bgcolor: 'primary.main',
+                      color: '#FFFFFF',
+                    },
+                  }}
+                >
+                  <ChevronRight size={20} />
+                </IconButton>
+              </Box>
             </Grid>
           </Grid>
         </Box>
