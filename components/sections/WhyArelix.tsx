@@ -114,8 +114,8 @@ export default function WhyArelix() {
 
   // Calculate active index (0 to 5) as the user scrolls, with entry/exit buffers
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    const startBuffer = 0.10;
-    const endBuffer = 0.90;
+    const startBuffer = 0.06;
+    const endBuffer = 0.94;
     const progress = Math.max(0, Math.min(1, (latest - startBuffer) / (endBuffer - startBuffer)));
 
     const calculatedIndex = Math.min(
@@ -137,8 +137,8 @@ export default function WhyArelix() {
       const containerTop = window.scrollY + containerRect.top;
       const containerHeight = containerRef.current.offsetHeight - window.innerHeight;
 
-      const startBuffer = 0.10;
-      const endBuffer = 0.90;
+      const startBuffer = 0.06;
+      const endBuffer = 0.94;
       const effectiveProgress = startBuffer + (idx / (whyChooseCards.length - 1)) * (endBuffer - startBuffer);
 
       const targetY = containerTop + effectiveProgress * containerHeight;
@@ -157,19 +157,19 @@ export default function WhyArelix() {
       id="why-arelix"
       sx={{ py: { xs: 2, md: 2 } }}
     >
-      {/* Scroll pinning container: each mobile/desktop scroll segment advances one card. */}
+      {/* Scroll pinning container: 550vh on mobile for smooth single-step swiping, 360vh on desktop */}
       <Box
         ref={containerRef}
         sx={{
           position: 'relative',
-          height: '350vh',
+          height: { xs: '550vh', md: '360vh' },
         }}
       >
-        {/* Sticky Inner Wrapper (Pins to screen on desktop as mouse scrolls) */}
+        {/* Inner Sticky Wrapper */}
         <Box
           sx={{
             position: 'sticky',
-            top: { xs: 12, md: 84 },
+            top: { xs: 72, md: 84 },
             zIndex: 2,
           }}
         >
