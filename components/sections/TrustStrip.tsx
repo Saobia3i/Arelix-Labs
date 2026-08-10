@@ -10,7 +10,7 @@ import Section from '@/components/ui/Section';
 import Card from '@/components/ui/Card';
 
 const bannerDomains = [
-  { title: 'Web', subtitle: 'Web Engineering', icon: Code2 },
+  { title: 'Web', subtitle: 'Full-Stack Web Engineering', icon: Code2 },
   { title: 'Apps', subtitle: 'Mobile Applications', icon: Smartphone },
   { title: 'UI/UX', subtitle: 'Product & Interface Design', icon: Palette },
   { title: 'PCB', subtitle: 'PCB & Hardware Design', icon: Cpu },

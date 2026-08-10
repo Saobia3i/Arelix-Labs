@@ -56,6 +56,9 @@ export const metadata: Metadata = {
     description: 'Engineering at the intersection of software, hardware, AI, and IoT.',
     images: ['/images/og-image.png'],
   },
+  verification: {
+    google: 'google-site-verification-code',
+  },
 };
 
 import ChatBot from '@/components/ui/ChatBot';

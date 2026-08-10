@@ -41,12 +41,12 @@ const hexPopIn = keyframes`
 `;
 
 const iconMap: Record<string, React.ReactNode> = {
-  'Software Engineering': <Code size={22} />,
-  'Hardware & Embedded Systems': <Cpu size={22} />,
-  'Artificial Intelligence & ML': <Brain size={22} />,
-  'IoT & Connected Systems': <Wifi size={22} />,
-  'Systems Integration': <Layers size={22} />,
-  'Technical Consulting & Architecture': <Compass size={22} />,
+  'Software Development': <Code size={22} color="#B84A47" strokeWidth={2.2} />,
+  'AI Solutions': <Brain size={22} color="#B84A47" strokeWidth={2.2} />,
+  'Hardware & Electronics': <Cpu size={22} color="#B84A47" strokeWidth={2.2} />,
+  'IoT & Connected Systems': <Wifi size={22} color="#B84A47" strokeWidth={2.2} />,
+  'UI/UX & Product Design': <Layers size={22} color="#B84A47" strokeWidth={2.2} />,
+  'Technology Support & Maintenance': <Compass size={22} color="#B84A47" strokeWidth={2.2} />,
 };
 
 // Mathematically calculated 6 Radial Node Centers around Hub (550, 460) with R = 360px
@@ -500,17 +500,19 @@ export default function ServicesGrid() {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Box
                   sx={{
-                    width: 36,
-                    height: 36,
+                    width: 40,
+                    height: 40,
                     borderRadius: '50%',
-                    bgcolor: 'rgba(192,0,0,0.08)',
-                    color: 'primary.main',
+                    bgcolor: 'rgba(184, 74, 71, 0.12)',
+                    border: '1px solid rgba(184, 74, 71, 0.25)',
+                    color: '#B84A47',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    flexShrink: 0,
                   }}
                 >
-                  {iconMap[services[selectedModal].category]}
+                  {iconMap[services[selectedModal].category] || <Code size={22} color="#B84A47" strokeWidth={2.2} />}
                 </Box>
                 <Box>
                   <Typography variant="h5" sx={{ fontWeight: 700, fontSize: '1.2rem', color: 'text.primary' }}>
@@ -535,11 +537,12 @@ export default function ServicesGrid() {
                   <Box key={i} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.25 }}>
                     <Box
                       sx={{
-                        width: 18,
-                        height: 18,
+                        width: 20,
+                        height: 20,
                         borderRadius: '50%',
-                        bgcolor: 'rgba(192,0,0,0.08)',
-                        color: 'primary.main',
+                        bgcolor: 'rgba(184, 74, 71, 0.12)',
+                        border: '1px solid rgba(184, 74, 71, 0.25)',
+                        color: '#B84A47',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -547,7 +550,7 @@ export default function ServicesGrid() {
                         flexShrink: 0,
                       }}
                     >
-                      <Check size={12} strokeWidth={2.5} />
+                      <Check size={12} strokeWidth={2.5} color="#B84A47" />
                     </Box>
                     <Typography variant="body2" sx={{ fontSize: '0.875rem', color: 'text.primary' }}>
                       {item}

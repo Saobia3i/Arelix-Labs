@@ -24,8 +24,8 @@ const knowledgeBase: KnowledgeChunk[] = [
     id: 'ai',
     title: 'AI Solutions',
     content:
-      'AI capabilities include AI-integrated web products, lead qualification and sales agents, multi-agent systems, computer vision applications, LangGraph workflows, retrieval-augmented generation pipelines, company research, personalized outreach, and fact-verification agents.',
-    keywords: ['ai', 'agent', 'rag', 'langgraph', 'automation', 'computer', 'vision', 'lead', 'llm', 'multiagent'],
+      'AI capabilities include AI-integrated web products, multi-agent AI systems, custom AI solutions, and computer vision applications.',
+    keywords: ['ai', 'agent', 'automation', 'computer', 'vision', 'llm', 'multiagent', 'custom'],
   },
   {
     id: 'hardware',

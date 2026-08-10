@@ -17,7 +17,7 @@ const companyLinks = [
 ];
 
 const capabilityLinks = [
-  { label: 'Web Engineering', href: '/services' },
+  { label: 'Full-Stack Web Engineering', href: '/services' },
   { label: 'Mobile Applications', href: '/services' },
   { label: 'UI/UX Design', href: '/services' },
   { label: 'PCB & Hardware Design', href: '/services' },

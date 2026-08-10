@@ -62,8 +62,8 @@ export const services: {
     description: 'Intelligence layered on top of your existing systems.',
     items: [
       'AI-Integrated Web Products',
-      'AI Lead Qualification & Sales Agents',
       'Multi-Agent AI Systems',
+      'Custom AI Solutions',
       'Computer Vision Applications',
     ],
   },
