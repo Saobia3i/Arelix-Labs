@@ -241,7 +241,7 @@ export const founders = {
     {
       name: 'Khorshed Alam',
       role: 'Co-Founder & CEO',
-      image: '/images/founders/founder-1.jpg',
+      image: '/images/founders/founder-1.png?v=20260810',
       bio:
         'Leads Arelix\'s vision, business strategy and growth, with a focus on partnerships and building the company\'s international direction.',
       education: 'BSc in EEE, Ahsanullah University of Science & Technology',
