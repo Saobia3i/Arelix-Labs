@@ -18,6 +18,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 import Container from '@/components/ui/Container';
+import ArelixTextLogo from '@/components/ui/ArelixTextLogo';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -28,7 +29,7 @@ const navLinks = [
 
 function ArelixLogo() {
   return (
-    <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+    <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
       <Box
         sx={{
           width: 36,
@@ -46,20 +47,7 @@ function ArelixLogo() {
           sx={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.08)' }}
         />
       </Box>
-      <Typography
-        component="span"
-        sx={{
-          fontFamily: 'var(--font-oswald), Oswald, sans-serif',
-          fontWeight: 700,
-          fontSize: '1.15rem',
-          letterSpacing: '0.04em',
-          color: 'text.primary',
-          textTransform: 'uppercase',
-          lineHeight: 1,
-        }}
-      >
-        Arelix<Typography component="span" sx={{ color: 'primary.main' }}>Labs</Typography>
-      </Typography>
+      <ArelixTextLogo variant="navbar" height={28} />
     </Link>
   );
 }

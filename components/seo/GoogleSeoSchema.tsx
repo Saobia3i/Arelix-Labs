@@ -63,11 +63,15 @@ export default function GoogleSeoSchema() {
       '@type': 'ContactPoint',
       telephone: '+880-1984-961641',
       contactType: 'customer service',
-      email: 'arelixlabs@gmail.com',
+      email: 'contact@arelixlabs.com',
       areaServed: 'Worldwide',
       availableLanguage: ['English', 'Bengali'],
     },
-    sameAs: ['https://arelixlabs.com'],
+    sameAs: [
+      'https://www.facebook.com/ArelixLabs',
+      'https://www.linkedin.com/company/arelixlabs',
+      'https://arelixlabs.com',
+    ],
   };
 
   const websiteSchema = {

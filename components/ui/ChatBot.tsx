@@ -142,7 +142,7 @@ export default function ChatBot() {
         {
           id: (Date.now() + 1).toString(),
           sender: 'bot',
-          text: 'Network error. Please check your connection or reach out to our team at arelixlabs@gmail.com.',
+          text: 'Network error. Please check your connection or reach out to our team at contact@arelixlabs.com.',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         },
       ]);

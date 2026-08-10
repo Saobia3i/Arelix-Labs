@@ -66,7 +66,7 @@ const knowledgeBase: KnowledgeChunk[] = [
     id: 'leadership',
     title: 'Founders and Leadership',
     content:
-      'Arelix Labs has three co-founders. Khorshed Alam is Co-Founder and CEO. He earned a BSc in EEE from Ahsanullah University of Science & Technology; email: khorshedalamkhairul@gmail.com; phone: 01984961641; LinkedIn: https://www.linkedin.com/in/khorshedalamon. Khadiza Khanom is Co-Founder and Managing Director. She earned a BSc in CSE from Ahsanullah University of Science & Technology; email: kkl.khadiza@gmail.com; phone: 01795753116; LinkedIn: https://www.linkedin.com/in/khadiza-khanom-liza-a95a26263/. Saobia Islam Tinni is Co-Founder and CTO. She earned a BSc in CSE from Ahsanullah University of Science & Technology and leads full-stack architecture, Next.js, React, MERN, ASP.NET Core, AI-integrated systems, LangGraph, RAG pipelines, database and backend architecture, UI, deployment, and software engineering practices; email: islamsaobia@gmail.com; LinkedIn: https://www.linkedin.com/in/saobia-islam; portfolio: https://islamsaobia.vercel.app.',
+      'Arelix Labs has three co-founders. Khorshed Alam is Co-Founder and CEO. He earned a BSc in EEE from Ahsanullah University of Science & Technology; email: ceo@arelixlabs.com; phone: 01984961641; LinkedIn: https://www.linkedin.com/in/khorshedalamon. Khadiza Khanom is Co-Founder and Managing Director. She earned a BSc in CSE from Ahsanullah University of Science & Technology; email: md@arelixlabs.com; phone: 01795753116; LinkedIn: https://www.linkedin.com/in/khadiza-khanom-liza-a95a26263/. Saobia Islam Tinni is Co-Founder and CTO. She earned a BSc in CSE from Ahsanullah University of Science & Technology and leads full-stack architecture, Next.js, React, MERN, ASP.NET Core, AI-integrated systems, LangGraph, RAG pipelines, database and backend architecture, UI, deployment, and software engineering practices; email: cto@arelixlabs.com; LinkedIn: https://www.linkedin.com/in/saobia-islam; portfolio: https://islamsaobia.vercel.app.',
     keywords: ['founder', 'leadership', 'ceo', 'cto', 'director', 'khorshed', 'alam', 'khadiza', 'khanom', 'saobia', 'tinni', 'team', 'linkedin', 'education', 'portfolio'],
   },
   {
@@ -80,8 +80,8 @@ const knowledgeBase: KnowledgeChunk[] = [
     id: 'contact',
     title: 'Contact and Project Inquiries',
     content:
-      'For project inquiries, architecture discussions, pricing, or partnership conversations, email arelixlabs@gmail.com or use the Contact page. Pricing depends on scope, technical complexity, integrations, hardware requirements, timeline, and support needs, so Arelix first discusses the project before estimating.',
-    keywords: ['contact', 'email', 'price', 'pricing', 'cost', 'quote', 'hire', 'consultation', 'meeting', 'arelixlabs@gmail.com'],
+      'For project inquiries, architecture discussions, pricing, or partnership conversations, email contact@arelixlabs.com or use the Contact page. Pricing depends on scope, technical complexity, integrations, hardware requirements, timeline, and support needs, so Arelix first discusses the project before estimating.',
+    keywords: ['contact', 'email', 'price', 'pricing', 'cost', 'quote', 'hire', 'consultation', 'meeting', 'contact@arelixlabs.com'],
   },
 ];
 
@@ -148,5 +148,5 @@ export function createLocalFallback(chunks: KnowledgeChunk[]) {
     .map((chunk) => `${chunk.title}\n${chunk.content}`)
     .join('\n\n');
 
-  return `${summary}\n\nFor a tailored discussion, email arelixlabs@gmail.com or use the Contact page.`;
+  return `${summary}\n\nFor a tailored discussion, email contact@arelixlabs.com or use the Contact page.`;
 }

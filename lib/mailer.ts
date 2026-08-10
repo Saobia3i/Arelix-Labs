@@ -8,7 +8,7 @@ export interface LeadEmailData {
 }
 
 export async function sendLeadNotificationEmail(data: LeadEmailData) {
-  const recipient = process.env.CONTACT_RECIPIENT_EMAIL || 'arelixlabs@gmail.com';
+  const recipient = process.env.CONTACT_RECIPIENT_EMAIL || 'contact@arelixlabs.com';
   const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
   const smtpPort = parseInt(process.env.SMTP_PORT || '465', 10);
   const smtpSecure = process.env.SMTP_SECURE !== 'false';

@@ -87,8 +87,8 @@ export default function TermsPage() {
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
                 For legal inquiries regarding these terms, please contact us at{' '}
-                <Typography component="a" href="mailto:arelixlabs@gmail.com" sx={{ color: 'primary.main', fontWeight: 600 }}>
-                  arelixlabs@gmail.com
+                <Typography component="a" href="mailto:contact@arelixlabs.com" sx={{ color: 'primary.main', fontWeight: 600 }}>
+                  contact@arelixlabs.com
                 </Typography>.
               </Typography>
             </Box>

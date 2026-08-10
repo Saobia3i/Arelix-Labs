@@ -7,7 +7,15 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
 import Container from '@/components/ui/Container';
-import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { FacebookIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
+import ArelixTextLogo from '@/components/ui/ArelixTextLogo';
+
+const socialLinks = [
+  { name: 'Facebook', href: 'https://www.facebook.com/ArelixLabs', icon: FacebookIcon },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/arelixlabs', icon: LinkedinIcon },
+  { name: 'Email', href: 'mailto:contact@arelixlabs.com', icon: Mail },
+];
 
 const companyLinks = [
   { label: 'Home', href: '/' },
@@ -54,23 +62,49 @@ export default function Footer() {
                   alt="Arelix Labs Logo"
                   sx={{ width: 36, height: 36, objectFit: 'contain', flexShrink: 0 }}
                 />
-                <Typography
-                  sx={{
-                    fontFamily: 'var(--font-oswald), Oswald, sans-serif',
-                    fontWeight: 700,
-                    fontSize: '1.2rem',
-                    letterSpacing: '0.04em',
-                    textTransform: 'uppercase',
-                    color: '#FFFFFF',
-                  }}
-                >
-                  Arelix<Typography component="span" sx={{ color: 'rgba(255, 255, 255, 0.85)' }}>Labs</Typography>
-                </Typography>
+                <ArelixTextLogo variant="footer" height={32} />
               </Box>
 
               <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.85)', lineHeight: 1.7, mb: 2, maxWidth: 300 }}>
                 Engineering custom software, PCB electronics, AI models, and IoT systems into unified, production-ready solutions.
               </Typography>
+
+              {/* Social Media Icons */}
+              <Box sx={{ display: 'flex', gap: 1.25, mt: 2 }}>
+                {socialLinks.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <Box
+                      key={social.name}
+                      component="a"
+                      href={social.href}
+                      target={social.href.startsWith('http') ? '_blank' : undefined}
+                      rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      aria-label={social.name}
+                      sx={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: '50%',
+                        display: 'grid',
+                        placeItems: 'center',
+                        color: 'rgba(255, 255, 255, 0.9)',
+                        bgcolor: 'rgba(255, 255, 255, 0.12)',
+                        border: '1px solid rgba(255, 255, 255, 0.22)',
+                        transition: 'all 200ms ease-in-out',
+                        '&:hover': {
+                          color: '#B84A47',
+                          bgcolor: '#FFFFFF',
+                          borderColor: '#FFFFFF',
+                          transform: 'translateY(-3px)',
+                          boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                        },
+                      }}
+                    >
+                      <Icon size={18} />
+                    </Box>
+                  );
+                })}
+              </Box>
             </Box>
           </Grid>
 
@@ -171,7 +205,7 @@ export default function Footer() {
                 <Mail size={16} style={{ color: 'rgba(255, 255, 255, 0.85)', flexShrink: 0 }} />
                 <Typography
                   component="a"
-                  href="mailto:arelixlabs@gmail.com"
+                  href="mailto:contact@arelixlabs.com"
                   variant="body2"
                   sx={{
                     color: 'rgba(255, 255, 255, 0.9)',
@@ -181,7 +215,7 @@ export default function Footer() {
                     '&:hover': { color: '#FFFFFF', textDecoration: 'underline' },
                   }}
                 >
-                  arelixlabs@gmail.com
+                  contact@arelixlabs.com
                 </Typography>
               </Box>
 

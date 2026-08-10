@@ -245,7 +245,7 @@ export const founders = {
       bio:
         'Leads Arelix\'s vision, business strategy and growth, with a focus on partnerships and building the company\'s international direction.',
       education: 'BSc in EEE, Ahsanullah University of Science & Technology',
-      email: 'khorshedalamkhairul@gmail.com',
+      email: 'ceo@arelixlabs.com',
       phone: '01984961641',
       linkedin: 'https://www.linkedin.com/in/khorshedalamon',
       portfolio: '',
@@ -257,7 +257,7 @@ export const founders = {
       bio:
         'Oversees operations, administration and client coordination, helping turn the company\'s vision into organized execution and long-term relationships.',
       education: 'BSc in CSE, Ahsanullah University of Science & Technology',
-      email: 'kkl.khadiza@gmail.com',
+      email: 'md@arelixlabs.com',
       phone: '01795753116',
       linkedin: 'https://www.linkedin.com/in/khadiza-khanom-liza-a95a26263/',
       portfolio: '',
@@ -269,13 +269,31 @@ export const founders = {
       bio:
         'Leads software development and technical execution, overseeing architecture, engineering practices and the development of Arelix\'s digital products.',
       education: 'BSc in CSE, Ahsanullah University of Science & Technology',
-      email: 'islamsaobia@gmail.com',
+      email: 'cto@arelixlabs.com',
       phone: '',
       linkedin: 'https://www.linkedin.com/in/saobia-islam',
       portfolio: 'https://islamsaobia.vercel.app',
     },
   ],
 };
+
+export const socialLinks = [
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/ArelixLabs',
+    icon: 'Facebook',
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/arelixlabs',
+    icon: 'Linkedin',
+  },
+  {
+    name: 'Email',
+    href: 'mailto:contact@arelixlabs.com',
+    icon: 'Mail',
+  },
+];
 
 export const cta = {
   headline: 'Have a technology challenge?',
@@ -285,7 +303,7 @@ export const cta = {
 
 export const contact = {
   headline: 'Let\'s talk about your project.',
-  body: 'Fill out the form and we\'ll get back to you within one business day. Prefer email? Reach us at arelixlabs@gmail.com.',
+  body: 'Fill out the form and we\'ll get back to you within one business day. Prefer email? Reach us at contact@arelixlabs.com.',
   formLabels: {
     name: 'Your name',
     email: 'Your email',

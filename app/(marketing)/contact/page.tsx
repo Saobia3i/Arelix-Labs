@@ -8,6 +8,14 @@ import Alert from '@mui/material/Alert';
 import Section from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import { contact } from '@/content/site-copy';
+import { Mail } from 'lucide-react';
+import { FacebookIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
+
+const socialLinks = [
+  { name: 'Facebook', href: 'https://www.facebook.com/ArelixLabs', icon: FacebookIcon },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/company/arelixlabs', icon: LinkedinIcon },
+  { name: 'Email', href: 'mailto:contact@arelixlabs.com', icon: Mail },
+];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -81,7 +89,7 @@ export default function ContactPage() {
             severity="error"
             sx={{ mb: 3, borderRadius: 1.5 }}
           >
-            {errorMessage || 'Something went wrong. Please try again or email us directly at arelixlabs@gmail.com.'}
+            {errorMessage || 'Something went wrong. Please try again or email us directly at contact@arelixlabs.com.'}
           </Alert>
         )}
 
@@ -128,6 +136,52 @@ export default function ContactPage() {
             >
               {status === 'submitting' ? 'Sending…' : contact.formLabels.submit}
             </Button>
+          </Box>
+        </Box>
+
+        {/* Social Media Links */}
+        <Box sx={{ mt: 5, pt: 3.5, borderTop: '1px solid', borderColor: 'divider' }}>
+          <Typography variant="caption" sx={{ display: 'block', color: 'text.secondary', fontWeight: 700, letterSpacing: '0.08em', mb: 2 }}>
+            CONNECT WITH US
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1.75 }}>
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <Box
+                  key={social.name}
+                  component="a"
+                  href={social.href}
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={social.name}
+                  sx={{
+                    width: 42,
+                    height: 42,
+                    borderRadius: '50%',
+                    display: 'grid',
+                    placeItems: 'center',
+                    color: 'text.primary',
+                    bgcolor: (theme) => (theme.palette.mode === 'light' ? 'rgba(184, 74, 71, 0.06)' : 'rgba(194, 87, 82, 0.12)'),
+                    border: '1px solid',
+                    borderColor: (theme) => (theme.palette.mode === 'light' ? 'rgba(184, 74, 71, 0.2)' : 'rgba(194, 87, 82, 0.3)'),
+                    transition: 'all 200ms ease-in-out',
+                    '&:hover': {
+                      color: '#FFFFFF',
+                      bgcolor: 'primary.main',
+                      borderColor: 'primary.main',
+                      transform: 'translateY(-3px)',
+                      boxShadow: (theme) =>
+                        theme.palette.mode === 'light'
+                          ? '0 6px 16px rgba(184, 74, 71, 0.35)'
+                          : '0 6px 16px rgba(194, 87, 82, 0.45)',
+                    },
+                  }}
+                >
+                  <Icon size={20} />
+                </Box>
+              );
+            })}
           </Box>
         </Box>
       </Box>

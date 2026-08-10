@@ -92,8 +92,8 @@ export default function PrivacyPage() {
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8 }}>
                 If you have questions regarding this Privacy Policy or data security practices, please reach out to us at{' '}
-                <Typography component="a" href="mailto:arelixlabs@gmail.com" sx={{ color: 'primary.main', fontWeight: 600 }}>
-                  arelixlabs@gmail.com
+                <Typography component="a" href="mailto:contact@arelixlabs.com" sx={{ color: 'primary.main', fontWeight: 600 }}>
+                  contact@arelixlabs.com
                 </Typography>.
               </Typography>
             </Box>
