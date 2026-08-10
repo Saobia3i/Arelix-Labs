@@ -325,21 +325,6 @@ function LiveEngineConsole() {
             : '0 10px 30px rgba(0,0,0,0.85)',
       }}
     >
-      {/* Eyebrow Tag */}
-      <Typography
-        variant="caption"
-        sx={{
-          display: 'block',
-          color: 'text.secondary',
-          fontWeight: 600,
-          letterSpacing: '0.06em',
-          fontSize: '0.7rem',
-          mb: 1,
-        }}
-      >
-        • SOFTWARE + HARDWARE + AI + IOT
-      </Typography>
-
       {/* Console Top Bar */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.75 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.85 }}>
@@ -486,6 +471,16 @@ export default function Hero() {
       >
         {/* Left: Copy */}
         <Box sx={{ width: '100%', maxWidth: { lg: 620 }, minWidth: 0 }}>
+          {/* Eyebrow */}
+          <Box sx={{ mb: 0.75, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 1 }}>
+            <Typography
+              variant="caption"
+              sx={{ color: 'text.secondary', fontWeight: 600, letterSpacing: '0.05em', fontSize: '0.78rem' }}
+            >
+              • SOFTWARE + HARDWARE + AI + IOT
+            </Typography>
+          </Box>
+
           {/* H1 */}
           <Typography
             variant="h1"
