@@ -6,9 +6,9 @@
 
 export const hero = {
   eyebrow: '01 — HERO',
-  title: 'Build Digital. Build Physical.\nBuild What\'s Next.',
+  title: 'Build Digital.\nBuild Physical.\nBuild What\'s Next.',
   tagline: 'Software. Hardware. Engineered Together.',
-  body: 'We build digital products, connected systems and engineering solutions for businesses ready to build what\'s next. From applications and platforms to PCB, embedded systems, and IoT, Arelix Labs engineers solutions designed for real-world use.',
+  body: 'We build custom software, PCB electronics, AI models, and IoT systems into unified, production-ready solutions designed for real-world deployment.',
   cta: 'Contact Us',
   ctaSecondary: 'Start a Conversation',
 };

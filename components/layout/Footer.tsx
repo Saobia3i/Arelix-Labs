@@ -24,10 +24,10 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        borderTop: '1px solid',
-        borderColor: 'divider',
-        bgcolor: 'background.paper',
+        bgcolor: '#B84A47',
+        color: '#FFFFFF',
         py: { xs: 5, md: 6 },
+        borderTop: 'none',
       }}
     >
       <Container>
@@ -51,7 +51,8 @@ export default function Footer() {
                   height: 32,
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  bgcolor: 'transparent',
+                  bgcolor: '#FFFFFF',
+                  p: '2px',
                   flexShrink: 0,
                 }}
               >
@@ -69,13 +70,13 @@ export default function Footer() {
                   fontSize: '1rem',
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
-                  color: 'text.primary',
+                  color: '#FFFFFF',
                 }}
               >
-                Arelix<Typography component="span" sx={{ color: 'primary.main' }}>Labs</Typography>
+                Arelix<Typography component="span" sx={{ color: 'rgba(255, 255, 255, 0.85)' }}>Labs</Typography>
               </Typography>
             </Box>
-            <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 280 }}>
+            <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.85)', maxWidth: 280 }}>
               Engineering at the intersection of software, hardware, AI, and IoT.
             </Typography>
             <Typography
@@ -85,10 +86,10 @@ export default function Footer() {
               sx={{
                 display: 'inline-block',
                 mt: 1,
-                color: 'text.primary',
+                color: '#FFFFFF',
                 textDecoration: 'none',
-                fontWeight: 500,
-                '&:hover': { color: 'primary.main' },
+                fontWeight: 600,
+                '&:hover': { color: 'rgba(255, 255, 255, 0.8)' },
               }}
             >
               arelixlabs@gmail.com
@@ -108,13 +109,14 @@ export default function Footer() {
                 href={link.href}
                 disableRipple
                 sx={{
-                  color: 'text.secondary',
-                  fontWeight: 400,
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontWeight: 500,
                   fontSize: '0.875rem',
-                  '&:hover': { color: 'text.primary', backgroundColor: 'transparent' },
-                  transition: 'color 80ms ease',
+                  '&:hover': { color: '#FFFFFF', backgroundColor: 'rgba(255, 255, 255, 0.12)' },
+                  transition: 'all 120ms ease',
                   minWidth: 0,
                   px: 1.5,
+                  borderRadius: '6px',
                 }}
               >
                 {link.label}
@@ -123,7 +125,7 @@ export default function Footer() {
           </Box>
         </Box>
 
-        <Divider />
+        <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.2)' }} />
 
         {/* Bottom row */}
         <Box
@@ -136,7 +138,7 @@ export default function Footer() {
             mt: 3,
           }}
         >
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" sx={{ color: 'rgba(255, 255, 255, 0.8)' }}>
             © {new Date().getFullYear()} Arelix Labs. All rights reserved.
           </Typography>
           <Box sx={{ display: 'flex', gap: 2 }}>
@@ -147,9 +149,9 @@ export default function Footer() {
                 href={link.href}
                 variant="body2"
                 sx={{
-                  color: 'text.secondary',
+                  color: 'rgba(255, 255, 255, 0.8)',
                   textDecoration: 'none',
-                  '&:hover': { color: 'primary.main' },
+                  '&:hover': { color: '#FFFFFF', textDecoration: 'underline' },
                   transition: 'color 80ms ease',
                 }}
               >

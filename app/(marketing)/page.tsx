@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Hero from '@/components/sections/Hero';
-import TrustStrip from '@/components/sections/TrustStrip';
 import ServicesGrid from '@/components/sections/ServicesGrid';
 import WhyArelix from '@/components/sections/WhyArelix';
 import ProcessTimeline from '@/components/sections/ProcessTimeline';
@@ -18,7 +17,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustStrip />
       <ServicesGrid />
       <WhyArelix />
       <ProcessTimeline />
