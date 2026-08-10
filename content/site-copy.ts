@@ -253,7 +253,7 @@ export const founders = {
     {
       name: 'Khadiza Khanom',
       role: 'Co-Founder & Managing Director',
-      image: '/images/founders/founder-2.jpg',
+      image: '/images/founders/founder-2.png?v=20260810',
       bio:
         'Oversees operations, administration and client coordination, helping turn the company\'s vision into organized execution and long-term relationships.',
       education: 'BSc in CSE, Ahsanullah University of Science & Technology',
