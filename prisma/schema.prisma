@@ -28,6 +28,7 @@ model Lead {
   id        String   @id @default(cuid())
   name      String
   email     String
+  phone     String?
   message   String
   source    String?  // e.g. "contact-form", "assistant", "cta"
   createdAt DateTime @default(now())

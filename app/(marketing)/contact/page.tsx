@@ -11,6 +11,8 @@ import { contact } from '@/content/site-copy';
 import { Mail } from 'lucide-react';
 import { FacebookIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
 
+import { validateEmail, validatePhoneNumber } from '@/lib/validators';
+
 const socialLinks = [
   { name: 'Facebook', href: 'https://www.facebook.com/ArelixLabs', icon: FacebookIcon },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/arelixlabs', icon: LinkedinIcon },
@@ -18,7 +20,7 @@ const socialLinks = [
 ];
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -26,9 +28,23 @@ export default function ContactPage() {
     e.preventDefault();
     setErrorMessage('');
 
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.message.trim()) {
       setStatus('error');
       setErrorMessage('Please fill in all required fields.');
+      return;
+    }
+
+    const emailCheck = validateEmail(form.email);
+    if (!emailCheck.isValid) {
+      setStatus('error');
+      setErrorMessage(emailCheck.error || 'Please enter a valid email address.');
+      return;
+    }
+
+    const phoneCheck = validatePhoneNumber(form.phone);
+    if (!phoneCheck.isValid) {
+      setStatus('error');
+      setErrorMessage(phoneCheck.error || 'Please enter a valid contact number.');
       return;
     }
 
@@ -40,6 +56,7 @@ export default function ContactPage() {
         body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
+          phone: form.phone.trim(),
           message: form.message.trim(),
           source: 'contact-form',
         }),
@@ -49,7 +66,7 @@ export default function ContactPage() {
 
       if (res.ok) {
         setStatus('success');
-        setForm({ name: '', email: '', message: '' });
+        setForm({ name: '', email: '', phone: '', message: '' });
       } else {
         setStatus('error');
         setErrorMessage(data.error || 'Something went wrong. Please try again.');
@@ -116,6 +133,17 @@ export default function ContactPage() {
             required
             fullWidth
             autoComplete="email"
+          />
+          <TextField
+            label={contact.formLabels.phone}
+            id="contact-phone"
+            type="tel"
+            placeholder="e.g. +1 555 123 4567 or 01725-520582"
+            value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            required
+            fullWidth
+            autoComplete="tel"
           />
           <TextField
             label={contact.formLabels.message}

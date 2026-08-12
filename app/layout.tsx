@@ -62,6 +62,7 @@ export const metadata: Metadata = {
 };
 
 import ChatBot from '@/components/ui/ChatBot';
+import WhatsAppBubble from '@/components/ui/WhatsAppBubble';
 import NavigationScrollReset from '@/components/ui/NavigationScrollReset';
 import GoogleSeoSchema from '@/components/seo/GoogleSeoSchema';
 
@@ -94,6 +95,7 @@ export default async function RootLayout({
           <Navbar />
           <main>{children}</main>
           <Footer />
+          <WhatsAppBubble />
           <ScrollToTop />
           <ChatBot />
         </ColorModeProvider>

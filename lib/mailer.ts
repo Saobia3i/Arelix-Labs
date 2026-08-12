@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 export interface LeadEmailData {
   name: string;
   email: string;
+  phone?: string | null;
   message: string;
   source?: string | null;
 }
@@ -89,6 +90,11 @@ export async function sendLeadNotificationEmail(data: LeadEmailData) {
           </div>
 
           <div class="field">
+            <div class="label">Contact Number</div>
+            <div class="value">${escapeHtml(data.phone || 'Not provided')}</div>
+          </div>
+
+          <div class="field">
             <div class="label">Source Form</div>
             <div class="value">${escapeHtml(data.source || 'contact-form')}</div>
           </div>
@@ -116,6 +122,7 @@ New Contact Inquiry - Arelix Labs
 
 Name: ${data.name}
 Email: ${data.email}
+Contact Number: ${data.phone || 'Not provided'}
 Source: ${data.source || 'contact-form'}
 Date: ${submissionDate}
 

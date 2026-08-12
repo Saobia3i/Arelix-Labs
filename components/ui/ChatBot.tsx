@@ -58,6 +58,18 @@ export default function ChatBot() {
   const [selectedModel, setSelectedModel] = useState('deepseek/deepseek-chat');
   const [isLoading, setIsLoading] = useState(false);
   const [keyboardInset, setKeyboardInset] = useState(0);
+  const [isPillVisible, setIsPillVisible] = useState(true);
+  const [isPillHovered, setIsPillHovered] = useState(false);
+  const [isPillDismissed, setIsPillDismissed] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPillVisible(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const showPill = !isOpen && !isPillDismissed && (isPillVisible || isPillHovered);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -152,15 +164,118 @@ export default function ChatBot() {
   };
 
   return (
-    <Box sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1200 }}>
+    <Box
+      onMouseEnter={() => setIsPillHovered(true)}
+      onMouseLeave={() => setIsPillHovered(false)}
+      sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1200 }}
+    >
       {/* Floating Launcher Button */}
-      <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+      <motion.div
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+      >
+        <AnimatePresence>
+          {showPill && (
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, scale: 0.9, x: 8 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.9, x: 8 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsOpen(true)}
+              sx={{
+                position: 'absolute',
+                right: 'calc(100% + 14px)',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                bgcolor: (theme) => (theme.palette.mode === 'light' ? '#FFFFFF' : '#0B1320'),
+                color: 'primary.main',
+                pl: 2,
+                pr: 1.25,
+                py: 0.85,
+                borderRadius: '100px',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.22)',
+                border: '1.5px solid',
+                borderColor: 'primary.main',
+                whiteSpace: 'nowrap',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 1.25,
+                cursor: 'pointer',
+                zIndex: 1201,
+                fontFamily: 'var(--font-roboto), Roboto, sans-serif',
+                // Rightward pointing speech triangle tail
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: '50%',
+                  left: '100%',
+                  transform: 'translateY(-50%)',
+                  borderWidth: '6px',
+                  borderStyle: 'solid',
+                  borderColor: (theme) =>
+                    theme.palette.mode === 'light'
+                      ? 'transparent transparent transparent #B84A47'
+                      : 'transparent transparent transparent #C25752',
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  bgcolor: 'primary.main',
+                  boxShadow: '0 0 8px currentColor',
+                  flexShrink: 0,
+                }}
+              />
+              <Typography
+                variant="caption"
+                sx={{
+                  fontFamily: 'var(--font-roboto), Roboto, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                  color: 'text.primary',
+                  letterSpacing: '0.01em',
+                  lineHeight: 1,
+                }}
+              >
+                Ask AI Assistant
+              </Typography>
+              <IconButton
+                size="small"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsPillDismissed(true);
+                }}
+                aria-label="Close AI tail notification"
+                sx={{
+                  width: 20,
+                  height: 20,
+                  p: 0,
+                  ml: 0.5,
+                  color: 'text.secondary',
+                  transition: 'all 150ms ease',
+                  '&:hover': {
+                    color: 'primary.main',
+                    bgcolor: (theme) => (theme.palette.mode === 'light' ? 'rgba(184, 74, 71, 0.15)' : 'rgba(194, 87, 82, 0.2)'),
+                  },
+                }}
+              >
+                <X size={13} />
+              </IconButton>
+            </Box>
+          )}
+        </AnimatePresence>
+
         <IconButton
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Open AI Technical Advisor Chat"
           sx={{
-            width: 60,
-            height: 60,
+            width: 52,
+            height: 52,
             borderRadius: '50%',
             bgcolor: 'primary.main',
             color: '#FFFFFF',
@@ -170,9 +285,13 @@ export default function ChatBot() {
               bgcolor: 'primary.dark',
               boxShadow: '0 12px 36px rgba(184, 74, 71, 0.32)',
             },
+            '@media (max-width: 600px)': {
+              width: 44,
+              height: 44,
+            },
           }}
         >
-          {isOpen ? <X size={26} /> : <BotMessageSquare size={26} />}
+          {isOpen ? <X size={24} /> : <BotMessageSquare size={24} />}
         </IconButton>
       </motion.div>
 

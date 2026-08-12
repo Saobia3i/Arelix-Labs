@@ -2,24 +2,40 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/db';
 import { sendLeadNotificationEmail } from '@/lib/mailer';
+import { validateEmail, validatePhoneNumber } from '@/lib/validators';
 
 export async function POST(req: NextRequest) {
   try {
     const body = (await req.json().catch(() => ({}))) as {
       name?: string;
       email?: string;
+      phone?: string;
       message?: string;
       source?: string;
     };
 
     const name = body.name?.trim() || '';
-    const email = body.email?.trim() || '';
+    const emailInput = body.email?.trim() || '';
+    const phoneInput = body.phone?.trim() || '';
     const message = body.message?.trim() || '';
     const source = body.source || 'contact-form';
 
-    if (!name || !email || !message) {
+    if (!name || !emailInput || !phoneInput || !message) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
+
+    const emailCheck = validateEmail(emailInput);
+    if (!emailCheck.isValid) {
+      return NextResponse.json({ error: emailCheck.error }, { status: 400 });
+    }
+
+    const phoneCheck = validatePhoneNumber(phoneInput);
+    if (!phoneCheck.isValid) {
+      return NextResponse.json({ error: phoneCheck.error }, { status: 400 });
+    }
+
+    const email = emailCheck.normalized || emailInput;
+    const phone = phoneCheck.normalized || phoneInput;
 
     let leadId = `lead_${Date.now()}`;
 
@@ -29,6 +45,7 @@ export async function POST(req: NextRequest) {
         data: {
           name,
           email,
+          phone,
           message,
           source,
         },
@@ -43,6 +60,7 @@ export async function POST(req: NextRequest) {
       await sendLeadNotificationEmail({
         name,
         email,
+        phone,
         message,
         source,
       });

@@ -307,6 +307,7 @@ export const contact = {
   formLabels: {
     name: 'Your name',
     email: 'Your email',
+    phone: 'Your contact number',
     message: 'Tell us about your project',
     submit: 'Send Message',
   },

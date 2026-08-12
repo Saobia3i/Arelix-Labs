@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import type { Theme } from '@mui/material/styles';
@@ -26,24 +27,30 @@ export default function ScrollToTop() {
   return (
     <AnimatePresence>
       {visible && (
-        <motion.div
+        <Box
+          component={motion.div}
           initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.85 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={reduceMotion ? undefined : { opacity: 0, y: 12, scale: 0.88 }}
           transition={{ duration: 0.22, ease: 'easeOut' }}
-          style={{ position: 'fixed', right: 98, bottom: 31, zIndex: 1210 }}
+          sx={{
+            position: 'fixed',
+            right: 24,
+            bottom: 156,
+            zIndex: 1210,
+          }}
         >
-          <Tooltip title="Back to top" placement="left">
+          <Tooltip title="Back to top" placement="top">
             <IconButton
               onClick={scrollToTop}
               aria-label="Scroll back to the top"
               sx={{
-                width: 46,
-                height: 46,
+                width: 52,
+                height: 52,
                 color: '#FFFFFF',
                 bgcolor: (theme: Theme) =>
                   theme.palette.mode === 'light' ? '#B84A47' : '#C25752',
-                border: '1.5px solid #FFFFFF',
+                border: '2px solid #FFFFFF',
                 boxShadow: '0 10px 28px rgba(0,0,0,0.28)',
                 '&:hover': {
                   bgcolor: (theme: Theme) =>
@@ -52,15 +59,15 @@ export default function ScrollToTop() {
                 },
                 transition: 'transform 180ms ease, background-color 180ms ease',
                 '@media (max-width: 600px)': {
-                  width: 42,
-                  height: 42,
+                  width: 44,
+                  height: 44,
                 },
               }}
             >
-              <ArrowUp size={21} strokeWidth={2.2} />
+              <ArrowUp size={22} strokeWidth={2.2} />
             </IconButton>
           </Tooltip>
-        </motion.div>
+        </Box>
       )}
     </AnimatePresence>
   );
