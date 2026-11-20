@@ -20,7 +20,7 @@ interface ColorModeContextValue {
 }
 
 const ColorModeContext = createContext<ColorModeContextValue>({
-  mode: 'light',
+  mode: 'dark',
   toggleColorMode: () => {},
 });
 
@@ -39,7 +39,7 @@ function getInitialMode(fallback: ColorMode): ColorMode {
 
 export function ColorModeProvider({
   children,
-  initialMode = 'light',
+  initialMode = 'dark',
 }: {
   children: ReactNode;
   initialMode?: ColorMode;

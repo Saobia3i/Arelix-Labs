@@ -72,7 +72,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const storedMode = (await cookies()).get('arelix-color-mode')?.value;
-  const initialMode = storedMode === 'dark' ? 'dark' : 'light';
+  const initialMode = storedMode === 'light' ? 'light' : 'dark';
 
   return (
     <html
