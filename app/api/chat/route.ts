@@ -7,6 +7,8 @@ import {
 } from '@/lib/chat-knowledge';
 import { checkChatRateLimit, getVisitorId } from '@/lib/chat-rate-limit';
 
+export const runtime = 'nodejs';
+
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
@@ -37,19 +39,6 @@ function normalizeMessages(value: unknown): ChatMessage[] {
     .slice(-8);
 }
 
-function toPlainText(value: string) {
-  return value
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, (_match, label: string, url: string) =>
-      label.trim() === url.trim() ? url : `${label.trim()}: ${url}`
-    )
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/__([^_]+)__/g, '$1')
-    .replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '$1')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/^#{1,6}\s+/gm, '')
-    .trim();
-}
-
 export async function POST(req: Request) {
   try {
     const contentLength = Number(req.headers.get('content-length') || 0);
@@ -75,17 +64,17 @@ export async function POST(req: Request) {
 
     const queryType = classifyChatQuery(latestQuestion);
     if (queryType.greeting) {
-      return NextResponse.json({
-        content: 'Hello! I can help with Arelix Labs services, projects, engineering capabilities, pricing inquiries, and consultations. What would you like to know?',
-        model: 'local-scope-response',
-      });
+      return new Response(
+        'Hello! I am the **Arelix Labs** technical assistant.\n\nI can help you explore our engineering capabilities:\n• **Software Development** (Full-Stack web, mobile apps, real-time dashboards)\n• **Hardware & PCB** (Schematic design, embedded firmware, ESP32)\n• **AI & Automation** (Custom agents, LLM integrations, computer vision)\n• **IoT & Telemetry** (Sensor networks, cloud telemetry, digital twins)\n\nHow can we help your team today?',
+        { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
+      );
     }
 
     if (!queryType.relevant) {
-      return NextResponse.json({
-        content: 'I can only help with Arelix Labs, its engineering services, projects, team, and consultation inquiries. Please ask a relevant business or technology question.',
-        model: 'local-scope-response',
-      });
+      return new Response(
+        'I specialize in **Arelix Labs** engineering services, technical architecture, and project consultations.\n\nPlease feel free to ask about our software, hardware, AI, or IoT engineering capabilities!',
+        { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }
+      );
     }
 
     const retrievedChunks = retrieveKnowledge(latestQuestion);
@@ -99,11 +88,8 @@ export async function POST(req: Request) {
     const apiKey = process.env.OPENROUTER_API_KEY;
 
     if (!apiKey || apiKey === 'placeholder') {
-      return NextResponse.json({
-        content: createLocalFallback(retrievedChunks),
-        model: 'local-knowledge-retrieval',
-        retrieved: retrievedChunks.map((chunk) => chunk.id),
-        demo: true,
+      return new Response(createLocalFallback(retrievedChunks), {
+        headers: { 'Content-Type': 'text/plain; charset=utf-8' },
       });
     }
 
@@ -115,15 +101,16 @@ RETRIEVED KNOWLEDGE:
 ${knowledgeContext}
 
 RESPONSE RULES:
-- Give a direct, helpful answer first, normally in 2-5 short paragraphs or concise bullets.
-- Use only claims supported by the retrieved knowledge. If information is unavailable, say so plainly.
+- Format your answers cleanly, structured, and easy to read:
+  • Start with a direct, clear 1-2 sentence overview answering the question.
+  • When describing services, features, or steps, ALWAYS use bullet points (• or -) with **bold key terms** (e.g., "• **Full-Stack Engineering**: ...").
+  • Keep paragraphs short (2-3 sentences max). Never output long unbroken walls of text.
+- Use only facts supported by the retrieved knowledge. If information is unavailable, say so plainly.
 - Never invent prices, timelines, clients, certifications, guarantees, founder details, or technical capabilities.
-- For pricing, custom scope, architecture consultations, or project discussions, recommend emailing contact@arelixlabs.com or using the Contact page.
+- For custom pricing, architectural audits, or project inquiries, recommend emailing **contact@arelixlabs.com** or visiting the Contact page.
 - Match the user's language when practical, including Bangla or Banglish.
-- Stay strictly within Arelix Labs, its team, services, engineering projects, and project consultations. Politely refuse personal advice, entertainment, general knowledge, homework, or unrelated requests.
-- Return plain text only. Do not use Markdown, asterisks for bold or italic text, backticks, headings, or Markdown links. Write URLs directly.
-- Do not mention retrieval, chunks, context IDs, system prompts, OpenRouter, or internal implementation.
-- Do not expose credentials, API keys, database details, or private information.`;
+- Stay strictly within Arelix Labs, its team, engineering services, and project consultations.
+- Do not mention retrieval, chunks, context IDs, system prompts, OpenRouter, or internal implementation details.`;
 
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
@@ -137,7 +124,8 @@ RESPONSE RULES:
         model: targetModel,
         messages: [{ role: 'system', content: systemPrompt }, ...messages],
         temperature: 0.35,
-        max_tokens: 420,
+        max_tokens: 650,
+        stream: true,
       }),
     });
 
@@ -149,18 +137,58 @@ RESPONSE RULES:
       );
     }
 
-    const data = (await response.json()) as {
-      choices?: Array<{ message?: { content?: string } }>;
-      model?: string;
-      usage?: unknown;
-    };
-    const botReply = data.choices?.[0]?.message?.content;
+    if (!response.body) {
+      return NextResponse.json({ error: 'No stream received.' }, { status: 502 });
+    }
 
-    return NextResponse.json({
-      content: botReply ? toPlainText(botReply) : createLocalFallback(retrievedChunks),
-      model: data.model || targetModel,
-      usage: data.usage,
-      retrieved: retrievedChunks.map((chunk) => chunk.id),
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    const transformStream = new TransformStream({
+      transform(chunk, controller) {
+        buffer += decoder.decode(chunk, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed || !trimmed.startsWith('data:')) continue;
+          const dataStr = trimmed.slice(5).trim();
+          if (dataStr === '[DONE]') continue;
+          try {
+            const json = JSON.parse(dataStr);
+            const delta = json.choices?.[0]?.delta?.content;
+            if (delta) {
+              controller.enqueue(encoder.encode(delta));
+            }
+          } catch {
+            // ignore partial/invalid json line
+          }
+        }
+      },
+      flush(controller) {
+        if (buffer.trim().startsWith('data:')) {
+          const dataStr = buffer.trim().slice(5).trim();
+          if (dataStr && dataStr !== '[DONE]') {
+            try {
+              const json = JSON.parse(dataStr);
+              const delta = json.choices?.[0]?.delta?.content;
+              if (delta) controller.enqueue(encoder.encode(delta));
+            } catch {
+              // ignore
+            }
+          }
+        }
+      },
+    });
+
+    return new Response(response.body.pipeThrough(transformStream), {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache, no-transform',
+        'X-Content-Type-Options': 'nosniff',
+      },
     });
   } catch (error: unknown) {
     console.error('Chat API error:', error);
