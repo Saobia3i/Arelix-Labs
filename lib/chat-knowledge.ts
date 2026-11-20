@@ -145,8 +145,8 @@ export function formatKnowledgeContext(chunks: KnowledgeChunk[]) {
 export function createLocalFallback(chunks: KnowledgeChunk[]) {
   const summary = chunks
     .slice(0, 3)
-    .map((chunk) => `${chunk.title}\n${chunk.content}`)
+    .map((chunk) => `### ${chunk.title}\n${chunk.content}`)
     .join('\n\n');
 
-  return `${summary}\n\nFor a tailored discussion, email contact@arelixlabs.com or use the Contact page.`;
+  return `Here is the relevant information regarding your inquiry:\n\n${summary}\n\nFor a custom consultation or project scope, feel free to email **contact@arelixlabs.com** or use our Contact page.`;
 }

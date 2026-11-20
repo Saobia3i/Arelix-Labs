@@ -32,10 +32,147 @@ interface Message {
 
 const AVAILABLE_MODELS = [
   { id: 'deepseek/deepseek-chat', name: 'DeepSeek V3 (Default)' },
+  { id: 'openai/gpt-4o-mini', name: 'GPT-4o Mini (Fast)' },
   { id: 'anthropic/claude-3.5-sonnet', name: 'Claude 3.5 Sonnet' },
-  { id: 'openai/gpt-4o-mini', name: 'GPT-4o Mini' },
   { id: 'meta-llama/llama-3.3-70b-instruct', name: 'Llama 3.3 70B' },
 ];
+
+function FormattedMessage({ text }: { text: string }) {
+  if (!text) return null;
+
+  const lines = text.split('\n');
+
+  const renderInline = (lineText: string) => {
+    const tokenRegex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\(https?:\/\/[^)]+\)|https?:\/\/[^\s)]+)/g;
+    const parts = lineText.split(tokenRegex);
+
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
+        return (
+          <Box component="span" key={i} sx={{ fontWeight: 700 }}>
+            {part.slice(2, -2)}
+          </Box>
+        );
+      }
+      if (part.startsWith('`') && part.endsWith('`') && part.length >= 2) {
+        return (
+          <Box
+            component="code"
+            key={i}
+            sx={{
+              px: 0.5,
+              py: 0.1,
+              borderRadius: '3px',
+              bgcolor: (theme) =>
+                theme.palette.mode === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.12)',
+              fontSize: '0.78rem',
+              fontFamily: 'monospace',
+            }}
+          >
+            {part.slice(1, -1)}
+          </Box>
+        );
+      }
+      if (part.startsWith('[') && part.includes('](')) {
+        const match = part.match(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/);
+        if (match) {
+          return (
+            <Box
+              component="a"
+              key={i}
+              href={match[2]}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{ color: 'primary.main', textDecoration: 'underline', fontWeight: 600 }}
+            >
+              {match[1]}
+            </Box>
+          );
+        }
+      }
+      if (part.startsWith('http://') || part.startsWith('https://')) {
+        return (
+          <Box
+            component="a"
+            key={i}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{ color: 'primary.main', textDecoration: 'underline', wordBreak: 'break-all' }}
+          >
+            {part}
+          </Box>
+        );
+      }
+      return part;
+    });
+  };
+
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+      {lines.map((line, idx) => {
+        const trimmed = line.trim();
+        if (!trimmed) {
+          return <Box key={idx} sx={{ height: 4 }} />;
+        }
+
+        if (trimmed.startsWith('### ')) {
+          return (
+            <Typography
+              key={idx}
+              variant="subtitle2"
+              sx={{ fontWeight: 700, fontSize: '0.85rem', mt: 0.6, mb: 0.2, color: 'primary.main' }}
+            >
+              {renderInline(trimmed.slice(4))}
+            </Typography>
+          );
+        }
+        if (trimmed.startsWith('## ') || trimmed.startsWith('# ')) {
+          return (
+            <Typography
+              key={idx}
+              variant="subtitle2"
+              sx={{ fontWeight: 700, fontSize: '0.9rem', mt: 0.8, mb: 0.2, color: 'primary.main' }}
+            >
+              {renderInline(trimmed.replace(/^#+\s*/, ''))}
+            </Typography>
+          );
+        }
+
+        const bulletMatch = trimmed.match(/^([-*•]|\d+\.)\s+(.+)$/);
+        if (bulletMatch) {
+          const isNum = /^\d+\./.test(bulletMatch[1]);
+          return (
+            <Box key={idx} sx={{ display: 'flex', alignItems: 'flex-start', gap: 0.8, pl: 0.25, my: 0.1 }}>
+              <Typography
+                component="span"
+                sx={{
+                  color: 'primary.main',
+                  fontWeight: 700,
+                  fontSize: isNum ? '0.78rem' : '0.95rem',
+                  lineHeight: 1.5,
+                  flexShrink: 0,
+                  minWidth: isNum ? '16px' : 'auto',
+                }}
+              >
+                {isNum ? bulletMatch[1] : '•'}
+              </Typography>
+              <Typography variant="body2" sx={{ fontSize: '0.825rem', lineHeight: 1.6, flexGrow: 1 }}>
+                {renderInline(bulletMatch[2])}
+              </Typography>
+            </Box>
+          );
+        }
+
+        return (
+          <Typography key={idx} variant="body2" sx={{ fontSize: '0.825rem', lineHeight: 1.6 }}>
+            {renderInline(line)}
+          </Typography>
+        );
+      })}
+    </Box>
+  );
+}
 
 const SUGGESTED_PROMPTS = [
   'What engineering services does Arelix Labs provide?',
@@ -122,6 +259,9 @@ export default function ChatBot() {
     if (!textToSend) setInput('');
     setIsLoading(true);
 
+    const botMsgId = (Date.now() + 1).toString();
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
     try {
       const apiMessages = [...messages, userMessage].map((msg) => ({
         role: msg.sender === 'user' ? 'user' : 'assistant',
@@ -137,27 +277,67 @@ export default function ChatBot() {
         }),
       });
 
-      const data = await res.json();
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || `Server error ${res.status}`);
+      }
 
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        sender: 'bot',
-        text: data.content || data.error || 'Sorry, I encountered an issue processing your inquiry. Please try again.',
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      };
+      if (!res.body) {
+        throw new Error('No readable response stream.');
+      }
 
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (err) {
-      console.error('Chat error:', err);
+      // Add placeholder bot message
       setMessages((prev) => [
         ...prev,
         {
-          id: (Date.now() + 1).toString(),
+          id: botMsgId,
           sender: 'bot',
-          text: 'Network error. Please check your connection or reach out to our team at contact@arelixlabs.com.',
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          text: '',
+          timestamp,
         },
       ]);
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let accumulated = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        accumulated += chunk;
+        setMessages((prev) =>
+          prev.map((m) => (m.id === botMsgId ? { ...m, text: accumulated } : m))
+        );
+      }
+    } catch (err: unknown) {
+      console.error('Chat error:', err);
+      const errorMessage =
+        err instanceof Error ? err.message : 'Network error. Please try again.';
+      setMessages((prev) => {
+        const exists = prev.some((m) => m.id === botMsgId);
+        if (exists) {
+          return prev.map((m) =>
+            m.id === botMsgId
+              ? {
+                  ...m,
+                  text: m.text
+                    ? `${m.text}\n\n*[Connection interrupted. Please reach out to contact@arelixlabs.com]*`
+                    : errorMessage,
+                }
+              : m
+          );
+        }
+        return [
+          ...prev,
+          {
+            id: botMsgId,
+            sender: 'bot',
+            text: errorMessage,
+            timestamp,
+          },
+        ];
+      });
     } finally {
       setIsLoading(false);
     }
@@ -462,9 +642,27 @@ export default function ChatBot() {
                         boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                       }}
                     >
-                      <Typography variant="body2" sx={{ fontSize: '0.825rem', lineHeight: 1.55, whitespace: 'pre-line' }}>
-                        {msg.text}
-                      </Typography>
+                      {msg.sender === 'user' ? (
+                        <Typography
+                          variant="body2"
+                          sx={{ fontSize: '0.825rem', lineHeight: 1.55, whiteSpace: 'pre-wrap' }}
+                        >
+                          {msg.text}
+                        </Typography>
+                      ) : msg.text ? (
+                        <FormattedMessage text={msg.text} />
+                      ) : (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, py: 0.5 }}>
+                          <RefreshCw
+                            size={13}
+                            className="animate-spin"
+                            style={{ animation: 'spin 1s linear infinite', color: '#B84A47' }}
+                          />
+                          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
+                            Arelix Assistant is writing...
+                          </Typography>
+                        </Box>
+                      )}
                     </Box>
                     <Typography variant="caption" sx={{ fontSize: '0.65rem', color: 'text.secondary', mt: 0.4, px: 0.5 }}>
                       {msg.timestamp}
@@ -472,7 +670,7 @@ export default function ChatBot() {
                   </Box>
                 ))}
 
-                {isLoading && (
+                {isLoading && !messages.some((m) => m.sender === 'bot' && m.id === messages[messages.length - 1]?.id) && (
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary', p: 1 }}>
                     <RefreshCw size={14} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
                     <Typography variant="caption" sx={{ fontSize: '0.75rem' }}>

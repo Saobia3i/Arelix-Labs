@@ -307,10 +307,28 @@ const consoleTabs = [
 ];
 
 function LiveEngineConsole() {
-  const [activeTab, setActiveTab] = useState(consoleTabs[0]);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    const reduceMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || isPaused) return;
+
+    const timer = setInterval(() => {
+      setActiveTabIndex((prev) => (prev + 1) % consoleTabs.length);
+    }, 2400);
+
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  const activeTab = consoleTabs[activeTabIndex];
 
   return (
     <Card
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
       sx={{
         p: { xs: 2.25, sm: 2.5 },
         maxWidth: 440,
@@ -363,38 +381,71 @@ function LiveEngineConsole() {
 
       {/* Console Domain Tabs */}
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, mb: 2 }}>
-        {consoleTabs.map((tab) => {
-          const isSelected = tab.id === activeTab.id;
+        {consoleTabs.map((tab, index) => {
+          const isSelected = index === activeTabIndex;
           const TabIcon = tab.icon;
           return (
             <Box
               key={tab.id}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => setActiveTabIndex(index)}
               sx={{
-                p: 1,
+                p: 1.1,
                 borderRadius: '10px 0px 10px 10px',
                 cursor: 'pointer',
-                transition: 'all 150ms ease',
+                userSelect: 'none',
+                transition:
+                  'border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease, color 220ms ease',
                 bgcolor: (theme) =>
                   isSelected
-                    ? 'rgba(192, 0, 0, 0.08)'
+                    ? theme.palette.mode === 'light'
+                      ? 'rgba(184, 74, 71, 0.08)'
+                      : 'rgba(194, 87, 82, 0.16)'
                     : theme.palette.mode === 'light'
                     ? '#F4F5F7'
                     : '#000000',
                 border: '1.5px solid',
                 borderColor: (theme) =>
                   isSelected
-                    ? '#B84A47'
+                    ? theme.palette.mode === 'light'
+                      ? '#B84A47'
+                      : '#C25752'
                     : theme.palette.mode === 'light'
                     ? '#E2E8F0'
                     : '#262626',
+                boxShadow: (theme) =>
+                  isSelected
+                    ? theme.palette.mode === 'light'
+                      ? '0 2px 10px rgba(184, 74, 71, 0.18)'
+                      : '0 2px 12px rgba(194, 87, 82, 0.28)'
+                    : 'none',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 0.85,
+                '&:hover': {
+                  borderColor: isSelected
+                    ? undefined
+                    : (theme) => (theme.palette.mode === 'light' ? '#CBD5E1' : '#3F3F46'),
+                },
               }}
             >
-              <TabIcon size={16} style={{ color: isSelected ? '#B84A47' : 'inherit' }} />
-              <Typography variant="subtitle2" sx={{ fontWeight: 700, fontSize: '0.74rem' }}>
+              <TabIcon
+                size={16}
+                style={{
+                  color: isSelected ? '#B84A47' : 'inherit',
+                  transition: 'color 220ms ease',
+                }}
+              />
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: 700,
+                  fontSize: '0.74rem',
+                  color: isSelected
+                    ? (theme) => (theme.palette.mode === 'light' ? '#B84A47' : '#FFFFFF')
+                    : 'text.primary',
+                  transition: 'color 220ms ease',
+                }}
+              >
                 {tab.label}
               </Typography>
             </Box>
